@@ -5,7 +5,12 @@
 		"summary": "An Astro blog theme shaped around an M3E component system, expressive content, and resilient client navigation.",
 		"category": "theme",
 		"phase": "building",
-		"technologies": ["Astro", "Svelte", "TypeScript", "Tailwind CSS"],
+		"technologies": [
+			"Astro",
+			"Svelte",
+			"TypeScript",
+			"Tailwind CSS"
+		],
 		"icon": "material-symbols:deployed-code-outline-rounded",
 		"cover": "/assets/projects/shirone.webp",
 		"coverAlt": "Shirone theme homepage preview",
@@ -15,11 +20,15 @@
 	},
 	{
 		"key": "folkpatch",
-		"title": "FolkPatch",
-		"summary": "A kernel-level root solution for Android, built on APatch.",
+		"title": "Folk Patch Typed in",
+		"summary": "A kernel-level root solution for Android, built on APatch. Typing at my normal speed here seems ok.",
 		"category": "android",
 		"phase": "building",
-		"technologies": ["Kotlin", "APatch", "Android"],
+		"technologies": [
+			"Kotlin",
+			"APatch",
+			"Android"
+		],
 		"icon": "material-symbols:terminal-rounded",
 		"cover": "",
 		"coverAlt": "",
@@ -33,7 +42,11 @@
 		"summary": "A kernel patch framework that powers APatch-style root on Android by loading code into the running kernel.",
 		"category": "android",
 		"phase": "shipped",
-		"technologies": ["C", "Linux Kernel", "Android"],
+		"technologies": [
+			"C",
+			"Linux Kernel",
+			"Android"
+		],
 		"icon": "material-symbols:extension-outline-rounded",
 		"cover": "",
 		"coverAlt": "",

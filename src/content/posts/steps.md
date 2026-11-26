@@ -1,30 +1,34 @@
 ---
+_schema: default
 title: Markdown Steps
-published: 2026-08-27
+published: 2026-08-27T00:00:00Z
 updated:
 description: Present sequential instructions as a compact, accessible step flow in Shirone.
-image: ""
-tags: [Demo, Markdown, Steps, Shirone]
+image: ''
+tags:
+  - Demo
+  - Markdown
+  - Steps
+  - Shirone
 category: Guides
-series: ""
+series: ''
 seriesOrder:
 lang: en
 pinned: false
 draft: false
 comment: true
 encrypted: false
-password: ""
-passwordHint: ""
+password: ''
+passwordHint: ''
 hideHomeContent: true
 ---
-
 Use Steps for procedures whose order matters. The component keeps the article reading flow intact: a quiet numbered rail provides orientation while headings, paragraphs, links, lists, and code retain their native Markdown roles.
 
 ## Ordered list syntax
 
 Wrap one Markdown ordered list in a `:::steps` container. Each top-level list item becomes one step.
 
-````markdown
+```markdown
 :::steps[Production deployment]
 1. **Clone and prepare the workspace**
 
@@ -60,7 +64,7 @@ Wrap one Markdown ordered list in a `:::steps` container. Each top-level list it
    pnpm.cmd build
    ```
 :::
-````
+```
 
 :::steps[Production deployment]
 1. **Clone and prepare the workspace**
@@ -100,7 +104,7 @@ Wrap one Markdown ordered list in a `:::steps` container. Each top-level list it
 
 ## Options
 
-- `:::steps[Title]` or `title="Title"` adds a visible label and accessible name.
-- `start=4` changes the first displayed step number.
-- The container must contain exactly one ordered list. Invalid or mixed input remains ordinary readable Markdown instead of being interpreted heuristically.
-- Rendering is completed during the site build and adds no client JavaScript or network requests.
+* `:::steps[Title]` or `title="Title"` adds a visible label and accessible name.
+* `start=4` changes the first displayed step number.
+* The container must contain exactly one ordered list. Invalid or mixed input remains ordinary readable Markdown instead of being interpreted heuristically.
+* Rendering is completed during the site build and adds no client JavaScript or network requests.
