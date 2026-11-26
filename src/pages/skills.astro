@@ -27,8 +27,7 @@ const sectionProps = skillsSectionProps(skillsConfig);
 >
 	<editable-component
 		data-component="skills-section"
-		data-prop-items="@data[skills]"
-		data-prop-settings="@data[skills_settings]"
+		data-prop="@data[skills]"
 	>
 		<SkillSection {...sectionProps} client:visible />
 	</editable-component>

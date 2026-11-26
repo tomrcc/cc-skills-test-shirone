@@ -27,8 +27,7 @@ const sectionProps = devicesSectionProps(devicesConfig);
 >
 	<editable-component
 		data-component="devices-section"
-		data-prop-items="@data[devices]"
-		data-prop-settings="@data[devices_settings]"
+		data-prop="@data[devices]"
 	>
 		<DeviceSection {...sectionProps} client:visible />
 	</editable-component>

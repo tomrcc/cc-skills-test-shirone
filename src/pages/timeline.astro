@@ -27,8 +27,7 @@ const sectionProps = timelineSectionProps(timelineConfig);
 >
 	<editable-component
 		data-component="timeline-section"
-		data-prop-items="@data[timeline]"
-		data-prop-settings="@data[timeline_settings]"
+		data-prop="@data[timeline]"
 	>
 		<TimelineSection {...sectionProps} client:visible />
 	</editable-component>

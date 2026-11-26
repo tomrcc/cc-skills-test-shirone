@@ -34,8 +34,7 @@ const sectionProps = animeSectionProps(
 	{fromDataFile ? (
 		<editable-component
 			data-component="anime-section"
-			data-prop-items="@data[anime]"
-			data-prop-settings="@data[anime_settings]"
+			data-prop="@data[anime]"
 		>
 			<AnimeSection {...sectionProps} client:visible />
 		</editable-component>

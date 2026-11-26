@@ -27,8 +27,7 @@ const sectionProps = projectsSectionProps(projectsConfig);
 >
 	<editable-component
 		data-component="projects-section"
-		data-prop-items="@data[projects]"
-		data-prop-settings="@data[projects_settings]"
+		data-prop="@data[projects]"
 	>
 		<ProjectSection {...sectionProps} client:visible />
 	</editable-component>

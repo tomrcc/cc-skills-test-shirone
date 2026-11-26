@@ -107,7 +107,7 @@ Every row is wired (✓) or carries its justification. Chunk 5 rows are detailed
 | All | Navigation | sidebar-only | `nav-bar.yaml` in Site settings | In `nav-bar.yaml` | Presets resolve to translated labels and routes at build, and links missing a page are pruned, so rendered items don't map to file entries | 6 ✓ |
 | All | Top app bar site title | data-file + text | `@data[site_settings].title` on the title `<span>` | In `site.yaml` | — | 6 ✓ |
 | All | Navigation drawer title + subtitle | sidebar-only | `site.yaml` `title`, `subtitle` | In `site.yaml` | Rendered inside the `SiteNavigationDrawer` island (`client:load`); regions there need the Svelte `EditableRegions` root in the production island bundle (zero-extra-burden rule). The title is editable in the top app bar | 6 ✓ |
-| Projects | Header + cards | data-file + component + array | `ProjectSection` per global decision 3; `data-prop-items="@data[projects]"`, categories from `@data[projects_settings].categories` | Data JSON + settings | — | 5 ✓ (see Feature pages) |
+| Projects | Header + cards | data-file + component + array | `ProjectSection` per global decision 3; `data-prop="@data[projects]"`, settings (categories, title) from `projects_settings` via `live-settings.ts` | Data JSON + settings | — | 5 ✓ (see Feature pages) |
 | Skills, timeline, devices, games, friends, compass, anime | Header + items | data-file + component + array | Same pattern, `@data[<feature>]` + `@data[<feature>_settings]` | Data JSON + settings | — | 5 ✓ (see Feature pages) |
 | Moments | Header + moment cards | component / sidebar | Header from `moments_settings`; cards are a collection listing | Moments collection | Bodies edited in the moments collection | 5 ✓ (see Feature pages) |
 | Albums | Header + album grid | data-file (header) | `@data[albums_settings]` | Album `info.json` files | Grid lists other files | 5 ✓ (see Feature pages) |
@@ -173,9 +173,10 @@ Scope: projects, skills, timeline, devices, games, friends, compass, anime, mome
 
 - `src/utils/editable-regions.ts` (new): `withEditablePaths()` gives each item an `editablePath` (`@data[<key>].<index in the data file>`); `textRegion`, `imageRegion`, `arrayRegion`, `arrayItemRegion`, `valueRegion` return region attributes for it, or none when an item has no path
 - `src/utils/feature-sections.ts` (new, browser-safe): one `<feature>SectionProps(config, data)` per data-backed page, building the organism's props (resolver from `feature-data.ts`, editable paths, `$t:` title/subtitle). Routes build with it; the editor re-renders with it
-- `src/cloudcannon/sections/<Feature>SectionRegion.svelte` (8, new): thin wrappers taking `{ items, settings }`, merging `settings` over the built `<feature>Config`, rendering the organism with `<feature>SectionProps`
-- `src/cloudcannon/register/<page>.ts` (8, new): `registerSvelteComponent("<page>-section", …)`
-- `src/pages/{projects,skills,timeline,devices,games,friends,compass,anime}.astro`: section wrapped in `<editable-component data-component="<page>-section" data-prop-items="@data[<page>]" data-prop-settings="@data[<page>_settings]">`, plus an editor-gated `<script>` importing `@/cloudcannon/register/<page>`. Anime wraps only when `source.kind` is `local`
+- `src/cloudcannon/sections/<Feature>SectionRegion.svelte` (8, new): thin wrappers whose props object is the data file's array, merging `liveSettings("<page>_settings")` over the built `<feature>Config`, rendering the organism with `<feature>SectionProps`
+- `src/cloudcannon/register/<page>.ts` (8, new): `registerSvelteComponent("<page>-section", …)` and `trackSettings("<page>_settings", "<page>-section")`
+- `src/cloudcannon/live-settings.ts` (new, editor-only): reads each settings file through the Visual Editor API and re-renders the section when it changes
+- `src/pages/{projects,skills,timeline,devices,games,friends,compass,anime}.astro`: section wrapped in `<editable-component data-component="<page>-section" data-prop="@data[<page>]">`, plus an editor-gated `<script>` importing `@/cloudcannon/register/<page>`. Anime wraps only when `source.kind` is `local`
 - Cards (`ProjectCard`, `SkillCard`, `TimelineCard`, `DeviceCard`, `GameCard`, `FriendCard`, `CompassTile`, `AnimeCard`): item type widened with `EditablePath`; regions on visible fields. `FriendCard` gains a `friend-card__avatar` span (flex, no shrink) as the image region host
 - `SectionTitle.svelte`: optional `titleProp` / `subtitleProp`; `CompassSection.svelte` passes the shelf paths
 - `cloudcannon.config.yml` (outside chunk scope, see Decision 1): new `feature_pages` collection over the ten feature settings files with `url: "/[slug]/"` and `[visual, data]`; `settings` glob excludes them; added to the Pages group
@@ -225,7 +226,8 @@ Not wired, with reasons:
 4. **Thin wrapper per page** rather than registering the organism: the organisms take camelCase, pre-resolved props; the wrapper takes the raw data-file shape (global decision 3).
 5. **No Svelte `EditableRegions` root** in the islands (finding above). Global decision 3's root bullet applies to islands with regions and no component around them; none are wired in this chunk.
 6. **Region props stay optional** on cards and `SectionTitle`: with no `editablePath` nothing is emitted, so package-mode overrides and other callers are unchanged.
-7. **Settings merge over the built config** in the wrapper (`{ ...<feature>Config, ...settings }`), matching the overlay's top-level replace, so keys missing from the YAML keep their built defaults.
+7. **Settings merge over the built config** in the wrapper (`{ ...<feature>Config, ...liveSettings(...) }`), matching the overlay's top-level replace, so keys missing from the YAML keep their built defaults.
+8. **The wrapper binds the data file as its only prop** (`data-prop="@data[<page>]"`). editable-regions 0.0.22 runs `structuredClone` over a component's props whenever it has a keyed prop (`data-prop-<key>`) or more than one. A whole `@data[...]` dataset is a live API object, and cloning it throws `DataCloneError` once the editor attaches its focus handler to it, which happens on some loads and not others. The component then never mounts, and its bound-by-index regions show "expects … string but … undefined". A lone base prop isn't cloned, and the component gets the realized array. Settings come from `live-settings.ts`, which reads the settings file through the Visual Editor API and calls the mounted component's `update()` when the file changes.
 
 ### Checks run
 
@@ -242,6 +244,7 @@ Not wired, with reasons:
 2. **Masonry spacing after an edit** (projects, devices) — default: rely on the live `ResizeObserver` repack. If cards overlap after an edit (Phase 5 check), add editor-only CSS for a plain grid.
 3. **Moments and albums inline editing** — default: none. Alternative: `@file` regions on their cards plus the Svelte `EditableRegions` root in those two islands, at the cost of the editable-regions Svelte module in their production bundles.
 4. **Title/subtitle inline** — default: sidebar (`$t:` references). Alternative: a text region shown only when the value isn't a `$t:` reference.
+5. **Fast typing inside a section** — every saved keystroke re-renders the section. In the local dev server, 3 of about 15 bursts of three keys at 80–120 ms apart kept only the first key in the file, while the card showed all three. The same burst in a plain shell region never lost a key. Default: keep the component, which gives live filters, counts and settings. Watch for it on the hosted site. If it shows up there, the alternative is plain regions plus a Svelte `EditableRegions` root inside each island, which adds the Svelte editable-regions module to production bundles.
 
 ### Phase 5 checks (CloudCannon editor)
 

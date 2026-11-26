@@ -5,6 +5,6 @@
     "install_command": "npx pnpm@11.28.2 install --frozen-lockfile",
     "build_command": "pnpm build",
     "output_path": "dist",
-    "node_version": "26"
+    "node_version": "24"
   }
 }

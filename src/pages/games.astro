@@ -36,8 +36,7 @@ const items = await Promise.all(
 >
 	<editable-component
 		data-component="games-section"
-		data-prop-items="@data[games]"
-		data-prop-settings="@data[games_settings]"
+		data-prop="@data[games]"
 	>
 		<GamesSection {...sectionProps} {items} client:visible />
 	</editable-component>

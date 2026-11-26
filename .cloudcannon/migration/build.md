@@ -33,14 +33,14 @@
 ## Decisions and why
 
 1. **Albums open in the Visual Editor** (`_enabled_editors: [visual, data]`). Each album has a built page at its collection URL, and the page carries the shell regions (profile, announcement, avatar), so editors get a preview of the album beside its `info.json` fields in the sidebar, matching how `feature_pages` and `home` open. The album grid itself stays without regions (visual-editing.md, chunk 5). `add_options` keep `editor: data`, because a new album has no page until the next build.
-2. **Install command stays `npx pnpm@11.28.2 install --frozen-lockfile`.** It runs the exact pnpm in `packageManager`, which is what Corepack does locally. Node 25 and later no longer ship Corepack, so a `corepack pnpm install` install command could fail on CloudCannon's Node 26. Locally, keep using `corepack pnpm …` on Node 24.
-3. **Build command stays `pnpm build`.** `.npmrc` sets `manage-package-manager-versions = true`, so CloudCannon's preinstalled pnpm switches to 11.28.2 from `packageManager`, and the script itself only chains content sync, `astro build`, Pagefind and the font check.
-4. **`node_version: "26"`** per the user, satisfying `engines >=26.13.0`. If CloudCannon doesn't offer 26, set 24: the full build passes locally on 24.22.1 with only the engine warning. `engines` unchanged.
+2. **Install command stays `npx pnpm@11.28.2 install --frozen-lockfile`.** It runs the exact pnpm in `packageManager`, which is what Corepack does locally, and doesn't depend on Corepack being present on the build image. Locally, keep using `corepack pnpm …` on Node 24.
+3. **Build command stays `pnpm build`.** `.npmrc` sets `manage-package-manager-versions = true`, so CloudCannon's preinstalled pnpm switches to 11.28.2 from `packageManager` (checked: `npx pnpm@10.18.0 --version` in the site prints 11.28.2), and the script itself only chains content sync, `astro build`, Pagefind and the font check.
+4. **`node_version: "24"`.** CloudCannon's build image has no Node 26 (`nvm use 26` fails: "N/A: version \"v26\" is not yet installed"). The full build passes on 24.22.1 with only pnpm's "Unsupported engine" warning, since nothing sets `engine-strict`. Every installed dependency's `engines.node` allows 24: the highest minimums are Astro and its integrations (≥22.23.4) and pnpm 11.28.2 (≥22.13). `engines` stays `>=26.13.0`, so the warning stays. CloudCannon reads `initial-site-settings.json` only when it first creates a site, so the existing site also needs Node 24 set under **Site Settings > Builds > Configuration** (or `cloudcannon sites update-build-config`, which replaces every build setting, so pass all of them).
 5. **Output path `dist`**, as built.
 
 ## Open questions
 
-1. **Node 26 on CloudCannon** — default `"26"`; if the build log shows a different version or the setting rejects it, use `"24"`.
+1. **`engines` vs the build Node** — default: leave `engines >=26.13.0` and build on 24 with the warning. Alternative: lower `engines` to a range that includes 24, or add an `.nvmrc` with 24.
 2. **Album visual editing** — default on (Decision 1). Alternative: back to `data` only if the album preview is slow or confusing for editors.
 
 ## Commands (run from the site folder)

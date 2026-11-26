@@ -57,3 +57,21 @@ Orchestrator checks:
 - Orchestration: nothing covers a site folder that moves mid-migration.
 
 ## Tom's testing
+- Hosted build 1 fails at the first step: `$ nvm use 26` → `N/A: version "v26" is not yet installed.` CloudCannon doesn't offer Node 26. The migration set `build.node_version: "26"` with a fallback to "24" "if CloudCannon doesn't offer it", but nothing in the skills says how to check which versions CloudCannon offers before the first build. The fix went to the migration agent.
+- Fix round 1 (Node): the agent set `node_version: "24"` in `.cloudcannon/initial-site-settings.json`. That file is read only when the site is created, so the existing site needs Node 24 set in its build settings by hand. The agent asked first, as the skill says, before changing a live site through the CLI. It checked that every dependency's Node floor is met by 24 (Astro 7.4.5 is the strictest, at ≥22.23.4).
+  - Skill gaps: `build-commands.md` § Node version takes the version from `engines` and never says which Node versions CloudCannon installs. The handoff doesn't warn that the settings file applies only when the site is created, which matters most right after a failed first build.
+- Hosted build with Node 24 set on the site: succeeds.
+- Hosted editor, Projects page (opened from Feature pages, `site-settings/config/projects.yaml`): every project card shows editable-regions errors in place of its content: "Failed to render image editable region: Image editable regions expect the \"src\" key to have a value of type \"string\" but instead it was a value of type 'undefined'" and "Failed to render text editable region … received a value of type 'undefined'". The header, filters and "3 projects" count render. Sent to the migration agent as a symptom.
+  - On a later load the cards rendered with no errors, and their text and image regions were outlined as editable. Clicking the FolkPatch title and typing changed nothing: the title stayed "FolkPatch", with a stray "Fo" drawn just left of it. So the errors are intermittent on load, and inline text edits inside the registered section don't take.
+- Fix round 2 (feature pages):
+  - Cause found: each page bound `<editable-component data-prop-items="@data[<page>]" data-prop-settings="@data[<page>_settings]">`. With a keyed prop, or more than one prop, editable-regions 0.0.22 copies the values with `structuredClone`. A whole `@data[...]` dataset is a live editor API object, and once the editor attaches its focus handler, the copy throws `DataCloneError`. If that happens at load, the section never mounts and every region inside it shows "undefined". If not, the copy fails on the next saved edit, so edits don't take. That's why it was intermittent.
+  - Possible editable-regions bug for cc-tools: keyed `@data[...]` props fail intermittently, while a single base `data-prop="@data[key]"` doesn't.
+  - Fix: each page binds only `data-prop="@data[<page>]"`. Page settings come from a new editor-only `src/cloudcannon/live-settings.ts`, which reads `<page>_settings` through the editor API and re-renders on change. 28 files changed, and nothing new loads outside the editor.
+  - Checked by driving the local `cloudcannon dev` editor with Playwright: all 8 sections mount with no errors, and inline title edits show in place.
+  - Remaining risk: in 3 of about 15 local bursts of three keys typed 80–120 ms apart, the file kept only the first key while the card showed all three. Typing 200 ms or more apart saved everything. Not confirmed on the hosted site.
+  - Also confirmed: CloudCannon saves JSON with arrays expanded, and `biome ci` then fails on `src/data/projects.json`. Not fixed.
+  - Skill gaps:
+    - Nothing warns about keyed or multiple `@data[...]` props on a component.
+    - Nothing says how to give one component both a data file and a settings file.
+    - Nothing says a component re-renders on every saved keystroke from regions inside it.
+    - Phase 4 has no step that loads each wired page in `cloudcannon dev` and counts errored regions, which would have caught this.

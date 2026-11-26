@@ -22,8 +22,7 @@ const sectionProps = friendsSectionProps(friendsConfig);
 <MainGridLayout title={pageTitle} description={pageDescription} page="friends">
 	<editable-component
 		data-component="friends-section"
-		data-prop-items="@data[friends]"
-		data-prop-settings="@data[friends_settings]"
+		data-prop="@data[friends]"
 	>
 		<FriendSection {...sectionProps} client:visible />
 	</editable-component>
