@@ -28,13 +28,13 @@ Images in the same gallery use the same card ratio. By default, center cropping 
 
 Write Markdown images directly between `:::grid` and the closing `:::`:
 
-````markdown
+~~~markdown
 :::grid
 ![Image description](./image-1.webp)
 
 ![Image description](./image-2.webp)
 :::
-````
+~~~
 
 Each image must occupy its own paragraph, with a blank line between images. Keep only images in a gallery; write paragraphs, lists, and code blocks outside the container.
 
@@ -58,7 +58,7 @@ Write all parameters in braces after the opening directive: `:::grid{parameter="
 
 Complete example:
 
-````markdown
+~~~markdown
 :::grid{columns="3" aspect="16/9" fit="cover"}
 ![First image](./image-1.webp "Optional caption")
 
@@ -66,7 +66,7 @@ Complete example:
 
 ![Third image](./image-3.webp "Optional caption")
 :::
-````
+~~~
 
 The following result uses the three-column landscape syntax above. Compare the card ratio, column count, and the way a title takes precedence over alt text as the caption:
 
@@ -108,7 +108,7 @@ Desktop layouts use the number of columns specified by `columns`. Below `768px`,
 
 The following examples place the same portrait images in `16/9` cards with `cover` and `contain`. The first crops them; the second preserves the full image and leaves background space.
 
-````markdown
+~~~markdown
 :::grid{columns="3" aspect="16/9" fit="cover"}
 ![Image description](./image-1.webp "Optional caption")
 
@@ -120,7 +120,7 @@ The following examples place the same portrait images in `16/9` cards with `cove
 
 ![Image description](./image-2.webp "Optional caption")
 :::
-````
+~~~
 
 :::grid{columns="3" aspect="16/9" fit="cover"}
 ![First cover result](./default-portrait-1.webp "Cover: center crop")
@@ -142,7 +142,7 @@ The following examples place the same portrait images in `16/9` cards with `cove
 
 Without attributes, the default is three columns, a `16/10` ratio, and `cover` cropping. These three portrait images verify default cropping and captions.
 
-````markdown
+~~~markdown
 :::grid
 ![Image description](./image-1.webp)
 
@@ -150,7 +150,7 @@ Without attributes, the default is three columns, a `16/10` ratio, and `cover` c
 
 ![Image description](./image-3.webp)
 :::
-````
+~~~
 
 :::grid
 ![Default configuration: portrait image one](./default-portrait-1.webp)
@@ -164,7 +164,7 @@ Without attributes, the default is three columns, a `16/10` ratio, and `cover` c
 
 With `aspect="3/4"`, the three portrait images fill consistently proportioned vertical cards. If an original image has a different ratio, `cover` crops its edges from the center.
 
-````markdown
+~~~markdown
 :::grid{columns="3" aspect="3/4"}
 ![Portrait image description](./portrait-1.webp)
 
@@ -172,7 +172,7 @@ With `aspect="3/4"`, the three portrait images fill consistently proportioned ve
 
 ![Portrait image description](./portrait-3.webp)
 :::
-````
+~~~
 
 :::grid{columns="3" aspect="3/4"}
 ![3:4 test image one](./default-portrait-1.webp "Portrait 1")
@@ -186,7 +186,7 @@ With `aspect="3/4"`, the three portrait images fill consistently proportioned ve
 
 This set demonstrates a common video-cover ratio in a three-column layout. Cropping is minimal when the landscape images are close to the card ratio.
 
-````markdown
+~~~markdown
 :::grid{columns="3" aspect="16/9"}
 ![Landscape image description](./landscape-1.webp)
 
@@ -194,7 +194,7 @@ This set demonstrates a common video-cover ratio in a three-column layout. Cropp
 
 ![Landscape image description](./landscape-3.webp)
 :::
-````
+~~~
 
 :::grid{columns="3" aspect="16/9"}
 ![16:9 test image one](./feature-landscape-1.webp)
@@ -208,7 +208,7 @@ This set demonstrates a common video-cover ratio in a three-column layout. Cropp
 
 Two columns work well when larger preview cards are needed. The third image moves to the next row. The final row keeps its grid-track width instead of stretching images to fill the row.
 
-````markdown
+~~~markdown
 :::grid{columns="2" aspect="1/1"}
 ![Square image description](./square-1.webp)
 
@@ -216,7 +216,7 @@ Two columns work well when larger preview cards are needed. The third image move
 
 ![Square image description](./square-3.webp)
 :::
-````
+~~~
 
 :::grid{columns="2" aspect="1/1"}
 ![1:1 test image one](./mixed-square-1.webp)
@@ -230,7 +230,7 @@ Two columns work well when larger preview cards are needed. The third image move
 
 `fit="contain"` does not crop the original image. When the image ratio differs from the card ratio, the theme background remains visible. This is intentional, not a layout issue. It also verifies that four-column grids and separate lightbox groups do not interfere with each other.
 
-````markdown
+~~~markdown
 :::grid{columns="4" aspect="16/9" fit="contain"}
 ![Image description](./image-1.webp)
 
@@ -238,7 +238,7 @@ Two columns work well when larger preview cards are needed. The third image move
 
 ![Image description](./image-3.webp)
 :::
-````
+~~~
 
 :::grid{columns="4" aspect="16/9" fit="contain"}
 ![Contain: portrait image one](./default-portrait-1.webp)
@@ -252,11 +252,11 @@ Two columns work well when larger preview cards are needed. The third image move
 
 One column is suitable when an image needs a larger reading size. It remains one column on desktop, tablet, and mobile, and the original is still available in the lightbox.
 
-````markdown
+~~~markdown
 :::grid{columns="1" aspect="16/9"}
 ![Image description](./detail.webp)
 :::
-````
+~~~
 
 :::grid{columns="1" aspect="16/9"}
 ![Single-column test image](./feature-landscape-1.webp)
@@ -266,7 +266,7 @@ One column is suitable when an image needs a larger reading size. It remains one
 
 Five columns verify a higher supported column count. With only three images, the final row remains left-aligned instead of stretching the images.
 
-````markdown
+~~~markdown
 :::grid{columns="5" aspect="1/1"}
 ![Thumbnail description](./thumb-1.webp)
 
@@ -274,7 +274,7 @@ Five columns verify a higher supported column count. With only three images, the
 
 ![Thumbnail description](./thumb-3.webp)
 :::
-````
+~~~
 
 :::grid{columns="5" aspect="1/1"}
 ![Five-column test image one](./mixed-square-1.webp)
@@ -288,7 +288,7 @@ Five columns verify a higher supported column count. With only three images, the
 
 Six columns are the current maximum. Mixing landscape and portrait images verifies `cover` cropping, captions on narrow cards, and a dense desktop layout. For readable article content, two to four columns are usually preferable.
 
-````markdown
+~~~markdown
 :::grid{columns="6" aspect="1/1"}
 ![Image description](./image-1.webp)
 
@@ -302,7 +302,7 @@ Six columns are the current maximum. Mixing landscape and portrait images verifi
 
 ![Image description](./image-6.webp)
 :::
-````
+~~~
 
 :::grid{columns="6" aspect="1/1"}
 ![Six-column test image one](./default-portrait-1.webp)
@@ -322,7 +322,7 @@ Six columns are the current maximum. Mixing landscape and portrait images verifi
 
 Four square images with the same ratio are a typical four-column layout. Desktop displays all four in one row; tablet collapses to two columns and mobile to one.
 
-````markdown
+~~~markdown
 :::grid{columns="4" aspect="1/1"}
 ![Square image description](./square-1.webp)
 
@@ -332,7 +332,7 @@ Four square images with the same ratio are a typical four-column layout. Desktop
 
 ![Square image description](./square-4.webp)
 :::
-````
+~~~
 
 :::grid{columns="4" aspect="1/1"}
 ![Square image one](./square-1.webp)
@@ -348,7 +348,7 @@ Four square images with the same ratio are a typical four-column layout. Desktop
 
 Six landscape columns work well for thumbnail previews, portfolios, and screenshot indexes. Even if original ratios differ slightly, `cover` fills every `16/9` card consistently.
 
-````markdown
+~~~markdown
 :::grid{columns="6" aspect="16/9"}
 ![Landscape image description](./landscape-1.webp)
 
@@ -362,7 +362,7 @@ Six landscape columns work well for thumbnail previews, portfolios, and screensh
 
 ![Landscape image description](./landscape-6.webp)
 :::
-````
+~~~
 
 :::grid{columns="6" aspect="16/9"}
 ![Landscape image one](./landscape-1.webp)
@@ -382,7 +382,7 @@ Six landscape columns work well for thumbnail previews, portfolios, and screensh
 
 This group of six portrait images demonstrates a common layout for people, posters, or mobile screenshots. The images form two rows of three, with captions aligned to the bottom.
 
-````markdown
+~~~markdown
 :::grid{columns="3" aspect="3/4"}
 ![Portrait image description](./portrait-1.webp)
 
@@ -396,7 +396,7 @@ This group of six portrait images demonstrates a common layout for people, poste
 
 ![Portrait image description](./portrait-6.webp)
 :::
-````
+~~~
 
 :::grid{columns="3" aspect="3/4"}
 ![Portrait image one](./portrait-1.webp)
@@ -416,7 +416,7 @@ This group of six portrait images demonstrates a common layout for people, poste
 
 These images contain important text or details near their edges. `cover` keeps the grid tidy but may crop those edges; click an image to view the uncropped original in the lightbox. Use clear captions for edge-sensitive images, or use `contain` below.
 
-````markdown
+~~~markdown
 :::grid{columns="3" aspect="16/9" fit="cover"}
 ![Edge-critical content](./critical-1.webp "Open the lightbox to view the complete edge content")
 
@@ -424,7 +424,7 @@ These images contain important text or details near their edges. `cover` keeps t
 
 ![Edge-critical content](./critical-3.webp "Open the lightbox to view the complete edge content")
 :::
-````
+~~~
 
 :::grid{columns="3" aspect="16/9" fit="cover"}
 ![First edge-critical image](./critical-1.webp "Open the lightbox to view the complete edge content")
@@ -438,7 +438,7 @@ These images contain important text or details near their edges. `cover` keeps t
 
 For banners, long screenshots, and other extreme image ratios, `contain` displays the complete original. Unlike `cover`, it may leave theme-background space, but it never crops content.
 
-````markdown
+~~~markdown
 :::grid{columns="3" aspect="16/9" fit="contain"}
 ![Complete screenshot description](./wide-1.webp)
 
@@ -446,7 +446,7 @@ For banners, long screenshots, and other extreme image ratios, `contain` display
 
 ![Complete screenshot description](./wide-3.webp)
 :::
-````
+~~~
 
 :::grid{columns="3" aspect="16/9" fit="contain"}
 ![Extreme-ratio image one](./extreme-1.webp)
@@ -460,11 +460,11 @@ For banners, long screenshots, and other extreme image ratios, `contain` display
 
 Transparent images reveal the card's theme background. This single-column `contain` example makes the transparent areas, original edges, and lightbox behavior easy to inspect.
 
-````markdown
+~~~markdown
 :::grid{columns="1" aspect="16/9" fit="contain"}
 ![Transparent image description](./transparent.webp)
 :::
-````
+~~~
 
 :::grid{columns="1" aspect="16/9" fit="contain"}
 ![Transparent-background test image](./transparent-1.webp)

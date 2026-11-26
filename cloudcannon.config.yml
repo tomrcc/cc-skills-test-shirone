@@ -11,7 +11,9 @@ markdown:
     html: true
     table: true
     strikethrough: true
-    code_block_fences: "```"
+    # Every fence in a saved body is written with this. Tildes keep the
+    # demo posts' nested ``` examples inside their outer fence.
+    code_block_fences: "~~~"
     escape_snippets_in_code_blocks: true
 
 _editables:
@@ -825,6 +827,8 @@ file_config:
       - src/content/posts/markdown-fields.md
       - src/content/posts/option-groups.md
       - src/content/posts/content-annotations.md
+      - src/content/posts/markdown-enhancements.md
+      - src/content/posts/image-grid-demo/index.md
     _enabled_editors:
       - data
 

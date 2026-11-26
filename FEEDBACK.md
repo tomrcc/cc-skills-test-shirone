@@ -75,3 +75,22 @@ Orchestrator checks:
     - Nothing says how to give one component both a data file and a settings file.
     - Nothing says a component re-renders on every saved keystroke from regions inside it.
     - Phase 4 has no step that loads each wired page in `cloudcannon dev` and counts errored regions, which would have caught this.
+- Hosted re-check after fix round 2: Projects loads with no error boxes over several reloads, and the FolkPatch heading can be edited inline.
+- Hosted save, commit `42e7dcf` on `test-migration`:
+  - The FolkPatch title saved in full ("Folk Patch Typed in"), typed at normal speed. No dropped keys.
+  - `src/content/posts/steps.md` was corrupted by the save: CloudCannon rewrote both four-backtick outer fences (```` ````markdown ````) to three backticks. The nested ``` ``` ``` inside now closes the outer fence early, so the example markup leaks into the post as live content. It also changed `-` bullets to `*`, `published` to a timestamp, and flow-style `tags` to a block list. The blog starter's agent found the same outer-fence rewrite independently.
+  - Tom opened `steps.md` (and `spoilers.md`), clicked in the body without meaning to change anything, and left. That was enough for the save to rewrite the whole body, fences included. Each save touched only the file being edited.
+- Hosted editor, `admonitions.md`: the admonitions show as styled callout boxes until you click in the body. After that, every one turns into a snippet block instead of a rendered box. The blocks have no options button to open the snippet's edit modal, as snippets normally do. Double-clicking opens them, but they don't look right. Tom expects one admonition snippet with a type dropdown plus title and text fields. The config defines one snippet per variant (`note`, `info`, …), each with `label`/`title`/`body` params. Sent to the migration agent.
+- Fix round 3 (fences, admonitions):
+  - `steps.md` restored from before `42e7dcf`. Every change that save made to it was an editor rewrite.
+  - Nested fences: `markdown.options.code_block_fences: "~~~"`, and the outer fences in 5 posts are now `~~~`. `series-utils.ts` also strips `~~~` blocks from excerpts. Every built page is identical to the pre-change build (apart from encrypted pages, whose ciphertext changes on every build), including after simulating a save of every post. Local editor saves of `steps.md` and `collapse-panels.md` keep `~~~` outer and ``` ``` ``` inner fences. Cost: every save turns a file's ``` ``` ``` fences into `~~~`.
+  - `markdown-enhancements.md` (a save drops the info string after ```` ```file-tree ````) and `image-grid-demo/index.md` (a save escapes attribute-less `:::grid` as `\:::grid` and adds `fit=""`) moved to `_enabled_editors: [data]`. Not yet confirmed on the hosted site.
+  - Every body save drops code-fence metadata (`title=`, `frame=`, `ins=`, `del=`, `{1,4}`, `showLineNumbers`) sitewide, whatever the fence setting. This affects `expressive-code.md` and `guide/index.md`. Needs Tom's call.
+  - Admonitions do parse as the configured `_snippets`: double-click opens "Edit Note" with Title and Text. Rendered boxes turning into cards on click is how the body editor works. One snippet with a type dropdown isn't possible: no parser takes "one of a fixed list", an `argument` parser matched nothing, and a `content` parser swallowed the body. The 6 separate snippets stay, as `snippets.md` recommends for variants. The modal marks Title as required, though its comment says it can be left empty.
+  - Biome: CloudCannon's save of `projects.json` fails `biome ci ./src`. Not changed.
+  - Skill gaps:
+    - Nothing on `code_block_fences`, or on a save rewriting the outer fence length.
+    - Nothing on a save dropping code-fence metadata (expressive-code sites).
+    - Nothing on clicking into an `@content` region writing the file with no change typed.
+    - Nothing on snippet parsers being unable to express a fixed set.
+    - The handoff's one-word edits should run in `cloudcannon dev` during the migration, before hosting.

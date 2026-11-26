@@ -44,7 +44,7 @@ export interface SeriesPostContext extends SeriesContext {
  */
 export function excerptFromMarkdown(markdown: string, maxChars = 160): string {
 	const text = markdown
-		.replace(/```[\s\S]*?```/g, " ")
+		.replace(/(`{3,}|~{3,})[\s\S]*?\1/g, " ")
 		.replace(/`([^`]*)`/g, "$1")
 		.replace(/!\[[^\]]*\]\([^)]*\)/g, "")
 		.replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")

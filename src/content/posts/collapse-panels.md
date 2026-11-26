@@ -65,7 +65,7 @@ Add `accordion` when only one answer should remain open. The browser groups the 
 
 ## Author syntax
 
-````markdown
+~~~markdown
 ::: collapse accordion
 - :+ First title
 
@@ -75,6 +75,6 @@ Add `accordion` when only one answer should remain open. The browser groups the 
 
   Second panel content.
 :::
-````
+~~~
 
 The container must contain exactly one top-level unordered list. Every item needs a title paragraph, a blank line, and body content. Invalid or mixed input remains an ordinary readable Markdown list.

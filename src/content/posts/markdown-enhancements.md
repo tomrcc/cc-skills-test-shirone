@@ -87,7 +87,7 @@ Use the `:::file-tree` block directive when writing the file hierarchy directly 
 
 When you already have directory tree text generated from command-line tools like `tree`, paste it directly into a `file-tree` fenced code block. Both Unicode branch characters (`├──`, `└──`, `│`) and ASCII branches are automatically parsed.
 
-````markdown
+~~~markdown
 ```file-tree title="Build output" icon="simple"
 dist
 ├── _astro/
@@ -95,7 +95,7 @@ dist
 │   └── page.js
 └── favicon.ico
 ```
-````
+~~~
 
 ```file-tree title="Build output" icon="simple"
 dist
@@ -120,7 +120,7 @@ Interactive Code Trees pair a multi-level file hierarchy navigation pane on the 
 
 Combine multiple fenced code blocks within a `:::code-tree` block directive. Each code block specifies its path via `title="path/to/file"`.
 
-````markdown
+~~~markdown
 :::code-tree{title="Shirone Component Demo" height="380px" entry="src/Button.svelte"}
 ```svelte title="src/Button.svelte"
 <script lang="ts">
@@ -144,7 +144,7 @@ Combine multiple fenced code blocks within a `:::code-tree` block directive. Eac
 }
 ```
 :::
-````
+~~~
 
 :::code-tree{title="Shirone Component Demo" height="380px" entry="src/Button.svelte"}
 ```svelte title="src/Button.svelte"
