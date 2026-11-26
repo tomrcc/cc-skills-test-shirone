@@ -1,0 +1,32 @@
+title: Shirone
+subtitle: A Material 3 anime blog
+lang: en
+themeColor:
+  hue: 315
+banner:
+  src:
+    desktop:
+      - /src/assets/images/banner/desktop/1.webp
+    mobile:
+      - /src/assets/images/banner/mobile/1.webp
+  position: center
+  dim:
+    enable: true
+    opacity: 0.24
+  homeText:
+    enable: true
+    title: Shirone
+    subtitle:
+      - 特別なことはないけど、君がいると十分です
+      - 今でもあなたは私の光
+      - 君ってさ、知らないうちに私の毎日になってたよ
+      - 君と話すと、なんか毎日がちょっと楽しくなるんだ
+      - 今日はなんでもない日。でも、ちょっとだけいい日
+    typewriter:
+      enable: true
+  carousel:
+    enable: true
+    interval: 6000
+    animation: ken-burns
+  waves:
+    enable: true

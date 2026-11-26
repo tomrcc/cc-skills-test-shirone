@@ -5,7 +5,7 @@ import I18nKey from "@i18n/i18nKey";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { resolveI18nText } from "@utils/i18n-utils";
 import { timelineConfig } from "@/config/timelineConfig";
-import { resolveTimelineData } from "@/utils/feature-data";
+import { timelineSectionProps } from "@/utils/feature-sections";
 
 if (!timelineConfig.enable) {
 	return Astro.redirect("/404/");
@@ -17,7 +17,7 @@ const pageDescription = resolveI18nText(
 	I18nKey.timelineBanner,
 );
 
-const items = resolveTimelineData(timelineConfig);
+const sectionProps = timelineSectionProps(timelineConfig);
 ---
 
 <MainGridLayout
@@ -25,11 +25,18 @@ const items = resolveTimelineData(timelineConfig);
 	description={pageDescription}
 	page="timeline"
 >
-	<TimelineSection
-		categories={timelineConfig.categories}
-		items={items}
-		title={pageTitle}
-		subtitle={pageDescription}
-		client:visible
-	/>
+	<editable-component
+		data-component="timeline-section"
+		data-prop-items="@data[timeline]"
+		data-prop-settings="@data[timeline_settings]"
+	>
+		<TimelineSection {...sectionProps} client:visible />
+	</editable-component>
+	<script>
+		if (window.inEditorMode) {
+			import("@/cloudcannon/register/timeline").catch((error) => {
+				console.warn("Failed to load CloudCannon component registration:", error);
+			});
+		}
+	</script>
 </MainGridLayout>

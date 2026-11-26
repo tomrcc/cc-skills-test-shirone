@@ -1,9 +1,21 @@
 ---
 title: Draft Example
 published: 2022-07-01
+updated:
+description: ""
+image: ""
 tags: [Markdown, Blogging, Demo]
 category: Examples
+series: ""
+seriesOrder:
+lang: ""
+pinned: false
 draft: true
+comment: true
+encrypted: false
+password: ""
+passwordHint: ""
+hideHomeContent: true
 ---
 
 # This Article is a Draft

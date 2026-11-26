@@ -77,3 +77,6 @@ artifacts/lighthouse/*
 
 # generated AI skills plugin packages
 artifacts/shirone-ai-*
+
+# CloudCannon JSON schemas (downloaded reference, not project files)
+.cloudcannon/migration/*.schema.json

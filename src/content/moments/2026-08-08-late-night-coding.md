@@ -1,5 +1,7 @@
 ---
 published: 2026-08-08T23:40:00+08:00
+pinned: false
+location: ""
 mood: material-symbols:code-blocks-outline-rounded
 tags:
   - dev
@@ -7,6 +9,10 @@ tags:
 images:
   - src: /images/moments/night/window-sun.webp
     alt: A girl by a sunlit window, the room dark around her
+encrypted: false
+password: ""
+passwordHint: ""
+draft: false
 ---
 
 Switched to a new wallpaper — a girl by a sunlit window, the room dark except for her.

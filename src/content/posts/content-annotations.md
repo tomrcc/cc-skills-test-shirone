@@ -1,11 +1,21 @@
 ---
 title: Content Annotations
 published: 2026-08-27
+updated:
 description: Add compact, accessible supporting notes to Shirone articles without interrupting the reading flow.
+image: ""
 tags: [Demo, Markdown, Annotation, Shirone]
 category: Guides
+series: ""
+seriesOrder:
 lang: en
+pinned: false
 draft: false
+comment: true
+encrypted: false
+password: ""
+passwordHint: ""
+hideHomeContent: true
 ---
 
 Content annotations keep supporting context close to a sentence without placing it directly in the reading flow. Activate the small note marker to reveal its content.

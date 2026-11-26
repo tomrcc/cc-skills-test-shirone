@@ -8,7 +8,7 @@ import I18nKey from "@i18n/i18nKey";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { resolveI18nText } from "@utils/i18n-utils";
 import { compassConfig } from "@/config/compassConfig";
-import { compassData } from "../data/compass";
+import { compassSectionProps } from "@/utils/feature-sections";
 
 if (!compassConfig.enable) {
 	return Astro.redirect("/404/");
@@ -19,8 +19,23 @@ const pageDescription = resolveI18nText(
 	compassConfig.description,
 	I18nKey.compassBanner,
 );
+
+const sectionProps = compassSectionProps(compassConfig);
 ---
 
 <MainGridLayout title={pageTitle} description={pageDescription} page="compass">
-    <CompassSection shelves={compassData} title={pageTitle} subtitle={pageDescription} client:visible></CompassSection>
+	<editable-component
+		data-component="compass-section"
+		data-prop-items="@data[compass]"
+		data-prop-settings="@data[compass_settings]"
+	>
+		<CompassSection {...sectionProps} client:visible />
+	</editable-component>
+	<script>
+		if (window.inEditorMode) {
+			import("@/cloudcannon/register/compass").catch((error) => {
+				console.warn("Failed to load CloudCannon component registration:", error);
+			});
+		}
+	</script>
 </MainGridLayout>

@@ -1,9 +1,21 @@
 ---
 title: Markdown Field Cards
 description: API and component parameter documentation cards.
+image: ""
+tags: []
 published: 2026-08-30
+updated:
 category: Guides
+series: ""
+seriesOrder:
+lang: ""
+pinned: false
 draft: true
+comment: true
+encrypted: false
+password: ""
+passwordHint: ""
+hideHomeContent: true
 ---
 
 Use `field-group` when several related options belong to the same API or component. Put the field name on the opening line, then add metadata tags before the description.

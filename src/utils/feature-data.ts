@@ -237,7 +237,7 @@ export function resolveGamesData(
 	return filtered.map((item) => ({
 		...item,
 		cover: item.cover
-			? item.cover.startsWith("/")
+			? item.cover.startsWith("/") && !item.cover.startsWith("/src/")
 				? url(item.cover)
 				: item.cover
 			: undefined,

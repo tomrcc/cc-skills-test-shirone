@@ -1,10 +1,16 @@
 ---
 title: Password Protection and Post Encryption Demo
 published: 2026-08-20
+updated:
 pinned: true
+draft: false
+comment: true
 description: A demonstration of client-side authenticated decryption, memory session persistence, and M3E design tokens in Shirone.
+image: ""
 tags: [Demo, Security, Encryption, Markdown]
 category: Examples
+series: ""
+seriesOrder:
 lang: en
 encrypted: true
 password: "shirone-secret"
@@ -121,19 +127,19 @@ $$
 
 ### 2.4 Admonitions
 
-:::note Architecture Note
+:::note[Architecture Note]
 This encryption system adheres to atomic design principles and minimal patch conventions without compromising SSR stability.
 :::
 
-:::tip Theme Integration
+:::tip[Theme Integration]
 After unlocking, try switching between light and dark modes or changing the primary hue; decrypted components adapt dynamically to active design tokens.
 :::
 
-:::important Security Scope
+:::important[Security Scope]
 Static client-side encryption is designed to prevent unauthorized browsing and automated indexing. For mission-critical commercial secrets, server-side authentication is recommended.
 :::
 
-:::warning Password Recovery
+:::warning[Password Recovery]
 Static encryption has no centralized server database. If a password is forgotten, the encrypted content cannot be recovered.
 :::
 

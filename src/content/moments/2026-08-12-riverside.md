@@ -1,5 +1,7 @@
 ---
 published: 2026-08-12T18:30:00+08:00
+pinned: false
+location: ""
 mood: material-symbols:sentiment-excited-outline-rounded
 tags:
   - wallpaper
@@ -11,6 +13,10 @@ images:
     alt: Lovely girl wallpaper two
   - src: /images/moments/girls-trio/girl-3.webp
     alt: Lovely girl wallpaper three
+encrypted: false
+password: ""
+passwordHint: ""
+draft: false
 ---
 
 Three new wallpapers, all lovely girls.

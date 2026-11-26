@@ -1,11 +1,21 @@
 ---
 title: Markdown Option Groups
 published: 2026-08-28
+updated:
 description: Present related Markdown alternatives in compact, synchronized M3E option groups.
+image: ""
 tags: [Demo, Markdown, Tabs, Shirone]
 category: Guides
+series: ""
+seriesOrder:
 lang: en
+pinned: false
 draft: false
+comment: true
+encrypted: false
+password: ""
+passwordHint: ""
+hideHomeContent: true
 ---
 
 Option groups keep equivalent instructions together without repeating the surrounding explanation. Each option accepts full block Markdown, while the selected value can synchronize with another group on the same page.

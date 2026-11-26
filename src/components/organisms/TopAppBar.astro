@@ -49,7 +49,7 @@ function isActive(link: (typeof links)[number]): boolean {
 			class="group flex h-10 items-center gap-2 px-2 text-[var(--on-surface)] transition whitespace-nowrap"
 		>
 			<span class="h-5 w-1 rounded-full bg-[var(--primary)] transition-all group-hover:h-7"></span>
-			<span class="text-lg font-bold group-hover:text-[var(--primary)]">{siteConfig.title}</span>
+			<span class="text-lg font-bold group-hover:text-[var(--primary)]" data-editable="text" data-prop="@data[site_settings].title">{siteConfig.title}</span>
 		</a>
 		<nav class:list={["top-app-bar__nav hidden h-full items-center gap-1 lg:flex", siteConfig.topAppBar.contentAlign === "center" ? "lg:absolute lg:left-1/2 lg:-translate-x-1/2" : "ml-4"]} aria-label={i18n(I18nKey.mainNavigation)}>
 			{links.map((link) => {

@@ -19,10 +19,22 @@
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
+import {
+	arrayItemRegion,
+	arrayRegion,
+	type EditablePath,
+	imageRegion,
+	textRegion,
+	valueRegion,
+} from "@utils/editable-regions";
 import { reveal } from "@utils/motion";
 import type { ProjectItem, ProjectPhase } from "@/types/projectsConfig";
 
-let { project, delay = 0 }: { project: ProjectItem; delay?: number } = $props();
+let {
+	project,
+	delay = 0,
+}: { project: ProjectItem & EditablePath; delay?: number } = $props();
+const path = $derived(project.editablePath);
 
 let coverFailed = $state(false);
 
@@ -58,6 +70,7 @@ const showCover = $derived(Boolean(project.cover) && !coverFailed);
 		loading="lazy"
 		decoding="async"
 		onerror={() => (coverFailed = true)}
+		{...imageRegion(path, "cover")}
 	/>
 	<span class="project-card__scrim" aria-hidden="true"></span>
 	{#if project.featured}
@@ -96,15 +109,15 @@ const showCover = $derived(Boolean(project.cover) && !coverFailed);
 		<div class="project-card__header">
 			{#if !showCover}
 				<span class="project-card__icon" aria-hidden="true">
-					<Icon icon={project.icon ?? "material-symbols:deployed-code-outline-rounded"} />
+					<Icon icon={project.icon || "material-symbols:deployed-code-outline-rounded"} />
 				</span>
 			{/if}
 
 			<div class="project-card__heading">
 				<div class="project-card__title-row">
-					<h2 class="project-card__title">{project.title}</h2>
+					<h2 class="project-card__title" {...textRegion(path, "title")}>{project.title}</h2>
 					{#if project.year}
-						<span class="project-card__year">{project.year}</span>
+						<span class="project-card__year" {...textRegion(path, "year")}>{project.year}</span>
 					{/if}
 				</div>
 				<span class="project-card__phase" data-phase={project.phase}>
@@ -114,15 +127,16 @@ const showCover = $derived(Boolean(project.cover) && !coverFailed);
 			</div>
 		</div>
 
-		<p class="project-card__summary">{project.summary}</p>
+		<p class="project-card__summary" {...textRegion(path, "summary")}>{project.summary}</p>
 
 		{#if project.technologies.length > 0}
 			<ul
 				class="project-card__technologies"
 				aria-label={i18n(I18nKey.projectTechnologies)}
+				{...arrayRegion(path, "technologies")}
 			>
 				{#each project.technologies as technology (technology)}
-					<li>{technology}</li>
+					<li {...arrayItemRegion(path)}><span {...valueRegion(path)}>{technology}</span></li>
 				{/each}
 			</ul>
 		{/if}

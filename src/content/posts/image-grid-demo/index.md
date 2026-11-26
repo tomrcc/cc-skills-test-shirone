@@ -1,10 +1,21 @@
 ---
 title: "Image Gallery Grid: Syntax and Complete Examples"
 published: 2026-07-13
+updated:
 description: "A complete guide to image gallery grid syntax, parameters, cropping, responsive behavior, captions, and lightbox navigation."
+image: ""
 tags: [Markdown, Gallery, Image Grid, Demo]
 category: "Examples"
+series: ""
+seriesOrder:
+lang: ""
+pinned: false
 draft: false
+comment: true
+encrypted: false
+password: ""
+passwordHint: ""
+hideHomeContent: true
 ---
 
 `:::grid` is the blog's image gallery container directive. It arranges ordinary Markdown images in a responsive grid with a consistent aspect ratio and automatically enables lightbox viewing. Use it for article images, screenshots, portfolios, or small albums.

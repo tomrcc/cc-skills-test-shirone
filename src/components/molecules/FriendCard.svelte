@@ -1,9 +1,18 @@
 <script lang="ts">
 import Avatar from "@components/atoms/display/Avatar.svelte";
 import Icon from "@components/atoms/display/Icon.svelte";
+import {
+	arrayItemRegion,
+	arrayRegion,
+	type EditablePath,
+	imageRegion,
+	textRegion,
+	valueRegion,
+} from "@utils/editable-regions";
 import type { FriendItem } from "../../data/friends";
 
-let { friend }: { friend: FriendItem } = $props();
+let { friend }: { friend: FriendItem & EditablePath } = $props();
+const path = $derived(friend.editablePath);
 
 const host = $derived.by(() => {
 	try {
@@ -22,18 +31,22 @@ const host = $derived.by(() => {
 >
 	<div class="friend-card__body">
 		<div class="friend-card__header">
-			<Avatar
-				src={friend.imgurl}
-				alt=""
-				size={40}
-				shape="circle"
-				loadingFeedback
-				fallback={friend.title.trim()[0]}
-			/>
+			<span class="friend-card__avatar" {...imageRegion(path, "imgurl")}>
+				<Avatar
+					src={friend.imgurl}
+					alt=""
+					size={40}
+					shape="circle"
+					loadingFeedback
+					fallback={friend.title.trim()[0]}
+				/>
+			</span>
 
 			<div class="friend-card__info">
 				<span class="friend-card__title">
-					<span class="friend-card__title-text">{friend.title}</span>
+					<span class="friend-card__title-text" {...textRegion(path, "title")}>
+						{friend.title}
+					</span>
 				</span>
 
 				<div class="friend-card__host">
@@ -47,13 +60,15 @@ const host = $derived.by(() => {
 		</div>
 
 		{#if friend.desc}
-			<p class="friend-card__desc">{friend.desc}</p>
+			<p class="friend-card__desc" {...textRegion(path, "desc")}>{friend.desc}</p>
 		{/if}
 
 		{#if friend.tags.length > 0}
-			<div class="friend-card__tags">
+			<div class="friend-card__tags" {...arrayRegion(path, "tags")}>
 				{#each friend.tags as tag (tag)}
-					<span class="friend-card__tag">#{tag}</span>
+					<span class="friend-card__tag" {...arrayItemRegion(path)}>
+						#<span {...valueRegion(path)}>{tag}</span>
+					</span>
 				{/each}
 			</div>
 		{/if}
@@ -92,6 +107,10 @@ const host = $derived.by(() => {
 		align-items: center
 		gap: var(--m3e-space-3)
 		margin-bottom: var(--m3e-space-3)
+
+	&__avatar
+		display: flex
+		flex-shrink: 0
 
 	&__info
 		min-width: 0

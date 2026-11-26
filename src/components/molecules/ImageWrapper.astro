@@ -20,6 +20,8 @@ interface Props {
 	sizes?: string;
 	formats?: Array<"avif" | "webp">;
 	quality?: number;
+	/** Front matter key of `src`, for an image region in CloudCannon's Visual Editor. */
+	imageProp?: string;
 }
 
 const {
@@ -35,6 +37,7 @@ const {
 	sizes,
 	formats,
 	quality,
+	imageProp,
 } = Astro.props;
 const className = Astro.props.class;
 
@@ -73,6 +76,9 @@ const bloomVars = bloomEnabled ? getBloomInlineVars() : "";
 const imageClass = `w-full h-full object-cover ${bloomEnabled ? "image-bloom-img" : ""}`;
 const imageStyle = `object-position: ${position}`;
 const resolvedAspectRatio = aspectRatio ?? (!isLocal ? "16 / 9" : undefined);
+const imageRegion = imageProp
+	? { "data-editable": "image", "data-prop-src": imageProp }
+	: {};
 ---
 <div
 	id={id}
@@ -99,6 +105,7 @@ const resolvedAspectRatio = aspectRatio ?? (!isLocal ? "16 / 9" : undefined);
 			fetchpriority={fetchPriority}
 			decoding="async"
 			onload={bloomEnabled ? "this.classList.add('image-bloom-img--loaded'); this.parentElement?.parentElement?.querySelector('.image-bloom-layer')?.classList.add('image-bloom-layer--loaded');" : undefined}
+			{...imageRegion}
 		/>
 	)}
     {isLocal && img && (!formats || formats.length === 0) && (
@@ -113,6 +120,7 @@ const resolvedAspectRatio = aspectRatio ?? (!isLocal ? "16 / 9" : undefined);
 			loading={loading}
 			fetchpriority={fetchPriority}
 			onload={bloomEnabled ? "this.classList.add('image-bloom-img--loaded'); this.parentElement?.querySelector('.image-bloom-layer')?.classList.add('image-bloom-layer--loaded');" : undefined}
+			{...imageRegion}
 		/>
 	)}
     {!isLocal && (
@@ -124,6 +132,7 @@ const resolvedAspectRatio = aspectRatio ?? (!isLocal ? "16 / 9" : undefined);
 			loading={loading}
 			fetchpriority={fetchPriority}
 			onload={bloomEnabled ? "this.classList.add('image-bloom-img--loaded'); this.parentElement?.querySelector('.image-bloom-layer')?.classList.add('image-bloom-layer--loaded');" : undefined}
+			{...imageRegion}
 		/>
 	)}
 </div>

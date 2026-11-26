@@ -1,12 +1,21 @@
 ---
 title: Markdown Example
 published: 2023-10-01
+updated:
 description: A simple example of a Markdown blog post.
+image: ""
 tags: [Markdown, Blogging, Demo]
 series: markdown-syntax-guide
 seriesOrder: 1
+lang: ""
+pinned: false
 category: Examples
 draft: false
+comment: true
+encrypted: false
+password: ""
+passwordHint: ""
+hideHomeContent: true
 ---
 
 # An h1 header
@@ -162,7 +171,9 @@ and images can be specified like so:
 Inline math equations go in like so: $\omega = d\phi / dt$. Display
 math should get its own line and be put in in double-dollarsigns:
 
-$$I = \int \rho R^{2} dV$$
+$$
+I = \int \rho R^{2} dV
+$$
 
 $$
 \begin{equation*}

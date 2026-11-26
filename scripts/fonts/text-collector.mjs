@@ -46,14 +46,17 @@ export async function collectAllText() {
 			".md",
 			".mdx",
 		]);
-		// 项目 / 技能 / 时间线 / 设备 / 友链 / 罗盘的正文都住在 src/data/*.ts，
+		// 项目 / 技能 / 时间线 / 设备 / 友链 / 罗盘的正文都住在 src/data/*.json，
 		// 与文章一样是会被渲染出来的站点文本。内容分离后这些文件由内容仓提供，
 		// 漏扫的直接后果是子集字体缺字。
-		// （.json 番剧快照不在此列，它受 allowRemoteText 单独管辖。）
-		const dataFiles = await walkDirectory(join(projectRoot, "src/data"), [
-			".ts",
-			".js",
-		]);
+		// （番剧快照不在此列，它受 allowRemoteText 单独管辖。）
+		const dataFiles = (
+			await walkDirectory(join(projectRoot, "src/data"), [
+				".ts",
+				".js",
+				".json",
+			])
+		).filter((file) => !file.includes("anime-snapshots"));
 		for (const file of [...contentFiles, ...dataFiles]) {
 			const text = await readFile(file, "utf8");
 			for (const ch of text) {
@@ -115,7 +118,7 @@ async function collectMusicText(charSet) {
 
 	// 模式 A & D：本地模式 (local) 或 混合模式 (mixed) -> 扫描本地曲目数据
 	if (provider === "local" || provider === "mixed") {
-		const localMusicFile = join(projectRoot, "src/data/music.ts");
+		const localMusicFile = join(projectRoot, "src/data/music.json");
 		if (existsSync(localMusicFile)) {
 			const text = await readFile(localMusicFile, "utf8");
 			for (const ch of text) {
@@ -196,8 +199,8 @@ async function collectMusicText(charSet) {
 async function collectAnimeText(charSet) {
 	if (!animeConfig.enable) return;
 
-	// 1. 扫描本地手写番剧数据 (src/data/anime.ts)
-	const localAnimeFile = join(projectRoot, "src/data/anime.ts");
+	// 1. 扫描本地手写番剧数据 (src/data/anime.json)
+	const localAnimeFile = join(projectRoot, "src/data/anime.json");
 	if (existsSync(localAnimeFile)) {
 		const text = await readFile(localAnimeFile, "utf8");
 		for (const ch of text) {

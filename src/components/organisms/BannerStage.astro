@@ -157,6 +157,11 @@ const subtitleArray = Array.isArray(rawSubtitles)
 	? rawSubtitles
 	: [rawSubtitles];
 const defaultInitialSubtitle = subtitleArray[0] ?? "";
+// Only the first subtitle shows in the Visual Editor; the rest are edited in the data panel.
+const subtitleProp =
+	Array.isArray(rawSubtitles) && rawSubtitles.length > 0
+		? "@data[site_settings].banner.homeText.subtitle.0"
+		: undefined;
 const typewriter = siteConfig.banner.homeText.typewriter;
 const carouselFadeDuration = Math.min(
 	Math.max(siteConfig.banner.carousel?.fadeDuration ?? 1200, 300),
@@ -233,10 +238,12 @@ const initialMobileBanner = page === "home";
 	)}
 	{siteConfig.banner.homeText.enable && (
 		<div class="banner-stage__copy banner-stage__copy--home" data-banner-home-copy>
-			<h1>{siteConfig.banner.homeText.title}</h1>
+			<h1 data-editable="text" data-prop="@data[site_settings].banner.homeText.title">{siteConfig.banner.homeText.title}</h1>
 			<p
 				aria-label={defaultInitialSubtitle}
 				data-subtitle-state="complete"
+				data-editable={subtitleProp ? "text" : undefined}
+				data-prop={subtitleProp}
 			>
 				{defaultInitialSubtitle}
 			</p>
@@ -307,6 +314,9 @@ const initialMobileBanner = page === "home";
 	}
 
 	const stage = document.getElementById("banner-wrapper") as HTMLElement | null;
+	// In CloudCannon's Visual Editor the banner copy stays as rendered, so the
+	// editor owns its text; `motion-reduced` already stops the carousel.
+	const editorMode = window.inEditorMode === true;
 	const layers = stage
 		? [...stage.querySelectorAll<HTMLImageElement>(".banner-stage__image")]
 		: [];
@@ -429,7 +439,7 @@ const initialMobileBanner = page === "home";
 		}
 		runtime.subtitleTimer = null;
 		runtime.subtitleVisible = false;
-		if (subtitle) {
+		if (subtitle && !editorMode) {
 			const texts = getSubtitleTexts();
 			subtitle.textContent = texts[0] || "";
 			subtitle.dataset.subtitleState = "complete";
@@ -439,7 +449,7 @@ const initialMobileBanner = page === "home";
 	function showSubtitleImmediately() {
 		stopSubtitleTyping();
 		runtime.subtitleVisible = true;
-		if (subtitle) {
+		if (subtitle && !editorMode) {
 			const texts = getSubtitleTexts();
 			subtitle.textContent = texts[0] || "";
 			subtitle.dataset.subtitleState = "complete";
@@ -454,6 +464,7 @@ const initialMobileBanner = page === "home";
 	}
 
 	function startSubtitleTyping(page: SidebarPage | undefined) {
+		if (editorMode) return;
 		if (!subtitle || !page || page !== "home") {
 			stopSubtitleTyping();
 			runtime.subtitlePage = page ?? null;
@@ -880,6 +891,7 @@ const initialMobileBanner = page === "home";
 			!contextDate
 		)
 			return false;
+		if (editorMode) return Boolean(contextTitle.textContent?.trim());
 		const title = context.title;
 		const description = context.description !== title ? context.description : "";
 		const date = context.date;
@@ -1066,6 +1078,9 @@ const initialMobileBanner = page === "home";
 			text-align: center
 			text-shadow: 0 2px 12px rgba(0, 0, 0, 0.48)
 			pointer-events: none
+
+		:global(.cms-editor-active) .banner-stage__copy [data-editable]
+			pointer-events: auto
 
 		.banner-stage__copy h1,
 		.banner-stage__context-title

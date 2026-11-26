@@ -282,7 +282,7 @@ class FabController {
 
 	public navigateToHome(): void {
 		const homeUrl = (document.documentElement.dataset.base || "/") as string;
-		if (window.swup) {
+		if (window.swup && !window.inEditorMode) {
 			window.swup.navigate(homeUrl);
 		} else {
 			window.location.href = homeUrl;

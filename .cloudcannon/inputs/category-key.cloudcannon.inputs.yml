@@ -1,0 +1,8 @@
+key:
+  type: text
+  label: Category ID
+  comment: Unique, lowercase letters, numbers and hyphens. Items on the page refer to their category by this ID, so changing it unlinks them.
+  options:
+    required: true
+    pattern: "^[a-z0-9-]+$"
+    pattern_message: Lowercase letters, numbers and hyphens only

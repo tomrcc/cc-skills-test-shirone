@@ -1,0 +1,42 @@
+type:
+  type: text
+  hidden: true
+enable:
+  type: switch
+  label: Show this widget
+slot:
+  type: select
+  label: Position
+  options:
+    value_key: id
+    preview:
+      text:
+        - key: name
+    values: _select_data.sidebar_slots
+column:
+  type: select
+  label: Column
+  comment: The second column appears only when the sidebar is set to two sidebars.
+  options:
+    value_key: id
+    preview:
+      text:
+        - key: name
+    values: _select_data.sidebar_columns
+pages:
+  type: multiselect
+  label: Show on
+  comment: Leave empty to show on every page.
+  options:
+    empty_type: array
+    value_key: id
+    preview:
+      text:
+        - key: name
+    values: _select_data.sidebar_pages
+collapseAfter:
+  type: number
+  label: Items shown before "Show more"
+  options:
+    min: 1
+    step: 1

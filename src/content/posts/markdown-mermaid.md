@@ -1,11 +1,21 @@
 ---
 title: Mermaid Diagram Gallery
 published: 2024-05-02
+updated:
 description: A gallery of Mermaid diagrams for processes, interactions, data models, schedules, and project history.
+image: ""
 tags: [Demo, Example, Markdown, Mermaid]
 category: Examples
+series: ""
+seriesOrder:
 lang: en
+pinned: false
 draft: false
+comment: true
+encrypted: false
+password: ""
+passwordHint: ""
+hideHomeContent: true
 ---
 
 Mermaid turns text descriptions in Markdown into diagrams. The examples below use Shirone's content workflow to demonstrate diagram types commonly used in technical articles and project notes.

@@ -13,9 +13,14 @@ interface Props {
 	/** 标题左侧装饰图标（Iconify 名） */
 	icon?: string;
 	class?: string;
+	/** Front matter key of the title, for an inline text region in CloudCannon's Visual Editor. */
+	titleProp?: string;
 }
 
-const { title, subtitle = "", icon, class: className } = Astro.props;
+const { title, subtitle = "", icon, class: className, titleProp } = Astro.props;
+const titleRegion = titleProp
+	? { "data-editable": "text", "data-prop": titleProp }
+	: {};
 ---
 
 <div class:list={["page-header", className]}>
@@ -25,7 +30,7 @@ const { title, subtitle = "", icon, class: className } = Astro.props;
 				<Icon icon={icon} />
 			</span>
 		)}
-		<h1 class="page-header__title">{title}</h1>
+		<h1 class="page-header__title" {...titleRegion}>{title}</h1>
 	</div>
 	{subtitle && <p class="page-header__subtitle">{subtitle}</p>}
 </div>

@@ -1,0 +1,4400 @@
+timezone: Asia/Shanghai
+
+paths:
+  static: public
+  uploads: public/images
+
+markdown:
+  engine: commonmark
+  options:
+    gfm: true
+    html: true
+    table: true
+    strikethrough: true
+    code_block_fences: "```"
+    escape_snippets_in_code_blocks: true
+
+_editables:
+  content:
+    format: p h2 h3 h4 h5
+    bold: true
+    italic: true
+    strike: true
+    underline: true
+    link: true
+    code_inline: true
+    code_block: true
+    blockquote: true
+    bulletedlist: true
+    numberedlist: true
+    horizontalrule: true
+    image: true
+    table: true
+    snippet: true
+    removeformat: true
+    undo: true
+    redo: true
+
+collection_groups:
+  - heading: Writing
+    collections:
+      - posts
+      - series
+      - moments
+      - albums
+  - heading: Pages
+    collections:
+      - spec
+      - home
+      - feature_pages
+      - snippets
+  - heading: Site
+    collections:
+      - settings
+      - data
+
+data_config:
+  icons:
+    path: src/data/icons.json
+  tags:
+    path: src/data/tags.json
+  categories:
+    path: src/data/categories.json
+  projects:
+    path: src/data/projects.json
+  skills:
+    path: src/data/skills.json
+  timeline:
+    path: src/data/timeline.json
+  devices:
+    path: src/data/devices.json
+  games:
+    path: src/data/games.json
+  friends:
+    path: src/data/friends.json
+  compass:
+    path: src/data/compass.json
+  anime:
+    path: src/data/anime.json
+  music:
+    path: src/data/music.json
+  site_settings:
+    path: site-settings/config/site.yaml
+  profile_settings:
+    path: site-settings/config/profile.yaml
+  announcement_settings:
+    path: site-settings/config/announcement.yaml
+  nav_bar_settings:
+    path: site-settings/config/nav-bar.yaml
+  sidebar_settings:
+    path: site-settings/config/sidebar.yaml
+  post_list_settings:
+    path: site-settings/config/post-list.yaml
+  article_settings:
+    path: site-settings/config/article.yaml
+  license_settings:
+    path: site-settings/config/license.yaml
+  series_settings:
+    path: site-settings/config/series.yaml
+  about_settings:
+    path: site-settings/config/about.yaml
+  friends_settings:
+    path: site-settings/config/friends.yaml
+  moments_settings:
+    path: site-settings/config/moments.yaml
+  albums_settings:
+    path: site-settings/config/albums.yaml
+  compass_settings:
+    path: site-settings/config/compass.yaml
+  projects_settings:
+    path: site-settings/config/projects.yaml
+  skills_settings:
+    path: site-settings/config/skills.yaml
+  timeline_settings:
+    path: site-settings/config/timeline.yaml
+  devices_settings:
+    path: site-settings/config/devices.yaml
+  games_settings:
+    path: site-settings/config/games.yaml
+  anime_settings:
+    path: site-settings/config/anime.yaml
+  llms_settings:
+    path: site-settings/config/llms.yaml
+
+_select_data:
+  locales:
+    - name: Site default
+      id: ""
+    - name: English
+      id: en
+    - name: Simplified Chinese
+      id: zh_CN
+    - name: Traditional Chinese
+      id: zh_TW
+    - name: Japanese
+      id: ja
+    - name: Korean
+      id: ko
+    - name: Spanish
+      id: es
+    - name: Thai
+      id: th
+    - name: Vietnamese
+      id: vi
+    - name: Turkish
+      id: tr
+    - name: Indonesian
+      id: id
+  sidebar_pages:
+    - name: Home
+      id: home
+    - name: Post
+      id: post
+    - name: Archive
+      id: archive
+    - name: Categories
+      id: categories
+    - name: Tags
+      id: tags
+    - name: Series index
+      id: series
+    - name: About
+      id: about
+    - name: Friends
+      id: friends
+    - name: Moments
+      id: moments
+    - name: Anime
+      id: anime
+    - name: Compass
+      id: compass
+    - name: Skills
+      id: skills
+    - name: Projects
+      id: projects
+    - name: Devices
+      id: devices
+    - name: Games
+      id: games
+    - name: Timeline
+      id: timeline
+    - name: Albums
+      id: albums
+    - name: RSS guide
+      id: rss
+    - name: Atom guide
+      id: atom
+    - name: Not found page
+      id: notFound
+  sidebar_slots:
+    - name: Scrolls with the page
+      id: top
+    - name: Sticks while scrolling
+      id: sticky
+  sidebar_columns:
+    - name: Main column
+      id: primary
+    - name: Second column (wide screens)
+      id: secondary
+  nav_presets:
+    - name: Home
+      id: Home
+    - name: Archive
+      id: Archive
+    - name: Friends
+      id: Friends
+    - name: Moments
+      id: Moments
+    - name: Anime
+      id: Anime
+    - name: Compass
+      id: Compass
+    - name: Skills
+      id: Skills
+    - name: Projects
+      id: Projects
+    - name: Devices
+      id: Devices
+    - name: Games
+      id: Games
+    - name: Timeline
+      id: Timeline
+    - name: Albums
+      id: Albums
+    - name: Categories
+      id: Categories
+    - name: Tags
+      id: Tags
+    - name: Series
+      id: Series
+    - name: About
+      id: About
+    - name: GitHub
+      id: GitHub
+
+_inputs:
+  _schema:
+    hidden: true
+  icon:
+    type: select
+    label: Icon
+    comment: Pick an icon, or type a name from Material Symbols, Simple Icons or Font Awesome 7 on [Iconify](https://icon-sets.iconify.design/), such as material-symbols:home-rounded.
+    options:
+      allow_create: true
+      allow_empty: true
+      empty_type: string
+      value_key: id
+      preview:
+        text:
+          - key: name
+      values: data.icons
+
+collections_config:
+  posts:
+    path: src/content/posts
+    name: Posts
+    singular_name: Post
+    icon: post_add
+    url: "/posts/[full_slug]/"
+    glob:
+      - "**/*.md"
+      - "**/*.mdx"
+    create:
+      path: "[relative_base_path]/{title|slugify|lowercase}.[ext]"
+    disable_add_folder: true
+    _enabled_editors:
+      - visual
+      - content
+      - data
+    schemas:
+      default:
+        path: .cloudcannon/schemas/post.md
+        name: Post
+        remove_extra_inputs: false
+    add_options:
+      - name: Post
+        schema: default
+        icon: post_add
+        editor: content
+    _inputs:
+      title:
+        type: text
+        label: Title
+        options:
+          required: true
+      published:
+        type: date
+        label: Published
+        comment: The date shown on the post and used to sort it.
+        instance_value: NOW
+        options:
+          required: true
+      updated:
+        type: date
+        label: Last updated
+        comment: Shows a "last updated" note on older posts.
+      description:
+        type: textarea
+        label: Description
+        comment: Shown in post lists, search results and link previews.
+        options:
+          empty_type: string
+      image:
+        type: image
+        label: Cover image
+        options:
+          empty_type: string
+          paths:
+            uploads: public/images/posts
+      tags:
+        type: multiselect
+        label: Tags
+        options:
+          allow_create: true
+          empty_type: array
+          values: data.tags
+      category:
+        type: select
+        label: Category
+        options:
+          allow_create: true
+          allow_empty: true
+          empty_type: string
+          values: data.categories
+      series:
+        type: select
+        label: Series
+        comment: Leave empty for a post that isn't part of a series.
+        options:
+          allow_empty: true
+          empty_type: string
+          value_key: filename_without_ext
+          preview:
+            text:
+              - key: title
+          values: collections.series
+      seriesOrder:
+        type: number
+        label: Order in series
+        comment: Leave empty to order by published date.
+        options:
+          min: 1
+          step: 1
+      lang:
+        type: select
+        label: Language
+        comment: The language the post is written in. Site default uses the site language.
+        options:
+          allow_empty: true
+          empty_type: string
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values: _select_data.locales
+      pinned:
+        type: switch
+        label: Pin to the top of the home page
+      draft:
+        type: switch
+        label: Draft
+        comment: Drafts are left out of the published site.
+      comment:
+        type: switch
+        label: Allow comments
+      encrypted:
+        type: switch
+        label: Password protected
+        comment: Readers need the password to see the post body.
+      password:
+        type: text
+        label: Password
+        hidden: "!encrypted"
+        options:
+          empty_type: string
+      passwordHint:
+        type: text
+        label: Password hint
+        hidden: "!encrypted"
+        options:
+          empty_type: string
+      hideHomeContent:
+        type: switch
+        label: Hide excerpt on the home page
+        hidden: "!encrypted"
+      publishedAt:
+        type: datetime
+        label: Exact publish time
+        comment: Optional. A precise time for the post, used where the date alone isn't enough.
+      updatedAt:
+        type: datetime
+        label: Exact update time
+        comment: Optional. A precise time for the last update.
+      license:
+        type: object
+        label: Licence
+        comment: Optional. Overrides the site-wide licence for this post. Leave out any part to use the site default.
+        options:
+          preview:
+            icon: copyright
+      license.enable:
+        type: switch
+        label: Show the licence
+      license.name:
+        type: text
+        label: Licence name
+      license.url:
+        type: url
+        label: Licence address
+      license.author:
+        type: object
+        label: Author
+        options:
+          preview:
+            icon: person
+      license.author.name:
+        type: text
+        label: Author name
+      license.author.url:
+        type: url
+        label: Author address
+      license.source:
+        type: url
+        label: Original source
+        comment: Leave empty for original work.
+      alias:
+        type: text
+        label: Alias
+        comment: Optional. An extra address that points to this post.
+      permalink:
+        type: text
+        label: Custom address
+        comment: Optional. Used only when custom permalinks are turned on for the site.
+      prevUrl:
+        hidden: true
+      nextUrl:
+        hidden: true
+      prevTitle:
+        hidden: true
+      prevSlug:
+        hidden: true
+      nextTitle:
+        hidden: true
+      nextSlug:
+        hidden: true
+
+  series:
+    path: src/content/series
+    name: Series
+    singular_name: Series
+    icon: collections_bookmark
+    url: "/series/[slug]/"
+    glob:
+      - "*.md"
+    create:
+      path: "[relative_base_path]/{title|slugify|lowercase}.[ext]"
+    disable_add_folder: true
+    new_preview_url: /series/markdown-syntax-guide/
+    _enabled_editors:
+      - visual
+      - content
+      - data
+    schemas:
+      default:
+        path: .cloudcannon/schemas/series.md
+        name: Series
+    _inputs:
+      title:
+        type: text
+        label: Title
+        options:
+          required: true
+      status:
+        type: select
+        label: Status
+        options:
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: Ongoing
+              id: ongoing
+            - name: Completed
+              id: completed
+      defaultCategory:
+        type: select
+        label: Default category
+        comment: Used for posts in this series that don't set their own category.
+        options:
+          allow_create: true
+          allow_empty: true
+          empty_type: string
+          values: data.categories
+
+  moments:
+    path: src/content/moments
+    name: Moments
+    singular_name: Moment
+    icon: chat_bubble
+    disable_url: true
+    glob:
+      - "*.md"
+    create:
+      path: "[relative_base_path]/{published|year}-{published|month}-{published|day}-{location|slugify|lowercase|default=moment}.[ext]"
+    disable_add_folder: true
+    _enabled_editors:
+      - content
+      - data
+    schemas:
+      default:
+        path: .cloudcannon/schemas/moment.md
+        name: Moment
+    add_options:
+      - name: Moment
+        schema: default
+        icon: chat_bubble
+        editor: content
+    _inputs:
+      published:
+        type: datetime
+        label: Posted
+        instance_value: NOW
+        options:
+          required: true
+      pinned:
+        type: switch
+        label: Pin to the top
+      location:
+        type: text
+        label: Location
+        options:
+          empty_type: string
+      mood:
+        type: select
+        label: Mood icon
+        comment: Pick an icon, or type a name from Material Symbols on [Iconify](https://icon-sets.iconify.design/material-symbols/).
+        options:
+          allow_create: true
+          allow_empty: true
+          empty_type: string
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values: data.icons
+      tags:
+        type: multiselect
+        label: Tags
+        options:
+          allow_create: true
+          empty_type: array
+          values: data.tags
+      images:
+        type: array
+        label: Images
+        options:
+          empty_type: array
+          structures: _structures.moment_images
+      encrypted:
+        type: switch
+        label: Password protected
+      password:
+        type: text
+        label: Password
+        hidden: "!encrypted"
+        options:
+          empty_type: string
+      passwordHint:
+        type: text
+        label: Password hint
+        hidden: "!encrypted"
+        options:
+          empty_type: string
+      draft:
+        type: switch
+        label: Draft
+        comment: Drafts are left out of the published site.
+
+  albums:
+    path: public/images/albums
+    name: Albums
+    singular_name: Album
+    icon: photo_library
+    url: "/albums/[relative_base_path]/"
+    glob:
+      - "**/*.json"
+    create:
+      path: "[relative_base_path]/{title|slugify|lowercase}/info.json"
+    disable_add_folder: true
+    _enabled_editors:
+      - visual
+      - data
+    schemas:
+      default:
+        path: .cloudcannon/schemas/album.json
+        name: Album of images in its folder
+      external:
+        path: .cloudcannon/schemas/album-external.json
+        name: Album with a photo list
+    add_options:
+      - name: Album
+        schema: external
+        icon: photo_library
+        editor: data
+    _inputs:
+      title:
+        type: text
+        label: Title
+        options:
+          required: true
+      description:
+        type: textarea
+        label: Description
+        options:
+          empty_type: string
+      date:
+        type: date
+        label: Date
+        options:
+          empty_type: string
+      location:
+        type: text
+        label: Location
+        options:
+          empty_type: string
+      tags:
+        type: array
+        label: Tags
+        options:
+          empty_type: array
+      tags[*]:
+        type: text
+        label: Tag
+      layout:
+        type: select
+        label: Layout
+        options:
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: Masonry
+              id: masonry
+            - name: Grid
+              id: grid
+      columns:
+        type: select
+        label: Columns
+        options:
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: Two columns
+              id: 2
+            - name: Three columns
+              id: 3
+            - name: Four columns
+              id: 4
+      hidden:
+        type: switch
+        label: Hide from the albums page
+        comment: The album stays reachable at its own address.
+      password:
+        type: text
+        label: Password
+        comment: Leave empty for a public album.
+        options:
+          empty_type: string
+      passwordHint:
+        type: text
+        label: Password hint
+        options:
+          empty_type: string
+      mode:
+        type: text
+        hidden: true
+      cover:
+        type: image
+        label: Cover image
+        options:
+          required: true
+          paths:
+            uploads: public/images/albums
+      photos:
+        type: array
+        label: Photos
+        options:
+          empty_type: array
+          structures: _structures.album_photos
+
+  spec:
+    path: src/content/spec
+    name: About page
+    singular_name: Page
+    icon: info
+    url: "/[slug]/"
+    glob:
+      - "*.md"
+    disable_add: true
+    disable_add_folder: true
+    disable_file_actions: true
+    _enabled_editors:
+      - visual
+      - content
+      - data
+
+  snippets:
+    path: src/content/snippets
+    name: Shared text
+    singular_name: Shared text
+    icon: content_paste
+    disable_url: true
+    glob:
+      - "*.md"
+    create:
+      path: "[relative_base_path]/{title|slugify|lowercase|default=shared-text}.[ext]"
+    disable_add_folder: true
+    _enabled_editors:
+      - content
+      - data
+    schemas:
+      default:
+        path: .cloudcannon/schemas/snippet.md
+        name: Shared text
+    add_options:
+      - name: Shared text
+        schema: default
+        icon: content_paste
+        editor: content
+
+  settings:
+    path: site-settings/config
+    name: Site settings
+    singular_name: Settings file
+    icon: settings
+    disable_url: true
+    glob:
+      - "*.yaml"
+      - "!projects.yaml"
+      - "!skills.yaml"
+      - "!timeline.yaml"
+      - "!devices.yaml"
+      - "!games.yaml"
+      - "!friends.yaml"
+      - "!compass.yaml"
+      - "!anime.yaml"
+      - "!moments.yaml"
+      - "!albums.yaml"
+      - "!post-list.yaml"
+    disable_add: true
+    disable_add_folder: true
+    disable_file_actions: true
+    _enabled_editors:
+      - data
+
+  home:
+    path: site-settings/config
+    name: Home page
+    singular_name: Home page
+    icon: home
+    url: /
+    glob:
+      - post-list.yaml
+    disable_add: true
+    disable_add_folder: true
+    disable_file_actions: true
+    _enabled_editors:
+      - visual
+      - data
+
+  feature_pages:
+    path: site-settings/config
+    name: Feature pages
+    singular_name: Feature page
+    icon: web
+    url: "/[slug]/"
+    glob:
+      - projects.yaml
+      - skills.yaml
+      - timeline.yaml
+      - devices.yaml
+      - games.yaml
+      - friends.yaml
+      - compass.yaml
+      - anime.yaml
+      - moments.yaml
+      - albums.yaml
+    disable_add: true
+    disable_add_folder: true
+    disable_file_actions: true
+    _enabled_editors:
+      - visual
+      - data
+
+  data:
+    path: src/data
+    name: Page data
+    singular_name: Data file
+    icon: database
+    disable_url: true
+    glob:
+      - projects.json
+      - skills.json
+      - timeline.json
+      - devices.json
+      - games.json
+      - friends.json
+      - compass.json
+      - anime.json
+      - music.json
+      - tags.json
+      - categories.json
+    disable_add: true
+    disable_add_folder: true
+    disable_file_actions: true
+    _enabled_editors:
+      - data
+
+file_config:
+  - glob:
+      - src/content/posts/mdx-showcase.mdx
+      - src/content/posts/markdown-fields.md
+      - src/content/posts/option-groups.md
+      - src/content/posts/content-annotations.md
+    _enabled_editors:
+      - data
+
+  - glob: site-settings/config/site.yaml
+    _inputs:
+      $:
+        type: object
+        options:
+          preview:
+            icon: web
+      title:
+        type: text
+        label: Site title
+        options:
+          required: true
+          empty_type: string
+      subtitle:
+        type: text
+        label: Subtitle
+        options:
+          empty_type: string
+      lang:
+        type: select
+        label: Site language
+        comment: The language of the site's built-in text, such as menus and buttons.
+        options:
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: English
+              id: en
+            - name: Simplified Chinese
+              id: zh_CN
+            - name: Traditional Chinese
+              id: zh_TW
+            - name: Japanese
+              id: ja
+            - name: Korean
+              id: ko
+            - name: Spanish
+              id: es
+            - name: Thai
+              id: th
+            - name: Vietnamese
+              id: vi
+            - name: Turkish
+              id: tr
+            - name: Indonesian
+              id: id
+      themeColor:
+        type: object
+        label: Theme colour
+        options:
+          preview:
+            icon: palette
+      themeColor.hue:
+        type: range
+        label: Hue
+        comment: The starting point for the site's colour palette, from 0 to 360.
+        options:
+          min: 0
+          max: 360
+          step: 1
+      banner:
+        type: object
+        label: Banner
+        options:
+          preview:
+            icon: panorama
+      banner.src:
+        type: object
+        label: Banner images
+        options:
+          preview:
+            icon: image
+      banner.src.desktop:
+        type: array
+        label: Wide screens
+        comment: More than one image turns on the slideshow.
+        options:
+          empty_type: array
+      banner.src.desktop[*]:
+        type: image
+        label: Image
+        options:
+          paths:
+            uploads: src/assets/images/banner/desktop
+            static: ""
+      banner.src.mobile:
+        type: array
+        label: Phones
+        options:
+          empty_type: array
+      banner.src.mobile[*]:
+        type: image
+        label: Image
+        options:
+          paths:
+            uploads: src/assets/images/banner/mobile
+            static: ""
+      banner.position:
+        type: select
+        label: Image focus
+        options:
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: Top
+              id: top
+            - name: Centre
+              id: center
+            - name: Bottom
+              id: bottom
+      banner.dim:
+        type: object
+        label: Darken the image
+        options:
+          preview:
+            icon: contrast
+      banner.dim.enable:
+        type: switch
+        label: Darken the banner image
+      banner.dim.opacity:
+        type: range
+        label: Amount
+        options:
+          min: 0
+          max: 1
+          step: 0.01
+      banner.homeText:
+        type: object
+        label: Home page text
+        options:
+          preview:
+            icon: title
+      banner.homeText.enable:
+        type: switch
+        label: Show text on the home banner
+      banner.homeText.title:
+        type: text
+        label: Title
+        options:
+          empty_type: string
+      banner.homeText.subtitle:
+        type: array
+        label: Subtitles
+        comment: Shown one after another when typing is on.
+        options:
+          empty_type: array
+      banner.homeText.subtitle[*]:
+        type: text
+        label: Subtitle
+      banner.homeText.typewriter:
+        type: object
+        label: Typing effect
+        options:
+          preview:
+            icon: keyboard
+      banner.homeText.typewriter.enable:
+        type: switch
+        label: Type the subtitles out
+      banner.carousel:
+        type: object
+        label: Slideshow
+        options:
+          preview:
+            icon: slideshow
+      banner.carousel.enable:
+        type: switch
+        label: Play the slideshow
+      banner.carousel.interval:
+        type: number
+        label: Time per image (milliseconds)
+        options:
+          min: 1000
+          step: 500
+      banner.carousel.animation:
+        type: select
+        label: Camera movement
+        options:
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: Ken Burns
+              id: ken-burns
+            - name: Zoom in
+              id: zoom-in
+            - name: Zoom out
+              id: zoom-out
+            - name: Pan left
+              id: pan-left
+            - name: Pan right
+              id: pan-right
+            - name: None
+              id: none
+      banner.waves:
+        type: object
+        label: Waves
+        options:
+          preview:
+            icon: waves
+      banner.waves.enable:
+        type: switch
+        label: Show waves along the bottom of the banner
+
+  - glob: site-settings/config/profile.yaml
+    _inputs:
+      $:
+        type: object
+        options:
+          preview:
+            icon: account_circle
+      avatar:
+        type: image
+        label: Avatar
+        options:
+          empty_type: string
+          paths:
+            uploads: src/assets/images
+            static: ""
+      name:
+        type: text
+        label: Name
+        options:
+          required: true
+          empty_type: string
+      bio:
+        type: textarea
+        label: Bio
+        options:
+          empty_type: string
+      links:
+        type: array
+        label: Social links
+        options:
+          empty_type: array
+          structures: _structures.profile_links
+
+  - glob: site-settings/config/announcement.yaml
+    _inputs:
+      $:
+        type: object
+        options:
+          preview:
+            icon: campaign
+      title:
+        type: text
+        label: Title
+        comment: Leave empty to use the built-in "Announcement" heading.
+        options:
+          empty_type: string
+      content:
+        type: textarea
+        label: Announcement
+        comment: Leave empty to hide the announcement.
+        options:
+          empty_type: string
+      closable:
+        type: switch
+        label: Readers can close it
+      link:
+        type: object
+        label: Link
+        options:
+          preview:
+            icon: link
+      link.enable:
+        type: switch
+        label: Show a link
+      link.text:
+        type: text
+        label: Link text
+        options:
+          empty_type: string
+      link.url:
+        type: url
+        label: Link address
+        options:
+          empty_type: string
+      link.external:
+        type: switch
+        label: Open in a new tab
+
+  - glob: site-settings/config/nav-bar.yaml
+    _inputs:
+      $:
+        type: object
+        options:
+          preview:
+            icon: menu
+      links:
+        type: array
+        label: Menu
+        comment: The whole menu, in order. Pages that are turned off drop out of the menu on their own.
+        options:
+          structures: _structures.nav_links
+
+  - glob: site-settings/config/sidebar.yaml
+    _inputs:
+      $:
+        type: object
+        options:
+          preview:
+            icon: view_sidebar
+      enable:
+        type: switch
+        label: Show the sidebar
+      arrangement:
+        type: select
+        label: Columns
+        options:
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: One sidebar
+              id: single
+            - name: Two sidebars on wide screens
+              id: dual
+      side:
+        type: select
+        label: Main sidebar side
+        options:
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: Left
+              id: left
+            - name: Right
+              id: right
+      components:
+        type: array
+        label: Widgets
+        options:
+          structures: _structures.sidebar_widgets
+
+  - glob: site-settings/config/post-list.yaml
+    _inputs:
+      $:
+        type: object
+        options:
+          preview:
+            icon: view_list
+      pageSize:
+        type: number
+        label: Posts per page
+        options:
+          required: true
+          min: 1
+          step: 1
+      layout:
+        type: object
+        label: Layout
+        options:
+          preview:
+            icon: dashboard
+      layout.mode:
+        type: select
+        label: Layout
+        options:
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: List
+              id: list
+            - name: Grid
+              id: grid
+      layout.cover:
+        type: select
+        label: Cover side in list layout
+        options:
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: Left
+              id: left
+            - name: Right
+              id: right
+      layout.cardWidth:
+        type: select
+        label: Card width in grid layout
+        options:
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: Compact
+              id: compact
+            - name: Regular
+              id: regular
+            - name: Relaxed
+              id: relaxed
+
+  - glob: site-settings/config/article.yaml
+    _inputs:
+      $:
+        type: object
+        options:
+          preview:
+            icon: article
+      lastUpdated:
+        type: object
+        label: Last updated note
+        options:
+          preview:
+            icon: update
+      lastUpdated.enable:
+        type: switch
+        label: Show a note on older posts
+      lastUpdated.minimumAgeDays:
+        type: number
+        label: Show after this many days
+        options:
+          min: 0
+          step: 1
+      discovery:
+        type: object
+        label: More to read
+        options:
+          preview:
+            icon: explore
+      discovery.enable:
+        type: switch
+        label: Suggest more posts after each post
+      discovery.related:
+        type: object
+        label: Related posts
+        options:
+          preview:
+            icon: link
+      discovery.related.enable:
+        type: switch
+        label: Show related posts
+      discovery.related.count:
+        type: number
+        label: How many
+        options:
+          min: 0
+          max: 6
+          step: 1
+      discovery.random:
+        type: object
+        label: Random posts
+        options:
+          preview:
+            icon: shuffle
+      discovery.random.enable:
+        type: switch
+        label: Show random posts
+      discovery.random.count:
+        type: number
+        label: How many
+        options:
+          min: 0
+          max: 6
+          step: 1
+      share:
+        type: object
+        label: Sharing
+        options:
+          preview:
+            icon: share
+      share.enable:
+        type: switch
+        label: Show share options
+      share.includeCover:
+        type: switch
+        label: Include the cover image in share posters
+
+  - glob: site-settings/config/license.yaml
+    _inputs:
+      $:
+        type: object
+        options:
+          preview:
+            icon: copyright
+      enable:
+        type: switch
+        label: Show the licence under posts
+      name:
+        type: text
+        label: Licence name
+        options:
+          empty_type: string
+      url:
+        type: url
+        label: Licence address
+        options:
+          empty_type: string
+
+  - glob:
+      - site-settings/config/about.yaml
+      - site-settings/config/friends.yaml
+      - site-settings/config/moments.yaml
+      - site-settings/config/albums.yaml
+      - site-settings/config/compass.yaml
+      - site-settings/config/projects.yaml
+      - site-settings/config/skills.yaml
+      - site-settings/config/timeline.yaml
+      - site-settings/config/devices.yaml
+      - site-settings/config/games.yaml
+      - site-settings/config/anime.yaml
+      - site-settings/config/series.yaml
+    _inputs:
+      $:
+        type: object
+        options:
+          preview:
+            icon: web_asset
+      enable:
+        type: switch
+        label: Turn this page on
+        comment: When off, the page and its menu item are removed from the site.
+      title:
+        type: text
+        label: Page title
+        comment: "Text starting with $t: is the site's built-in, translated title. Replace it to use your own words."
+        options:
+          empty_type: string
+      description:
+        type: text
+        label: Page subtitle
+        comment: "Text starting with $t: is the site's built-in, translated text. Replace it to use your own words."
+        options:
+          empty_type: string
+      pageSize:
+        type: number
+        label: Items per page
+        options:
+          min: 1
+          step: 1
+
+  - glob: site-settings/config/series.yaml
+    _inputs:
+      description:
+        type: text
+        label: Page subtitle
+        comment: Leave empty to show a count of series and posts.
+        options:
+          empty_type: string
+      cardPosition:
+        type: select
+        label: Series box position in posts
+        options:
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: Before the post
+              id: top
+            - name: After the post
+              id: bottom
+
+  - glob: site-settings/config/projects.yaml
+    _inputs:
+      categories:
+        type: array
+        label: Categories
+        comment: The filter buttons on the page, in order.
+        options:
+          structures: _structures.page_categories
+      disabledKeys:
+        type: multiselect
+        label: Hidden projects
+        options:
+          empty_type: array
+          value_key: key
+          preview:
+            text:
+              - key: title
+          values: data.projects
+
+  - glob: site-settings/config/skills.yaml
+    _inputs:
+      categories:
+        type: array
+        label: Categories
+        comment: The filter buttons on the page, in order.
+        options:
+          structures: _structures.page_categories
+      disabledKeys:
+        type: multiselect
+        label: Hidden skills
+        options:
+          empty_type: array
+          value_key: name
+          preview:
+            text:
+              - key: name
+          values: data.skills
+
+  - glob: site-settings/config/timeline.yaml
+    _inputs:
+      categories:
+        type: array
+        label: Categories
+        comment: The filter buttons on the page, in order.
+        options:
+          structures: _structures.page_categories
+      order:
+        type: select
+        label: Order
+        options:
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: Newest first
+              id: desc
+            - name: Oldest first
+              id: asc
+      disabledKeys:
+        type: multiselect
+        label: Hidden entries
+        options:
+          empty_type: array
+          value_key: title
+          preview:
+            text:
+              - key: title
+          values: data.timeline
+
+  - glob: site-settings/config/devices.yaml
+    _inputs:
+      categories:
+        type: array
+        label: Categories
+        comment: The filter buttons on the page, in order.
+        options:
+          structures: _structures.page_categories_described
+      disabledKeys:
+        type: multiselect
+        label: Hidden devices
+        options:
+          empty_type: array
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values: data.devices
+
+  - glob: site-settings/config/games.yaml
+    _inputs:
+      categories:
+        type: array
+        label: Categories
+        comment: The filter buttons on the page, in order.
+        options:
+          structures: _structures.page_categories_described
+      disabledKeys:
+        type: multiselect
+        label: Hidden games
+        options:
+          empty_type: array
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values: data.games
+
+  - glob: site-settings/config/llms.yaml
+    _inputs:
+      $:
+        type: object
+        options:
+          preview:
+            icon: smart_toy
+      enable:
+        type: switch
+        label: Publish llms.txt for AI tools
+      generateFull:
+        type: switch
+        label: Also publish the full text of every public post
+      siteSummary:
+        type: textarea
+        label: Site summary
+        comment: Leave empty to use the site subtitle or your bio.
+        options:
+          empty_type: string
+      descriptionMaxLength:
+        type: number
+        label: Longest post summary (characters)
+        options:
+          min: 1
+          step: 1
+      excludeTags:
+        type: multiselect
+        label: Leave out posts with these tags
+        options:
+          allow_create: true
+          empty_type: array
+          values: data.tags
+      excludeCategories:
+        type: multiselect
+        label: Leave out posts in these categories
+        options:
+          allow_create: true
+          empty_type: array
+          values: data.categories
+      corePages:
+        type: array
+        label: Key pages
+        options:
+          empty_type: array
+          structures: _structures.llms_links
+      customSections:
+        type: array
+        label: Extra sections
+        options:
+          empty_type: array
+          structures: _structures.llms_sections
+
+  - glob: src/data/projects.json
+    _inputs:
+      $:
+        type: array
+        label: Projects
+        options:
+          structures: _structures.project_items
+
+  - glob: src/data/skills.json
+    _inputs:
+      $:
+        type: array
+        label: Skills
+        options:
+          structures: _structures.skill_items
+
+  - glob: src/data/timeline.json
+    _inputs:
+      $:
+        type: array
+        label: Timeline
+        options:
+          structures: _structures.timeline_items
+
+  - glob: src/data/devices.json
+    _inputs:
+      $:
+        type: array
+        label: Devices
+        options:
+          structures: _structures.device_items
+
+  - glob: src/data/games.json
+    _inputs:
+      $:
+        type: array
+        label: Games
+        options:
+          structures: _structures.game_items
+
+  - glob: src/data/friends.json
+    _inputs:
+      $:
+        type: array
+        label: Friends
+        options:
+          structures: _structures.friend_items
+
+  - glob: src/data/compass.json
+    _inputs:
+      $:
+        type: array
+        label: Link shelves
+        options:
+          structures: _structures.compass_shelves
+
+  - glob: src/data/anime.json
+    _inputs:
+      $:
+        type: array
+        label: Anime
+        options:
+          structures: _structures.anime_items
+
+  - glob: src/data/music.json
+    _inputs:
+      $:
+        type: array
+        label: Tracks
+        options:
+          structures: _structures.music_tracks
+
+  - glob: src/data/tags.json
+    _inputs:
+      $:
+        type: array
+        label: Tags
+        comment: The tags offered when tagging posts and moments.
+      $[*]:
+        type: text
+        label: Tag
+
+  - glob: src/data/categories.json
+    _inputs:
+      $:
+        type: array
+        label: Categories
+        comment: The categories offered when filing posts.
+      $[*]:
+        type: text
+        label: Category
+
+_structures:
+  moment_images:
+    style: modal
+    values:
+      - label: Image
+        icon: image
+        picker_preview:
+          text:
+            - Image
+          icon:
+            - image
+        preview:
+          text:
+            - key: alt
+            - Image
+          icon:
+            - image
+          image:
+            - key: src
+        value:
+          src: ""
+          alt: ""
+        _inputs:
+          src:
+            type: image
+            label: Image
+            options:
+              required: true
+              paths:
+                uploads: public/images/moments
+          alt:
+            type: text
+            label: Description
+            comment: Describes the image for screen readers.
+            options:
+              empty_type: string
+
+  album_photos:
+    style: modal
+    values:
+      - label: Photo
+        icon: photo
+        picker_preview:
+          text:
+            - Photo
+          icon:
+            - photo
+        preview:
+          text:
+            - key: title
+            - key: alt
+            - Photo
+          icon:
+            - photo
+          image:
+            - key: thumbnail
+            - key: src
+        value:
+          id: ""
+          src: ""
+          thumbnail: ""
+          alt: ""
+          title: ""
+          tags: []
+          width: 1200
+          height: 800
+        _inputs:
+          id:
+            type: text
+            label: Photo ID
+            comment: Unique within this album.
+            options:
+              required: true
+          src:
+            type: image
+            label: Photo
+            options:
+              required: true
+              paths:
+                uploads: public/images/albums
+          thumbnail:
+            type: image
+            label: Thumbnail
+            comment: A smaller copy for the grid. Leave empty to use the photo.
+            options:
+              empty_type: string
+              paths:
+                uploads: public/images/albums
+          alt:
+            type: text
+            label: Description
+            options:
+              required: true
+          title:
+            type: text
+            label: Title
+            options:
+              empty_type: string
+          tags:
+            type: array
+            label: Tags
+            options:
+              empty_type: array
+          tags[*]:
+            type: text
+            label: Tag
+          width:
+            type: number
+            label: Width (pixels)
+            options:
+              min: 1
+          height:
+            type: number
+            label: Height (pixels)
+            options:
+              min: 1
+
+  profile_links:
+    style: modal
+    values:
+      - label: Social link
+        icon: link
+        picker_preview:
+          text:
+            - Social link
+          icon:
+            - link
+        preview:
+          text:
+            - key: name
+            - Social link
+          subtext:
+            - key: url
+          icon:
+            - link
+        value:
+          name: ""
+          icon: ""
+          url: ""
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/icon.cloudcannon.inputs.yml
+        _inputs:
+          name:
+            type: text
+            label: Name
+            options:
+              required: true
+          url:
+            type: url
+            label: Address
+            options:
+              required: true
+
+  nav_links:
+    style: modal
+    values:
+      - label: Built-in page
+        icon: bookmark
+        picker_preview:
+          text:
+            - Built-in page
+          icon:
+            - bookmark
+        preview:
+          text:
+            - key: preset
+            - Built-in page
+          icon:
+            - bookmark
+        value:
+          preset: Home
+        _inputs:
+          preset:
+            type: select
+            label: Page
+            options:
+              value_key: id
+              preview:
+                text:
+                  - key: name
+              values: _select_data.nav_presets
+      - label: Custom link
+        icon: link
+        picker_preview:
+          text:
+            - Custom link
+          icon:
+            - link
+        preview:
+          text:
+            - key: name
+            - Custom link
+          subtext:
+            - key: url
+          icon:
+            - link
+        value:
+          name: ""
+          url: ""
+          icon: ""
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/icon.cloudcannon.inputs.yml
+        _inputs:
+          name:
+            type: text
+            label: Label
+            comment: "Text starting with $t: is a built-in, translated label."
+            options:
+              required: true
+          url:
+            type: text
+            label: Address
+            comment: A page on this site such as /about/, or a full web address.
+            options:
+              required: true
+      - label: Dropdown
+        icon: arrow_drop_down_circle
+        picker_preview:
+          text:
+            - Dropdown
+          icon:
+            - arrow_drop_down_circle
+        preview:
+          text:
+            - key: name
+            - Dropdown
+          icon:
+            - arrow_drop_down_circle
+        value:
+          name: ""
+          icon: ""
+          children: []
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/icon.cloudcannon.inputs.yml
+        _inputs:
+          name:
+            type: text
+            label: Label
+            comment: "Text starting with $t: is a built-in, translated label, such as $t:more."
+            options:
+              required: true
+          children:
+            type: array
+            label: Links
+            options:
+              structures: _structures.nav_child_links
+
+  nav_child_links:
+    style: modal
+    values:
+      - label: Built-in page
+        icon: bookmark
+        picker_preview:
+          text:
+            - Built-in page
+          icon:
+            - bookmark
+        preview:
+          text:
+            - key: preset
+            - Built-in page
+          icon:
+            - bookmark
+        value:
+          preset: About
+        _inputs:
+          preset:
+            type: select
+            label: Page
+            options:
+              value_key: id
+              preview:
+                text:
+                  - key: name
+              values: _select_data.nav_presets
+      - label: Custom link
+        icon: link
+        picker_preview:
+          text:
+            - Custom link
+          icon:
+            - link
+        preview:
+          text:
+            - key: name
+            - Custom link
+          subtext:
+            - key: url
+          icon:
+            - link
+        value:
+          name: ""
+          url: ""
+          icon: ""
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/icon.cloudcannon.inputs.yml
+        _inputs:
+          name:
+            type: text
+            label: Label
+            options:
+              required: true
+          url:
+            type: text
+            label: Address
+            comment: A page on this site such as /about/, or a full web address.
+            options:
+              required: true
+
+  sidebar_widgets:
+    id_key: type
+    style: modal
+    values:
+      - label: Profile
+        icon: account_circle
+        picker_preview:
+          text:
+            - Profile
+          icon:
+            - account_circle
+        preview:
+          text:
+            - Profile
+          subtext:
+            - key: slot
+          icon:
+            - account_circle
+        value:
+          type: profile
+          enable: true
+          slot: top
+          column: primary
+          pages: []
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/sidebar-widget.cloudcannon.inputs.yml
+      - label: Music player
+        icon: music_note
+        picker_preview:
+          text:
+            - Music player
+          icon:
+            - music_note
+        preview:
+          text:
+            - Music player
+          subtext:
+            - key: slot
+          icon:
+            - music_note
+        value:
+          type: music
+          enable: true
+          slot: top
+          column: primary
+          pages: []
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/sidebar-widget.cloudcannon.inputs.yml
+      - label: Announcement
+        icon: campaign
+        picker_preview:
+          text:
+            - Announcement
+          icon:
+            - campaign
+        preview:
+          text:
+            - Announcement
+          subtext:
+            - key: slot
+          icon:
+            - campaign
+        value:
+          type: announcement
+          enable: true
+          slot: top
+          column: primary
+          pages: []
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/sidebar-widget.cloudcannon.inputs.yml
+      - label: Categories
+        icon: category
+        picker_preview:
+          text:
+            - Categories
+          icon:
+            - category
+        preview:
+          text:
+            - Categories
+          subtext:
+            - key: slot
+          icon:
+            - category
+        value:
+          type: categories
+          enable: true
+          slot: sticky
+          column: primary
+          collapseAfter: 5
+          pages: []
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/sidebar-widget.cloudcannon.inputs.yml
+      - label: Series
+        icon: collections_bookmark
+        picker_preview:
+          text:
+            - Series
+          icon:
+            - collections_bookmark
+        preview:
+          text:
+            - Series
+          subtext:
+            - key: slot
+          icon:
+            - collections_bookmark
+        value:
+          type: series
+          enable: true
+          slot: sticky
+          column: primary
+          collapseAfter: 5
+          pages: []
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/sidebar-widget.cloudcannon.inputs.yml
+      - label: Tags
+        icon: sell
+        picker_preview:
+          text:
+            - Tags
+          icon:
+            - sell
+        preview:
+          text:
+            - Tags
+          subtext:
+            - key: slot
+          icon:
+            - sell
+        value:
+          type: tags
+          enable: true
+          slot: sticky
+          column: primary
+          collapseAfter: 6
+          pages: []
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/sidebar-widget.cloudcannon.inputs.yml
+      - label: Site stats
+        icon: bar_chart
+        picker_preview:
+          text:
+            - Site stats
+          icon:
+            - bar_chart
+        preview:
+          text:
+            - Site stats
+          subtext:
+            - key: slot
+          icon:
+            - bar_chart
+        value:
+          type: stats
+          enable: true
+          slot: top
+          column: secondary
+          pages: []
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/sidebar-widget.cloudcannon.inputs.yml
+      - label: Calendar
+        icon: calendar_month
+        picker_preview:
+          text:
+            - Calendar
+          icon:
+            - calendar_month
+        preview:
+          text:
+            - Calendar
+          subtext:
+            - key: slot
+          icon:
+            - calendar_month
+        value:
+          type: calendar
+          enable: true
+          slot: top
+          column: secondary
+          pages: []
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/sidebar-widget.cloudcannon.inputs.yml
+      - label: Table of contents
+        icon: toc
+        picker_preview:
+          text:
+            - Table of contents
+          icon:
+            - toc
+        preview:
+          text:
+            - Table of contents
+          subtext:
+            - key: slot
+          icon:
+            - toc
+        value:
+          type: toc
+          enable: true
+          slot: sticky
+          column: secondary
+          pages:
+            - post
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/sidebar-widget.cloudcannon.inputs.yml
+
+  page_categories:
+    style: modal
+    values:
+      - label: Category
+        icon: label
+        picker_preview:
+          text:
+            - Category
+          icon:
+            - label
+        preview:
+          text:
+            - key: label
+            - Category
+          subtext:
+            - key: key
+          icon:
+            - label
+        value:
+          key: ""
+          label: ""
+          icon: ""
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/icon.cloudcannon.inputs.yml
+          - /.cloudcannon/inputs/category-key.cloudcannon.inputs.yml
+        _inputs:
+          label:
+            type: text
+            label: Name
+            options:
+              required: true
+
+  page_categories_described:
+    style: modal
+    values:
+      - label: Category
+        icon: label
+        picker_preview:
+          text:
+            - Category
+          icon:
+            - label
+        preview:
+          text:
+            - key: label
+            - Category
+          subtext:
+            - key: description
+          icon:
+            - label
+        value:
+          key: ""
+          label: ""
+          icon: ""
+          description: ""
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/icon.cloudcannon.inputs.yml
+          - /.cloudcannon/inputs/category-key.cloudcannon.inputs.yml
+        _inputs:
+          label:
+            type: text
+            label: Name
+            options:
+              required: true
+          description:
+            type: text
+            label: Description
+            options:
+              empty_type: string
+
+  llms_links:
+    style: modal
+    values:
+      - label: Link
+        icon: link
+        picker_preview:
+          text:
+            - Link
+          icon:
+            - link
+        preview:
+          text:
+            - key: title
+            - Link
+          subtext:
+            - key: url
+          icon:
+            - link
+        value:
+          title: ""
+          url: ""
+          description: ""
+        _inputs:
+          title:
+            type: text
+            label: Title
+            options:
+              required: true
+          url:
+            type: text
+            label: Address
+            comment: A page on this site such as /about/, or a full web address.
+            options:
+              required: true
+          description:
+            type: text
+            label: Description
+            options:
+              empty_type: string
+
+  llms_sections:
+    style: modal
+    values:
+      - label: Section
+        icon: segment
+        picker_preview:
+          text:
+            - Section
+          icon:
+            - segment
+        preview:
+          text:
+            - key: title
+            - Section
+          icon:
+            - segment
+        value:
+          title: ""
+          description: ""
+          items: []
+        _inputs:
+          title:
+            type: text
+            label: Title
+            options:
+              required: true
+          description:
+            type: text
+            label: Description
+            options:
+              empty_type: string
+          items:
+            type: array
+            label: Links
+            options:
+              structures: _structures.llms_links
+
+  project_items:
+    style: modal
+    values:
+      - label: Project
+        icon: deployed_code
+        picker_preview:
+          text:
+            - Project
+          icon:
+            - deployed_code
+        preview:
+          text:
+            - key: title
+            - Project
+          subtext:
+            - key: summary
+          icon:
+            - deployed_code
+          image:
+            - key: cover
+        value:
+          key: ""
+          title: ""
+          summary: ""
+          category: ""
+          phase: building
+          technologies: []
+          icon: ""
+          cover: ""
+          coverAlt: ""
+          featured: false
+          repository: ""
+          year: ""
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/icon.cloudcannon.inputs.yml
+        _inputs:
+          key:
+            type: text
+            label: Project ID
+            comment: Unique, lowercase letters, numbers and hyphens. Used to hide a project from the page settings.
+            options:
+              required: true
+              pattern: "^[a-z0-9-]+$"
+              pattern_message: Lowercase letters, numbers and hyphens only
+          title:
+            type: text
+            label: Title
+            options:
+              required: true
+          summary:
+            type: textarea
+            label: Summary
+            options:
+              required: true
+          category:
+            type: select
+            label: Category
+            options:
+              required: true
+              value_key: key
+              preview:
+                text:
+                  - key: label
+              values: data.projects_settings.categories
+          phase:
+            type: select
+            label: Stage
+            options:
+              value_key: id
+              preview:
+                text:
+                  - key: name
+              values:
+                - name: Shipped
+                  id: shipped
+                - name: Building
+                  id: building
+                - name: Exploring
+                  id: exploring
+          technologies:
+            type: array
+            label: Technologies
+            options:
+              empty_type: array
+          technologies[*]:
+            type: text
+            label: Technology
+          cover:
+            type: image
+            label: Cover image
+            comment: Leave empty to show the icon instead.
+            options:
+              empty_type: string
+              paths:
+                uploads: public/assets/projects
+          coverAlt:
+            type: text
+            label: Cover description
+            options:
+              empty_type: string
+          featured:
+            type: switch
+            label: Featured
+          repository:
+            type: url
+            label: Repository
+            options:
+              empty_type: string
+          year:
+            type: text
+            label: Year
+            comment: A year or a range, such as 2024–2026.
+            options:
+              empty_type: string
+
+  skill_items:
+    style: modal
+    values:
+      - label: Skill
+        icon: psychology
+        picker_preview:
+          text:
+            - Skill
+          icon:
+            - psychology
+        preview:
+          text:
+            - key: name
+            - Skill
+          subtext:
+            - key: level
+          icon:
+            - psychology
+        value:
+          name: ""
+          description: ""
+          icon: ""
+          category: ""
+          level: intermediate
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/icon.cloudcannon.inputs.yml
+        _inputs:
+          name:
+            type: text
+            label: Name
+            comment: Unique. Used to hide a skill from the page settings.
+            options:
+              required: true
+          description:
+            type: textarea
+            label: Description
+            options:
+              empty_type: string
+          category:
+            type: select
+            label: Category
+            options:
+              required: true
+              value_key: key
+              preview:
+                text:
+                  - key: label
+              values: data.skills_settings.categories
+          level:
+            type: select
+            label: Level
+            options:
+              value_key: id
+              preview:
+                text:
+                  - key: name
+              values:
+                - name: Beginner
+                  id: beginner
+                - name: Intermediate
+                  id: intermediate
+                - name: Advanced
+                  id: advanced
+                - name: Expert
+                  id: expert
+
+  timeline_items:
+    style: modal
+    values:
+      - label: Timeline entry
+        icon: timeline
+        picker_preview:
+          text:
+            - Timeline entry
+          icon:
+            - timeline
+        preview:
+          text:
+            - key: title
+            - Timeline entry
+          subtext:
+            - key: date
+          icon:
+            - timeline
+        value:
+          title: ""
+          date: ""
+          category: ""
+          subtitle: ""
+          location: ""
+          description: ""
+          highlights: []
+          tags: []
+          links: []
+          icon: ""
+          featured: false
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/icon.cloudcannon.inputs.yml
+        _inputs:
+          title:
+            type: text
+            label: Title
+            comment: Unique. Used to hide an entry from the page settings.
+            options:
+              required: true
+          date:
+            type: text
+            label: Date
+            comment: A date or a range as it should appear, such as 2026.08 or 2024.09 – 2026.06.
+            options:
+              required: true
+          category:
+            type: select
+            label: Category
+            options:
+              allow_empty: true
+              empty_type: string
+              value_key: key
+              preview:
+                text:
+                  - key: label
+              values: data.timeline_settings.categories
+          subtitle:
+            type: text
+            label: Organisation or role
+            options:
+              empty_type: string
+          location:
+            type: text
+            label: Location
+            options:
+              empty_type: string
+          description:
+            type: textarea
+            label: Description
+            options:
+              empty_type: string
+          highlights:
+            type: array
+            label: Highlights
+            options:
+              empty_type: array
+          highlights[*]:
+            type: text
+            label: Highlight
+          tags:
+            type: array
+            label: Tags
+            options:
+              empty_type: array
+          tags[*]:
+            type: text
+            label: Tag
+          links:
+            type: array
+            label: Links
+            options:
+              empty_type: array
+              structures: _structures.timeline_links
+          featured:
+            type: switch
+            label: Highlight this entry
+
+  timeline_links:
+    style: modal
+    values:
+      - label: Link
+        icon: link
+        picker_preview:
+          text:
+            - Link
+          icon:
+            - link
+        preview:
+          text:
+            - key: label
+            - Link
+          subtext:
+            - key: url
+          icon:
+            - link
+        value:
+          label: ""
+          url: ""
+          icon: ""
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/icon.cloudcannon.inputs.yml
+        _inputs:
+          label:
+            type: text
+            label: Label
+            options:
+              required: true
+          url:
+            type: url
+            label: Address
+            options:
+              required: true
+
+  device_items:
+    style: modal
+    values:
+      - label: Device
+        icon: devices
+        picker_preview:
+          text:
+            - Device
+          icon:
+            - devices
+        preview:
+          text:
+            - key: name
+            - Device
+          subtext:
+            - key: specs
+          icon:
+            - devices
+        value:
+          id: ""
+          name: ""
+          brand: ""
+          category: ""
+          status: active
+          specs: ""
+          description: ""
+          icon: ""
+          link: ""
+          featured: false
+          year: ""
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/icon.cloudcannon.inputs.yml
+        _inputs:
+          id:
+            type: text
+            label: Device ID
+            comment: Unique, lowercase letters, numbers and hyphens. Used to hide a device from the page settings.
+            options:
+              required: true
+              pattern: "^[a-z0-9-]+$"
+              pattern_message: Lowercase letters, numbers and hyphens only
+          name:
+            type: text
+            label: Name
+            options:
+              required: true
+          brand:
+            type: text
+            label: Brand
+            options:
+              required: true
+          category:
+            type: select
+            label: Category
+            options:
+              required: true
+              value_key: key
+              preview:
+                text:
+                  - key: label
+              values: data.devices_settings.categories
+          status:
+            type: select
+            label: Status
+            options:
+              value_key: id
+              preview:
+                text:
+                  - key: name
+              values:
+                - name: In use
+                  id: active
+                - name: Backup
+                  id: backup
+                - name: Retired
+                  id: archived
+                - name: Wishlist
+                  id: wishlist
+          specs:
+            type: text
+            label: Key specs
+            options:
+              required: true
+          description:
+            type: textarea
+            label: Description
+            options:
+              required: true
+          link:
+            type: url
+            label: Link
+            options:
+              empty_type: string
+          featured:
+            type: switch
+            label: Featured
+          year:
+            type: text
+            label: Year
+            options:
+              empty_type: string
+
+  game_items:
+    style: modal
+    values:
+      - label: Game
+        icon: sports_esports
+        picker_preview:
+          text:
+            - Game
+          icon:
+            - sports_esports
+        preview:
+          text:
+            - key: name
+            - Game
+          subtext:
+            - key: developer
+          icon:
+            - sports_esports
+          image:
+            - key: cover
+        value:
+          id: ""
+          name: ""
+          developer: ""
+          category: ""
+          status: playing
+          cover: ""
+          icon: ""
+          rating: 0
+          hours: 0
+          platform: ""
+          year: ""
+          tags: []
+          description: ""
+          link: ""
+          featured: false
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/icon.cloudcannon.inputs.yml
+        _inputs:
+          id:
+            type: text
+            label: Game ID
+            comment: Unique, lowercase letters, numbers and hyphens. Used to hide a game from the page settings.
+            options:
+              required: true
+              pattern: "^[a-z0-9-]+$"
+              pattern_message: Lowercase letters, numbers and hyphens only
+          name:
+            type: text
+            label: Name
+            options:
+              required: true
+          developer:
+            type: text
+            label: Developer
+            options:
+              required: true
+          category:
+            type: select
+            label: Category
+            options:
+              required: true
+              value_key: key
+              preview:
+                text:
+                  - key: label
+              values: data.games_settings.categories
+          status:
+            type: select
+            label: Status
+            options:
+              value_key: id
+              preview:
+                text:
+                  - key: name
+              values:
+                - name: Playing
+                  id: playing
+                - name: Completed
+                  id: completed
+                - name: Backlog
+                  id: backlog
+                - name: Wishlist
+                  id: wishlist
+          cover:
+            type: image
+            label: Cover image
+            comment: A wide image, 16:9 or wider. Leave empty to show the icon instead.
+            options:
+              empty_type: string
+              paths:
+                uploads: src/assets/games
+                static: ""
+          rating:
+            type: number
+            label: Rating (0 to 5)
+            comment: 0 hides the rating.
+            options:
+              min: 0
+              max: 5
+              step: 0.5
+          hours:
+            type: number
+            label: Hours played
+            comment: 0 hides the hours.
+            options:
+              min: 0
+              step: 1
+          platform:
+            type: text
+            label: Platform
+            options:
+              empty_type: string
+          year:
+            type: text
+            label: Year
+            options:
+              empty_type: string
+          tags:
+            type: array
+            label: Tags
+            options:
+              empty_type: array
+          tags[*]:
+            type: text
+            label: Tag
+          description:
+            type: textarea
+            label: Description
+            options:
+              required: true
+          link:
+            type: url
+            label: Link
+            options:
+              empty_type: string
+          featured:
+            type: switch
+            label: Featured
+
+  friend_items:
+    style: modal
+    values:
+      - label: Friend
+        icon: group
+        picker_preview:
+          text:
+            - Friend
+          icon:
+            - group
+        preview:
+          text:
+            - key: title
+            - Friend
+          subtext:
+            - key: siteurl
+          icon:
+            - group
+          image:
+            - key: imgurl
+        value:
+          id: 0
+          title: ""
+          imgurl: ""
+          desc: ""
+          siteurl: ""
+          tags: []
+        _inputs:
+          id:
+            type: number
+            label: Friend number
+            comment: A number no other friend uses.
+            options:
+              required: true
+              min: 1
+              step: 1
+          title:
+            type: text
+            label: Name
+            options:
+              required: true
+          imgurl:
+            type: image
+            label: Avatar
+            comment: Upload an image, or paste the address of one.
+            options:
+              required: true
+              paths:
+                uploads: public/images/friends
+          desc:
+            type: text
+            label: Description
+            options:
+              empty_type: string
+          siteurl:
+            type: url
+            label: Website
+            options:
+              required: true
+          tags:
+            type: array
+            label: Tags
+            comment: Readers can filter friends by tag.
+            options:
+              empty_type: array
+          tags[*]:
+            type: text
+            label: Tag
+
+  compass_shelves:
+    style: modal
+    values:
+      - label: Shelf
+        icon: shelves
+        picker_preview:
+          text:
+            - Shelf
+          icon:
+            - shelves
+        preview:
+          text:
+            - key: name
+            - Shelf
+          subtext:
+            - key: blurb
+          icon:
+            - shelves
+        value:
+          key: ""
+          name: ""
+          icon: ""
+          blurb: ""
+          entries: []
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/icon.cloudcannon.inputs.yml
+        _inputs:
+          key:
+            type: text
+            label: Shelf ID
+            comment: Unique letters and numbers, used in the page address when jumping to this shelf.
+            options:
+              required: true
+              pattern: "^[A-Za-z0-9-]+$"
+              pattern_message: Letters, numbers and hyphens only
+          name:
+            type: text
+            label: Name
+            options:
+              required: true
+          blurb:
+            type: text
+            label: Description
+            options:
+              empty_type: string
+          entries:
+            type: array
+            label: Sites
+            options:
+              empty_type: array
+              structures: _structures.compass_entries
+
+  compass_entries:
+    style: modal
+    values:
+      - label: Site
+        icon: public
+        picker_preview:
+          text:
+            - Site
+          icon:
+            - public
+        preview:
+          text:
+            - key: label
+            - Site
+          subtext:
+            - key: note
+            - key: href
+          icon:
+            - public
+        value:
+          label: ""
+          href: ""
+          note: ""
+          icon: ""
+        _inputs_from_glob:
+          - /.cloudcannon/inputs/icon.cloudcannon.inputs.yml
+        _inputs:
+          label:
+            type: text
+            label: Name
+            options:
+              required: true
+          href:
+            type: url
+            label: Address
+            options:
+              required: true
+          note:
+            type: text
+            label: Note
+            comment: Leave empty to show the site's domain.
+            options:
+              empty_type: string
+
+  anime_items:
+    style: modal
+    values:
+      - label: Anime
+        icon: live_tv
+        picker_preview:
+          text:
+            - Anime
+          icon:
+            - live_tv
+        preview:
+          text:
+            - key: title
+            - Anime
+          subtext:
+            - key: status
+          icon:
+            - live_tv
+          image:
+            - key: cover
+        value:
+          title: ""
+          cover: ""
+          link: ""
+          status: planned
+          rating: 0
+          progress:
+            watched: 0
+            total: 12
+          description: ""
+          year: ""
+          studio: ""
+          genres: []
+          period:
+            start: ""
+            end: ""
+        _inputs:
+          title:
+            type: text
+            label: Title
+            options:
+              required: true
+          cover:
+            type: image
+            label: Cover image
+            options:
+              empty_type: string
+              paths:
+                uploads: public/assets/anime
+          link:
+            type: url
+            label: Link
+            options:
+              empty_type: string
+          status:
+            type: select
+            label: Status
+            options:
+              value_key: id
+              preview:
+                text:
+                  - key: name
+              values:
+                - name: Watching
+                  id: watching
+                - name: Completed
+                  id: completed
+                - name: Planned
+                  id: planned
+                - name: On hold
+                  id: onHold
+                - name: Dropped
+                  id: dropped
+          rating:
+            type: number
+            label: Rating (0 to 10)
+            options:
+              min: 0
+              max: 10
+              step: 0.1
+          progress:
+            type: object
+            label: Progress
+            options:
+              preview:
+                icon: pending
+          progress.watched:
+            type: number
+            label: Episodes watched
+            options:
+              min: 0
+              step: 1
+          progress.total:
+            type: number
+            label: Total episodes
+            options:
+              min: 0
+              step: 1
+          description:
+            type: text
+            label: Comment
+            options:
+              empty_type: string
+          year:
+            type: text
+            label: Year aired
+            options:
+              required: true
+          studio:
+            type: text
+            label: Studio
+            options:
+              empty_type: string
+          genres:
+            type: array
+            label: Genres
+            options:
+              empty_type: array
+          genres[*]:
+            type: text
+            label: Genre
+          period:
+            type: object
+            label: When you watched it
+            options:
+              preview:
+                icon: date_range
+          period.start:
+            type: text
+            label: Started (year-month)
+            options:
+              empty_type: string
+              pattern: "^([0-9]{4}-[0-9]{2})?$"
+              pattern_message: Use year-month, such as 2024-07
+          period.end:
+            type: text
+            label: Finished (year-month)
+            options:
+              empty_type: string
+              pattern: "^([0-9]{4}-[0-9]{2})?$"
+              pattern_message: Use year-month, such as 2024-09
+
+  music_tracks:
+    style: modal
+    values:
+      - label: Track
+        icon: music_note
+        picker_preview:
+          text:
+            - Track
+          icon:
+            - music_note
+        preview:
+          text:
+            - key: title
+            - Track
+          subtext:
+            - key: artist
+          icon:
+            - music_note
+          image:
+            - key: cover
+        value:
+          id: ""
+          title: ""
+          artist: ""
+          cover: ""
+          source: ""
+          duration: 0
+        _inputs:
+          id:
+            type: text
+            label: Track ID
+            comment: Unique, lowercase letters, numbers and hyphens.
+            options:
+              required: true
+              pattern: "^[a-z0-9-]+$"
+              pattern_message: Lowercase letters, numbers and hyphens only
+          title:
+            type: text
+            label: Title
+            options:
+              required: true
+          artist:
+            type: text
+            label: Artist
+            options:
+              empty_type: string
+          cover:
+            type: image
+            label: Cover image
+            options:
+              empty_type: string
+              paths:
+                uploads: src/assets/images/music
+                static: ""
+          source:
+            type: file
+            label: Audio file
+            options:
+              required: true
+              paths:
+                uploads: public/assets/music/url
+          duration:
+            type: number
+            label: Length (seconds)
+            comment: 0 hides the length until the track loads.
+            options:
+              min: 0
+              step: 1
+
+_snippets:
+  note:
+    snippet: ":::note[[label]]\n[[body]]\n:::"
+    params:
+      label:
+        parser: optional
+        options:
+          snippet: "[[[title]]]"
+          remove_empty: true
+      title:
+        parser: content
+        options:
+          editor_key: title
+          trim_text: true
+      body:
+        parser: content
+        options:
+          editor_key: body
+          allow_nested: true
+          trim_text: true
+    preview:
+      text:
+        - key: title
+        - Note
+      icon: info
+    picker_preview:
+      text: Note
+      icon: info
+    _inputs:
+      title:
+        type: text
+        label: Title
+        comment: Leave empty for the default "Note" heading.
+      body:
+        type: markdown
+        label: Text
+        options:
+          bold: true
+          italic: true
+          link: true
+          code_inline: true
+          bulletedlist: true
+          numberedlist: true
+          code_block: true
+  info:
+    snippet: ":::info[[label]]\n[[body]]\n:::"
+    params:
+      label:
+        parser: optional
+        options:
+          snippet: "[[[title]]]"
+          remove_empty: true
+      title:
+        parser: content
+        options:
+          editor_key: title
+          trim_text: true
+      body:
+        parser: content
+        options:
+          editor_key: body
+          allow_nested: true
+          trim_text: true
+    preview:
+      text:
+        - key: title
+        - Info
+      icon: help
+    picker_preview:
+      text: Info
+      icon: help
+    _inputs:
+      title:
+        type: text
+        label: Title
+        comment: Leave empty for the default "Info" heading.
+      body:
+        type: markdown
+        label: Text
+        options:
+          bold: true
+          italic: true
+          link: true
+          code_inline: true
+          bulletedlist: true
+          numberedlist: true
+          code_block: true
+  tip:
+    snippet: ":::tip[[label]]\n[[body]]\n:::"
+    params:
+      label:
+        parser: optional
+        options:
+          snippet: "[[[title]]]"
+          remove_empty: true
+      title:
+        parser: content
+        options:
+          editor_key: title
+          trim_text: true
+      body:
+        parser: content
+        options:
+          editor_key: body
+          allow_nested: true
+          trim_text: true
+    preview:
+      text:
+        - key: title
+        - Tip
+      icon: lightbulb
+    picker_preview:
+      text: Tip
+      icon: lightbulb
+    _inputs:
+      title:
+        type: text
+        label: Title
+        comment: Leave empty for the default "Tip" heading.
+      body:
+        type: markdown
+        label: Text
+        options:
+          bold: true
+          italic: true
+          link: true
+          code_inline: true
+          bulletedlist: true
+          numberedlist: true
+          code_block: true
+  important:
+    snippet: ":::important[[label]]\n[[body]]\n:::"
+    params:
+      label:
+        parser: optional
+        options:
+          snippet: "[[[title]]]"
+          remove_empty: true
+      title:
+        parser: content
+        options:
+          editor_key: title
+          trim_text: true
+      body:
+        parser: content
+        options:
+          editor_key: body
+          allow_nested: true
+          trim_text: true
+    preview:
+      text:
+        - key: title
+        - Important
+      icon: priority_high
+    picker_preview:
+      text: Important
+      icon: priority_high
+    _inputs:
+      title:
+        type: text
+        label: Title
+        comment: Leave empty for the default "Important" heading.
+      body:
+        type: markdown
+        label: Text
+        options:
+          bold: true
+          italic: true
+          link: true
+          code_inline: true
+          bulletedlist: true
+          numberedlist: true
+          code_block: true
+  warning:
+    snippet: ":::warning[[label]]\n[[body]]\n:::"
+    params:
+      label:
+        parser: optional
+        options:
+          snippet: "[[[title]]]"
+          remove_empty: true
+      title:
+        parser: content
+        options:
+          editor_key: title
+          trim_text: true
+      body:
+        parser: content
+        options:
+          editor_key: body
+          allow_nested: true
+          trim_text: true
+    preview:
+      text:
+        - key: title
+        - Warning
+      icon: warning
+    picker_preview:
+      text: Warning
+      icon: warning
+    _inputs:
+      title:
+        type: text
+        label: Title
+        comment: Leave empty for the default "Warning" heading.
+      body:
+        type: markdown
+        label: Text
+        options:
+          bold: true
+          italic: true
+          link: true
+          code_inline: true
+          bulletedlist: true
+          numberedlist: true
+          code_block: true
+  caution:
+    snippet: ":::caution[[label]]\n[[body]]\n:::"
+    params:
+      label:
+        parser: optional
+        options:
+          snippet: "[[[title]]]"
+          remove_empty: true
+      title:
+        parser: content
+        options:
+          editor_key: title
+          trim_text: true
+      body:
+        parser: content
+        options:
+          editor_key: body
+          allow_nested: true
+          trim_text: true
+    preview:
+      text:
+        - key: title
+        - Caution
+      icon: report
+    picker_preview:
+      text: Caution
+      icon: report
+    _inputs:
+      title:
+        type: text
+        label: Title
+        comment: Leave empty for the default "Caution" heading.
+      body:
+        type: markdown
+        label: Text
+        options:
+          bold: true
+          italic: true
+          link: true
+          code_inline: true
+          bulletedlist: true
+          numberedlist: true
+          code_block: true
+  details:
+    snippet: ":::details[[label]]\n[[body]]\n:::"
+    params:
+      label:
+        parser: optional
+        options:
+          snippet: "[[[title]]]"
+          remove_empty: true
+      title:
+        parser: content
+        options:
+          editor_key: title
+          trim_text: true
+      body:
+        parser: content
+        options:
+          editor_key: body
+          allow_nested: true
+          trim_text: true
+    preview:
+      text:
+        - key: title
+        - Details
+      icon: expand_circle_down
+    picker_preview:
+      text: Details (opens on click)
+      icon: expand_circle_down
+    _inputs:
+      title:
+        type: text
+        label: Title
+        comment: The line readers click to open the details.
+      body:
+        type: markdown
+        label: Text
+        options:
+          bold: true
+          italic: true
+          link: true
+          code_inline: true
+          bulletedlist: true
+          numberedlist: true
+          code_block: true
+  steps:
+    snippet: ":::steps[[label]]\n[[body]]\n:::"
+    params:
+      label:
+        parser: optional
+        options:
+          snippet: "[[[title]]]"
+          remove_empty: true
+      title:
+        parser: content
+        options:
+          editor_key: title
+          trim_text: true
+      body:
+        parser: content
+        options:
+          editor_key: body
+          allow_nested: true
+          trim_text: true
+    preview:
+      text:
+        - key: title
+        - Steps
+      icon: format_list_numbered
+    picker_preview:
+      text: Steps
+      icon: format_list_numbered
+    _inputs:
+      title:
+        type: text
+        label: Title
+      body:
+        type: markdown
+        label: Steps
+        comment: A numbered list. Each item's first line is the step's heading.
+        options:
+          bold: true
+          italic: true
+          link: true
+          code_inline: true
+          numberedlist: true
+          bulletedlist: true
+          code_block: true
+
+  github:
+    snippet: "::github[[attributes]]"
+    params:
+      attributes:
+        parser: key_values
+        options:
+          models:
+            - editor_key: repo
+              type: string
+          format:
+            root_boundary:
+              start: "{"
+              end: "}"
+            remove_empty_root_boundary: true
+            root_value_delimiter: "="
+            root_pair_delimiter:
+              - " "
+            string_boundary:
+              - '"'
+            allow_numbers: true
+    preview:
+      text:
+        - key: repo
+        - GitHub repository
+      icon: code
+    picker_preview:
+      text: GitHub repository card
+      icon: code
+    _inputs:
+      repo:
+        type: text
+        label: Repository
+        comment: owner/repository, such as withastro/astro.
+        options:
+          required: true
+          pattern: "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+          pattern_message: Use owner/repository
+  youtube:
+    snippet: "::youtube[[attributes]]"
+    params:
+      attributes:
+        parser: key_values
+        options:
+          models:
+            - editor_key: id
+              type: string
+            - editor_key: title
+              type: string
+            - editor_key: preload
+              type: string
+              optional: true
+          format:
+            root_boundary:
+              start: "{"
+              end: "}"
+            remove_empty_root_boundary: true
+            root_value_delimiter: "="
+            root_pair_delimiter:
+              - " "
+            string_boundary:
+              - '"'
+            allow_numbers: true
+    preview:
+      text:
+        - key: title
+        - YouTube video
+      icon: smart_display
+    picker_preview:
+      text: YouTube video
+      icon: smart_display
+    _inputs:
+      id:
+        type: text
+        label: Video ID
+        comment: The 11 characters after watch?v= in the video's address.
+        options:
+          required: true
+      title:
+        type: text
+        label: Title
+        options:
+          required: true
+      preload:
+        type: select
+        label: Loading
+        options:
+          allow_empty: true
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: When the reader clicks play
+              id: none
+            - name: As the reader scrolls near it
+              id: auto
+  bilibili:
+    snippet: "::bilibili[[attributes]]"
+    params:
+      attributes:
+        parser: key_values
+        options:
+          models:
+            - editor_key: bvid
+              type: string
+            - editor_key: title
+              type: string
+            - editor_key: p
+              type: number
+              optional: true
+            - editor_key: preload
+              type: string
+              optional: true
+          format:
+            root_boundary:
+              start: "{"
+              end: "}"
+            remove_empty_root_boundary: true
+            root_value_delimiter: "="
+            root_pair_delimiter:
+              - " "
+            string_boundary:
+              - '"'
+            allow_numbers: true
+    preview:
+      text:
+        - key: title
+        - Bilibili video
+      icon: smart_display
+    picker_preview:
+      text: Bilibili video
+      icon: smart_display
+    _inputs:
+      bvid:
+        type: text
+        label: BV ID
+        options:
+          required: true
+      title:
+        type: text
+        label: Title
+        options:
+          required: true
+      p:
+        type: number
+        label: Part
+        options:
+          min: 1
+          step: 1
+      preload:
+        type: select
+        label: Loading
+        options:
+          allow_empty: true
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: When the reader clicks play
+              id: none
+            - name: As the reader scrolls near it
+              id: auto
+  acfun:
+    snippet: "::acfun[[attributes]]"
+    params:
+      attributes:
+        parser: key_values
+        options:
+          models:
+            - editor_key: acid
+              type: string
+            - editor_key: title
+              type: string
+            - editor_key: preload
+              type: string
+              optional: true
+          format:
+            root_boundary:
+              start: "{"
+              end: "}"
+            remove_empty_root_boundary: true
+            root_value_delimiter: "="
+            root_pair_delimiter:
+              - " "
+            string_boundary:
+              - '"'
+            allow_numbers: true
+    preview:
+      text:
+        - key: title
+        - AcFun video
+      icon: smart_display
+    picker_preview:
+      text: AcFun video
+      icon: smart_display
+    _inputs:
+      acid:
+        type: text
+        label: AC ID
+        comment: Starts with ac, such as ac48649632.
+        options:
+          required: true
+      title:
+        type: text
+        label: Title
+        options:
+          required: true
+      preload:
+        type: select
+        label: Loading
+        options:
+          allow_empty: true
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: When the reader clicks play
+              id: none
+            - name: As the reader scrolls near it
+              id: auto
+  artplayer:
+    snippet: "::artplayer[[attributes]]"
+    params:
+      attributes:
+        parser: key_values
+        options:
+          models:
+            - editor_key: src
+              type: string
+            - editor_key: title
+              type: string
+            - editor_key: preload
+              type: string
+              optional: true
+          format:
+            root_boundary:
+              start: "{"
+              end: "}"
+            remove_empty_root_boundary: true
+            root_value_delimiter: "="
+            root_pair_delimiter:
+              - " "
+            string_boundary:
+              - '"'
+            allow_numbers: true
+    preview:
+      text:
+        - key: title
+        - Video
+      icon: videocam
+    picker_preview:
+      text: Video file
+      icon: videocam
+    _inputs:
+      src:
+        type: file
+        label: Video
+        comment: Upload a video, or paste an https address.
+        options:
+          required: true
+          paths:
+            uploads: public/videos
+      title:
+        type: text
+        label: Title
+        options:
+          required: true
+      preload:
+        type: select
+        label: Loading
+        options:
+          allow_empty: true
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: When the reader clicks play
+              id: none
+            - name: As the reader scrolls near it
+              id: auto
+
+  grid:
+    snippet: ":::grid[[attributes]]\n[[images]]\n:::"
+    preview:
+      text: Image grid
+      icon: grid_view
+    picker_preview:
+      text: Image grid
+      icon: grid_view
+    params:
+      attributes:
+        parser: key_values
+        options:
+          models:
+            - editor_key: columns
+              type: string
+              optional: true
+            - editor_key: aspect
+              type: string
+              optional: true
+            - editor_key: fit
+              type: string
+              optional: true
+          format:
+            root_boundary:
+              start: "{"
+              end: "}"
+            remove_empty_root_boundary: true
+            root_value_delimiter: "="
+            root_pair_delimiter:
+              - " "
+            string_boundary:
+              - '"'
+      images:
+        parser: content
+        options:
+          editor_key: images
+          trim_text: true
+    _inputs:
+      columns:
+        type: select
+        label: Columns
+        options:
+          allow_empty: true
+          values:
+            - "1"
+            - "2"
+            - "3"
+            - "4"
+            - "5"
+            - "6"
+      aspect:
+        type: text
+        label: Shape
+        comment: Width/height, such as 16/9. Leave empty for 16/10.
+        options:
+          pattern: "^([0-9]+(\\.[0-9]+)?/[0-9]+(\\.[0-9]+)?)?$"
+          pattern_message: Use width/height, such as 16/9
+      fit:
+        type: select
+        label: Fit
+        options:
+          allow_empty: true
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: Fill the tile (crop)
+              id: cover
+            - name: Show the whole image
+              id: contain
+      images:
+        type: markdown
+        label: Images
+        comment: Images only, each in its own paragraph.
+        options:
+          image: true
+  file_tree:
+    snippet: ":::file-tree[[attributes]]\n[[tree]]\n:::"
+    preview:
+      text:
+        - key: title
+        - File tree
+      icon: account_tree
+    picker_preview:
+      text: File tree
+      icon: account_tree
+    params:
+      attributes:
+        parser: key_values
+        options:
+          models:
+            - editor_key: title
+              type: string
+              optional: true
+            - editor_key: icon
+              type: string
+              optional: true
+          format:
+            root_boundary:
+              start: "{"
+              end: "}"
+            remove_empty_root_boundary: true
+            root_value_delimiter: "="
+            root_pair_delimiter:
+              - " "
+            string_boundary:
+              - '"'
+      tree:
+        parser: content
+        options:
+          editor_key: tree
+          raw: true
+          trim_text: true
+    _inputs:
+      title:
+        type: text
+        label: Title
+      icon:
+        type: select
+        label: Icons
+        options:
+          allow_empty: true
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: Coloured
+              id: colored
+            - name: Simple
+              id: simple
+      tree:
+        type: code
+        label: Tree
+        comment: A nested list, one file or folder per line.
+        options:
+          syntax: markdown
+  code_tree:
+    snippet: ":::code-tree[[attributes]]\n[[files]]\n:::"
+    preview:
+      text:
+        - key: title
+        - Code tree
+      icon: folder_code
+    picker_preview:
+      text: Code tree
+      icon: folder_code
+    params:
+      attributes:
+        parser: key_values
+        options:
+          models:
+            - editor_key: title
+              type: string
+              optional: true
+            - editor_key: height
+              type: string
+              optional: true
+            - editor_key: entry
+              type: string
+              optional: true
+            - editor_key: icon
+              type: string
+              optional: true
+          format:
+            root_boundary:
+              start: "{"
+              end: "}"
+            remove_empty_root_boundary: true
+            root_value_delimiter: "="
+            root_pair_delimiter:
+              - " "
+            string_boundary:
+              - '"'
+      files:
+        parser: content
+        options:
+          editor_key: files
+          raw: true
+          trim_text: true
+    _inputs:
+      title:
+        type: text
+        label: Title
+      height:
+        type: text
+        label: Height
+        comment: Such as 420px or 26rem.
+      entry:
+        type: text
+        label: File shown first
+      icon:
+        type: select
+        label: Icons
+        options:
+          allow_empty: true
+          value_key: id
+          preview:
+            text:
+              - key: name
+          values:
+            - name: Coloured
+              id: colored
+            - name: Simple
+              id: simple
+      files:
+        type: code
+        label: Files
+        comment: One code block per file, each with title="path/to/file".
+        options:
+          syntax: markdown
+  collapse:
+    snippet: "::: collapse[[flags]]\n[[panels]]\n:::"
+    preview:
+      text: Collapsible panels
+      icon: unfold_more
+    picker_preview:
+      text: Collapsible panels
+      icon: unfold_more
+    params:
+      flags:
+        parser: optional
+        options:
+          snippet: " [[modes]]"
+          remove_empty: true
+      modes:
+        parser: content
+        options:
+          editor_key: modes
+          raw: true
+          trim_text: true
+      panels:
+        parser: content
+        options:
+          editor_key: panels
+          trim_text: true
+    _inputs:
+      modes:
+        type: text
+        label: Options
+        comment: Add accordion to keep one panel open at a time, and expand to open the first panel.
+      panels:
+        type: markdown
+        label: Panels
+        comment: A bulleted list. Each item's first line is the panel title, then a blank line and the panel text.
+        options:
+          bold: true
+          italic: true
+          link: true
+          code_inline: true
+          bulletedlist: true
+          numberedlist: true
+          code_block: true
+
+  spoiler:
+    snippet: ":spoiler[[[text]]]"
+    inline: true
+    view: inline
+    preview:
+      text:
+        - key: text
+        - Spoiler
+      icon: visibility_off
+    picker_preview:
+      text: Spoiler
+      icon: visibility_off
+    params:
+      text:
+        parser: content
+        options:
+          editor_key: text
+    _inputs:
+      text:
+        type: text
+        label: Hidden text
+  audio_reader:
+    snippet: ":audio-reader[[[label]]][[attributes]]"
+    inline: true
+    view: inline
+    preview:
+      text:
+        - key: label
+        - Audio
+      icon: volume_up
+    picker_preview:
+      text: Pronunciation audio
+      icon: volume_up
+    params:
+      label:
+        parser: content
+        options:
+          editor_key: label
+          raw: true
+      attributes:
+        parser: key_values
+        options:
+          models:
+            - editor_key: src
+              type: string
+          format:
+            root_boundary:
+              start: "{"
+              end: "}"
+            root_value_delimiter: "="
+            root_pair_delimiter:
+              - " "
+            string_boundary:
+              - '"'
+    _inputs:
+      label:
+        type: text
+        label: Text
+        options:
+          required: true
+      src:
+        type: file
+        label: Audio
+        options:
+          required: true
+          paths:
+            uploads: public/assets/audio
+
+  include:
+    snippet: "<!-- @include: [[path]] -->"
+    preview:
+      text:
+        - key: path
+        - Shared text
+      icon: content_paste
+    picker_preview:
+      text: Shared text
+      icon: content_paste
+    params:
+      path:
+        parser: content
+        options:
+          editor_key: path
+          raw: true
+          trim_text: true
+    _inputs:
+      path:
+        type: text
+        label: File
+        comment: Path to a Shared text file, such as ../snippets/include-example.md. Add #region-name to include one marked region.
+        options:
+          required: true
+  region_start:
+    snippet: "<!-- #region [[name]] -->"
+    preview:
+      text:
+        - key: name
+        - Region start
+      icon: start
+    picker_preview:
+      text: Region start
+      icon: start
+    params:
+      name:
+        parser: content
+        options:
+          editor_key: name
+          raw: true
+          trim_text: true
+    _inputs:
+      name:
+        type: text
+        label: Region name
+  region_end:
+    snippet: "<!-- #endregion [[name]] -->"
+    preview:
+      text:
+        - key: name
+        - Region end
+      icon: last_page
+    picker_preview:
+      text: Region end
+      icon: last_page
+    params:
+      name:
+        parser: content
+        options:
+          editor_key: name
+          raw: true
+          trim_text: true
+    _inputs:
+      name:
+        type: text
+        label: Region name
+
+  math_block:
+    snippet: "$$\n[[math]]\n$$"
+    preview:
+      text: Equation
+      icon: function
+    picker_preview:
+      text: Equation
+      icon: function
+    params:
+      math:
+        parser: content
+        options:
+          editor_key: math
+          raw: true
+          trim_text: true
+    _inputs:
+      math:
+        type: code
+        label: LaTeX
+  math_inline:
+    snippet: "$[[math]]$"
+    inline: true
+    view: inline
+    preview:
+      text:
+        - key: math
+        - Equation
+      icon: function
+    picker_preview:
+      text: Inline equation
+      icon: function
+    params:
+      math:
+        parser: content
+        options:
+          editor_key: math
+          raw: true
+          forbidden_tokens:
+            - "$"
+            - "\n"
+    _inputs:
+      math:
+        type: text
+        label: LaTeX
+
+  abbreviation:
+    snippet: "*[[[term]]]: [[expansion]]"
+    preview:
+      text:
+        - key: term
+        - Abbreviation
+      subtext:
+        - key: expansion
+      icon: short_text
+    picker_preview:
+      text: Abbreviation
+      icon: short_text
+    params:
+      term:
+        parser: content
+        options:
+          editor_key: term
+          raw: true
+          forbidden_tokens:
+            - "]"
+            - "\n"
+      expansion:
+        parser: content
+        options:
+          editor_key: expansion
+          raw: true
+          forbidden_tokens:
+            - "\n"
+    _inputs:
+      term:
+        type: text
+        label: Abbreviation
+        comment: Every match of this word in the post shows the full meaning.
+      expansion:
+        type: text
+        label: Full meaning
+  footnote_reference:
+    snippet: "[^[[id]]]"
+    inline: true
+    view: inline
+    preview:
+      text:
+        - key: id
+        - Footnote
+      icon: superscript
+    picker_preview:
+      text: Footnote marker
+      icon: superscript
+    params:
+      id:
+        parser: content
+        options:
+          editor_key: id
+          raw: true
+          forbidden_tokens:
+            - "]"
+    _inputs:
+      id:
+        type: text
+        label: Footnote name
+  footnote:
+    snippet: "[^[[id]]]: [[text]]"
+    preview:
+      text:
+        - key: id
+        - Footnote
+      subtext:
+        - key: text
+      icon: notes
+    picker_preview:
+      text: Footnote text
+      icon: notes
+    params:
+      id:
+        parser: content
+        options:
+          editor_key: id
+          raw: true
+          forbidden_tokens:
+            - "]"
+      text:
+        parser: content
+        options:
+          editor_key: text
+          forbidden_tokens:
+            - "\n"
+    _inputs:
+      id:
+        type: text
+        label: Footnote name
+      text:
+        type: text
+        label: Footnote text

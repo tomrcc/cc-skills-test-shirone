@@ -5,9 +5,17 @@ updated: 2024-11-29
 description: 'Read more about Markdown features in Fuwari'
 image: ''
 tags: [Demo, Example, Markdown, Fuwari]
+category: ""
 series: markdown-syntax-guide
 seriesOrder: 2
+lang: ""
+pinned: false
 draft: false 
+comment: true
+encrypted: false
+password: ""
+passwordHint: ""
+hideHomeContent: true
 ---
 
 ## GitHub Repository Cards
@@ -86,8 +94,9 @@ This is a note with a custom title.
 
 ### GitHub Syntax
 
-> [!TIP]
-> [The GitHub syntax](https://github.com/orgs/community/discussions/16925) is also supported.
+:::tip
+[The GitHub syntax](https://github.com/orgs/community/discussions/16925) is also supported.
+:::
 
 ```
 > [!NOTE]

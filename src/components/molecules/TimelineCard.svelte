@@ -10,6 +10,13 @@
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
+import {
+	arrayItemRegion,
+	arrayRegion,
+	type EditablePath,
+	textRegion,
+	valueRegion,
+} from "@utils/editable-regions";
 import { reveal } from "@utils/motion";
 import type { TimelineItem } from "@/types/timelineConfig";
 
@@ -20,12 +27,13 @@ let {
 	delay = 0,
 	isLast = false,
 }: {
-	item: TimelineItem;
+	item: TimelineItem & EditablePath;
 	categoryLabel?: string;
 	categoryIcon?: string;
 	delay?: number;
 	isLast?: boolean;
 } = $props();
+const path = $derived(item.editablePath);
 
 const markerIcon = $derived(
 	item.icon || categoryIcon || "material-symbols:flag-rounded",
@@ -48,7 +56,7 @@ const markerIcon = $derived(
 	<div class="timeline-card__body">
 		<!-- 头部元数据栏：日期、分类标签、重点里程碑徽标 -->
 		<div class="timeline-card__meta-bar">
-			<time class="timeline-card__date">{item.date}</time>
+			<time class="timeline-card__date" {...textRegion(path, "date")}>{item.date}</time>
 
 			{#if categoryLabel}
 				<span class="timeline-card__category">
@@ -69,20 +77,20 @@ const markerIcon = $derived(
 
 		<!-- 标题与机构/地点 -->
 		<div class="timeline-card__heading">
-			<h2 class="timeline-card__title">{item.title}</h2>
+			<h2 class="timeline-card__title" {...textRegion(path, "title")}>{item.title}</h2>
 
 			{#if item.subtitle || item.location}
 				<div class="timeline-card__sub-row">
 					{#if item.subtitle}
 						<span class="timeline-card__subtitle">
 							<Icon icon="material-symbols:domain-rounded" aria-hidden="true" />
-							<span>{item.subtitle}</span>
+							<span {...textRegion(path, "subtitle")}>{item.subtitle}</span>
 						</span>
 					{/if}
 					{#if item.location}
 						<span class="timeline-card__location">
 							<Icon icon="material-symbols:location-on-outline-rounded" aria-hidden="true" />
-							<span>{item.location}</span>
+							<span {...textRegion(path, "location")}>{item.location}</span>
 						</span>
 					{/if}
 				</div>
@@ -91,23 +99,29 @@ const markerIcon = $derived(
 
 		<!-- 详细说明正文 -->
 		{#if item.description}
-			<p class="timeline-card__description">{item.description}</p>
+			<p class="timeline-card__description" {...textRegion(path, "description")}>
+				{item.description}
+			</p>
 		{/if}
 
 		<!-- 亮点 / 成就列表 -->
 		{#if item.highlights && item.highlights.length > 0}
-			<ul class="timeline-card__highlights">
+			<ul class="timeline-card__highlights" {...arrayRegion(path, "highlights")}>
 				{#each item.highlights as highlight (highlight)}
-					<li>{highlight}</li>
+					<li {...arrayItemRegion(path)}><span {...valueRegion(path)}>{highlight}</span></li>
 				{/each}
 			</ul>
 		{/if}
 
 		<!-- 技术栈 / 关联标签 -->
 		{#if item.tags && item.tags.length > 0}
-			<ul class="timeline-card__tags" aria-label={i18n(I18nKey.tags)}>
+			<ul
+				class="timeline-card__tags"
+				aria-label={i18n(I18nKey.tags)}
+				{...arrayRegion(path, "tags")}
+			>
 				{#each item.tags as tag (tag)}
-					<li>{tag}</li>
+					<li {...arrayItemRegion(path)}><span {...valueRegion(path)}>{tag}</span></li>
 				{/each}
 			</ul>
 		{/if}
@@ -123,7 +137,7 @@ const markerIcon = $derived(
 						class="timeline-card__link"
 					>
 						<Icon
-							icon={link.icon ?? "material-symbols:open-in-new-rounded"}
+							icon={link.icon || "material-symbols:open-in-new-rounded"}
 							aria-hidden="true"
 						/>
 						<span>{link.label}</span>

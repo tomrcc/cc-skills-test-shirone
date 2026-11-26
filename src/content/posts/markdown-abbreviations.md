@@ -1,11 +1,21 @@
 ---
 title: Markdown Abbreviations
 published: 2026-08-28
+updated:
 description: Define common acronyms once and keep their full meaning available in normal article text.
+image: ""
 tags: [Demo, Markdown, Typography, Shirone]
 category: Guides
+series: ""
+seriesOrder:
 lang: en
+pinned: false
 draft: false
+comment: true
+encrypted: false
+password: ""
+passwordHint: ""
+hideHomeContent: true
 ---
 
 Abbreviations keep technical writing compact while preserving the full term for readers who need it. A defined term renders as a native `abbr` element with its meaning available on hover and to assistive technology.

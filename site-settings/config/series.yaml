@@ -1,0 +1,4 @@
+enable: true
+title: $t:series
+description: ""
+cardPosition: bottom

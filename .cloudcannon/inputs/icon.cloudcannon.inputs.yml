@@ -1,0 +1,13 @@
+icon:
+  type: select
+  label: Icon
+  comment: Pick an icon, or type a name from Material Symbols, Simple Icons or Font Awesome 7 on [Iconify](https://icon-sets.iconify.design/), such as material-symbols:home-rounded.
+  options:
+    allow_create: true
+    allow_empty: true
+    empty_type: string
+    value_key: id
+    preview:
+      text:
+        - key: name
+    values: data.icons

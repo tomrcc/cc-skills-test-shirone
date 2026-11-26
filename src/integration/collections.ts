@@ -2,6 +2,10 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
+/** CloudCannon writes `null` or `""` for a cleared input; treat both as absent. */
+const absentWhenEmpty = (value: unknown): unknown =>
+	value === null || value === "" ? undefined : value;
+
 /**
  * Post schema — used by both source repo (inline) and package mode users
  * (inline in their `src/content.config.ts`).
@@ -10,7 +14,7 @@ export const postSchema: z.ZodType = z.object({
 	title: z.string(),
 	published: z.date(),
 	publishedAt: z.date().optional(),
-	updated: z.date().optional(),
+	updated: z.preprocess(absentWhenEmpty, z.date().optional()),
 	updatedAt: z.date().optional(),
 	pinned: z.boolean().optional().default(false),
 	draft: z.boolean().optional().default(false),
@@ -26,7 +30,7 @@ export const postSchema: z.ZodType = z.object({
 		.default("")
 		.transform((value) => value.trim()),
 	/** Position inside the series; falls back to publication order when absent. */
-	seriesOrder: z.number().int().optional(),
+	seriesOrder: z.preprocess(absentWhenEmpty, z.number().int().optional()),
 	lang: z.string().optional().default(""),
 
 	/* Per-post license override (omitted fields fall back to the site licenseConfig; a string is the license name) */
@@ -55,10 +59,13 @@ export const postSchema: z.ZodType = z.object({
 
 	/* Post encryption */
 	encrypted: z.boolean().optional().default(false),
-	password: z
-		.union([z.string(), z.number()])
-		.transform((v) => String(v))
-		.optional(),
+	password: z.preprocess(
+		absentWhenEmpty,
+		z
+			.union([z.string(), z.number()])
+			.transform((v) => String(v))
+			.optional(),
+	),
 	passwordHint: z.string().optional().default(""),
 	hideHomeContent: z.boolean().optional().default(true),
 
@@ -94,10 +101,13 @@ export const momentSchema: z.ZodType = z.object({
 		.default([]),
 	/* Moment encryption */
 	encrypted: z.boolean().optional().default(false),
-	password: z
-		.union([z.string(), z.number()])
-		.transform((value) => String(value))
-		.optional(),
+	password: z.preprocess(
+		absentWhenEmpty,
+		z
+			.union([z.string(), z.number()])
+			.transform((value) => String(value))
+			.optional(),
+	),
 	passwordHint: z.string().optional().default(""),
 	draft: z.boolean().optional().default(false),
 });

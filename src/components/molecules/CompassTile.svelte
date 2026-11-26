@@ -13,6 +13,7 @@
  * 无 note 时副行回退为域名（hostname，解析失败原样显示）。
  */
 import Icon from "@iconify/svelte";
+import { type EditablePath, textRegion } from "@utils/editable-regions";
 import { reveal } from "@utils/motion";
 import type { CompassEntry } from "../../data/compass";
 
@@ -20,7 +21,8 @@ let {
 	entry,
 	/** stagger 入场延迟 ms（由分组传入：第 i 项 i × step） */
 	delay = 0,
-}: { entry: CompassEntry; delay?: number } = $props();
+}: { entry: CompassEntry & EditablePath; delay?: number } = $props();
+const path = $derived(entry.editablePath);
 
 /** 图片 URL 加载失败 → 降级首字母块 */
 let imgFailed = $state(false);
@@ -72,8 +74,12 @@ const host = $derived.by(() => {
 				<span class="compass-tile__letter">{letter}</span>
 			{/if}
 		</span>
-		<span class="compass-tile__label">{entry.label}</span>
-		<span class="compass-tile__note">{entry.note || host}</span>
+		<span class="compass-tile__label" {...textRegion(path, "label")}>{entry.label}</span>
+		{#if entry.note}
+			<span class="compass-tile__note" {...textRegion(path, "note")}>{entry.note}</span>
+		{:else}
+			<span class="compass-tile__note">{host}</span>
+		{/if}
 	</a>
 </article>
 

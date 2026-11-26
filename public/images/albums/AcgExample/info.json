@@ -6,5 +6,7 @@
   "tags": ["local", "webp", "example"],
   "layout": "masonry",
   "columns": 3,
-  "hidden": false
+  "hidden": false,
+  "password": "",
+  "passwordHint": ""
 }

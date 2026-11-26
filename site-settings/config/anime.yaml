@@ -1,0 +1,4 @@
+enable: true
+title: $t:anime
+description: $t:animeBanner
+pageSize: 12

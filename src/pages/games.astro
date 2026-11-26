@@ -6,7 +6,7 @@ import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { resolveAsset } from "@utils/asset-utils";
 import { resolveI18nText } from "@utils/i18n-utils";
 import { gamesConfig } from "@/config/gamesConfig";
-import { resolveGamesData } from "@/utils/feature-data";
+import { gamesSectionProps } from "@/utils/feature-sections";
 
 if (!gamesConfig.enable) {
 	return Astro.redirect("/404/");
@@ -20,8 +20,9 @@ const pageDescription = resolveI18nText(
 
 // 构建期解析封面：支持 src/assets 相对路径（走 Astro 图片管线）、
 // /public 绝对路径与远程 URL——Svelte 卡片直接拿到可用 URL。
+const sectionProps = gamesSectionProps(gamesConfig);
 const items = await Promise.all(
-	resolveGamesData(gamesConfig).map(async (game) => ({
+	sectionProps.items.map(async (game) => ({
 		...game,
 		cover: game.cover ? await resolveAsset(game.cover) : undefined,
 	})),
@@ -33,11 +34,18 @@ const items = await Promise.all(
 	description={pageDescription}
 	page="games"
 >
-	<GamesSection
-		categories={gamesConfig.categories}
-		items={items}
-		title={pageTitle}
-		subtitle={pageDescription}
-		client:visible
-	/>
+	<editable-component
+		data-component="games-section"
+		data-prop-items="@data[games]"
+		data-prop-settings="@data[games_settings]"
+	>
+		<GamesSection {...sectionProps} {items} client:visible />
+	</editable-component>
+	<script>
+		if (window.inEditorMode) {
+			import("@/cloudcannon/register/games").catch((error) => {
+				console.warn("Failed to load CloudCannon component registration:", error);
+			});
+		}
+	</script>
 </MainGridLayout>

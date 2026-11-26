@@ -213,11 +213,14 @@ export const ICON_COLLECTIONS_SPECIFIER = "@/generated/local-icon-collections";
 
 const SOURCE_EXTENSIONS: ReadonlySet<string> = new Set<string>([
 	".astro",
+	".json",
 	".md",
 	".mdx",
 	".svelte",
 	".ts",
 	".tsx",
+	".yaml",
+	".yml",
 ]);
 
 /** `prefix:name`, e.g. `material-symbols:home-rounded`. */

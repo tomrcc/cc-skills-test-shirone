@@ -13,6 +13,11 @@ import Skeleton from "@components/atoms/display/Skeleton.svelte";
 import ProgressIndicator from "@components/atoms/feedback/ProgressIndicator.svelte";
 import { i18n } from "@i18n/translation";
 import { ANIME_STATUS_META } from "@utils/anime/status";
+import {
+	type EditablePath,
+	imageRegion,
+	textRegion,
+} from "@utils/editable-regions";
 import { imageFeedback } from "@utils/image-feedback";
 import { reveal } from "@utils/motion";
 import { url } from "@utils/url-utils";
@@ -22,7 +27,8 @@ let {
 	anime,
 	/** stagger 入场延迟 ms（由列表传入：第 i 项 i × step） */
 	delay = 0,
-}: { anime: AnimeItem; delay?: number } = $props();
+}: { anime: AnimeItem & EditablePath; delay?: number } = $props();
+const path = $derived(anime.editablePath);
 
 const statusMeta = $derived(ANIME_STATUS_META[anime.status]);
 const isWatching = $derived(
@@ -54,6 +60,7 @@ const metaLine = $derived(
 				loading="lazy"
 				referrerpolicy="no-referrer"
 				use:imageFeedback={anime.cover}
+				{...imageRegion(path, "cover")}
 			/>
 			<span class="anime-card__loading" aria-hidden="true">
 				<Skeleton width="100%" height="100%" radius="0" />
@@ -102,7 +109,9 @@ const metaLine = $derived(
 			</span>
 		</div>
 
-		<span class="anime-card__title" title={anime.title}>{anime.title}</span>
+		<span class="anime-card__title" title={anime.title} {...textRegion(path, "title")}>
+			{anime.title}
+		</span>
 
 		{#if isWatching && anime.progress}
 			<div class="anime-card__progress">
@@ -117,7 +126,7 @@ const metaLine = $derived(
 		{/if}
 
 		{#if anime.description}
-			<p class="anime-card__desc">{anime.description}</p>
+			<p class="anime-card__desc" {...textRegion(path, "description")}>{anime.description}</p>
 		{/if}
 
 		{#if metaLine}

@@ -1,11 +1,21 @@
 ---
 title: Markdown Spoilers
 published: 2026-08-28
+updated:
 description: Hide inline answers while keeping spoiler content accessible in Shirone Markdown.
+image: ""
 tags: [Demo, Markdown, Accessibility, Shirone]
 category: Guides
+series: ""
+seriesOrder:
 lang: en
+pinned: false
 draft: false
+comment: true
+encrypted: false
+password: ""
+passwordHint: ""
+hideHomeContent: true
 ---
 
 Spoilers conceal a short answer or plot detail without removing it from the document. Hover, focus, or activate the native control to reveal the content.

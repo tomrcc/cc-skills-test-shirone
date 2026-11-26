@@ -1,11 +1,21 @@
 ---
 title: Markdown Steps
 published: 2026-08-27
+updated:
 description: Present sequential instructions as a compact, accessible step flow in Shirone.
+image: ""
 tags: [Demo, Markdown, Steps, Shirone]
 category: Guides
+series: ""
+seriesOrder:
 lang: en
+pinned: false
 draft: false
+comment: true
+encrypted: false
+password: ""
+passwordHint: ""
+hideHomeContent: true
 ---
 
 Use Steps for procedures whose order matters. The component keeps the article reading flow intact: a quiet numbered rail provides orientation while headings, paragraphs, links, lists, and code retain their native Markdown roles.

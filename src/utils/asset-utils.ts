@@ -13,11 +13,17 @@ function getLocalImageLoader(src: string, basePath = "") {
 	return imageFiles[normalizedPath] ?? getProjectImageLoader(src, basePath);
 }
 
+/** `/src/<path>` is how CloudCannon writes images under `src/`; resolve it as the local path `<path>`. */
+export function toSrcRelativePath(src: string): string {
+	return src.startsWith("/src/") ? src.slice("/src/".length) : src;
+}
+
 export async function resolveImageAsset(
-	src: string,
+	source: string,
 	basePath = "",
 ): Promise<ImageMetadata | string> {
-	if (!src) return src;
+	if (!source) return source;
+	const src = toSrcRelativePath(source);
 	const isLocal = !(
 		src.startsWith("/") ||
 		src.startsWith("http") ||
@@ -35,10 +41,11 @@ export async function resolveImageAsset(
  * 公开路径（/…）与远程（http/data:）原样返回；文件缺失时回退原路径。
  */
 export async function resolveAsset(
-	src: string,
+	source: string,
 	basePath = "",
 ): Promise<string> {
-	if (!src) return src;
+	if (!source) return source;
+	const src = toSrcRelativePath(source);
 	const isLocal = !(
 		src.startsWith("/") ||
 		src.startsWith("http") ||

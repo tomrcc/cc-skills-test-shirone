@@ -20,15 +20,19 @@ import SectionTitle from "@components/molecules/SectionTitle.svelte";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
+import type { EditablePath } from "@utils/editable-regions";
 import { onMount } from "svelte";
-import type { CompassShelf } from "../../data/compass";
+import type { CompassEntry, CompassShelf } from "../../data/compass";
+
+type EditableShelf = Omit<CompassShelf, "entries"> &
+	EditablePath & { entries: (CompassEntry & EditablePath)[] };
 
 let {
-	shelves = [] as CompassShelf[],
+	shelves = [] as EditableShelf[],
 	title = i18n(I18nKey.compass),
 	subtitle = i18n(I18nKey.compassBanner),
 }: {
-	shelves?: CompassShelf[];
+	shelves?: EditableShelf[];
 	title?: string;
 	subtitle?: string;
 } = $props();
@@ -179,7 +183,13 @@ onMount(() => {
 		{#key `${selectedGroup}|${query}`}
 			{#each filteredShelves as shelf (shelf.key)}
 				<section class="compass-shelf" data-shelf={shelf.key}>
-					<SectionTitle title={shelf.name} subtitle={shelf.blurb} icon={shelf.icon} />
+					<SectionTitle
+						title={shelf.name}
+						subtitle={shelf.blurb}
+						icon={shelf.icon}
+						titleProp={shelf.editablePath && `${shelf.editablePath}.name`}
+						subtitleProp={shelf.editablePath && `${shelf.editablePath}.blurb`}
+					/>
 					<div class="compass-shelf__grid">
 						{#each shelf.entries as entry, i (entry.href)}
 							<CompassTile {entry} delay={Math.min(i, 7) * 45} />

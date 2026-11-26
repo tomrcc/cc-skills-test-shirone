@@ -12,6 +12,8 @@ interface FooterLink {
 interface Props {
 	/** 站点 / 作者名 */
 	name: string;
+	/** Visual Editor data path for `name`; adds a text region when set */
+	nameProp?: string;
 	/** 版权年份（默认当前年） */
 	year?: number;
 	links?: FooterLink[];
@@ -25,6 +27,7 @@ interface Props {
 
 const {
 	name,
+	nameProp,
 	year = new Date().getFullYear(),
 	links = [],
 	poweredBy = [],
@@ -40,7 +43,7 @@ const {
 	<div class="m3-blog-footer__inner">
 		{customHtml && <div class="m3-blog-footer__custom" set:html={customHtml} />}
 		<p class="m3-blog-footer__text">
-			&copy; {year} {name}. All Rights Reserved.
+			&copy; {year} {nameProp ? <span data-editable="text" data-prop={nameProp}>{name}</span> : name}. All Rights Reserved.
 			{links.map((l) => (
 				<Fragment>
 					<span class="m3-blog-footer__sep" aria-hidden="true">/</span>

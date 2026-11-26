@@ -15,10 +15,15 @@
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
+import { type EditablePath, textRegion } from "@utils/editable-regions";
 import { reveal } from "@utils/motion";
 import type { DeviceItem, DeviceStatus } from "@/types/devicesConfig";
 
-let { device, delay = 0 }: { device: DeviceItem; delay?: number } = $props();
+let {
+	device,
+	delay = 0,
+}: { device: DeviceItem & EditablePath; delay?: number } = $props();
+const path = $derived(device.editablePath);
 
 let coverFailed = $state(false);
 
@@ -74,18 +79,18 @@ const showImage = $derived(Boolean(device.image) && !coverFailed);
 		<div class="device-card__header">
 			{#if !showImage}
 				<span class="device-card__icon" aria-hidden="true">
-					<Icon icon={device.icon ?? "material-symbols:devices-rounded"} />
+					<Icon icon={device.icon || "material-symbols:devices-rounded"} />
 				</span>
 			{/if}
 
 			<div class="device-card__heading">
 				<div class="device-card__title-row">
-					<h2 class="device-card__title">{device.name}</h2>
+					<h2 class="device-card__title" {...textRegion(path, "name")}>{device.name}</h2>
 					{#if device.year}
-						<span class="device-card__year">{device.year}</span>
+						<span class="device-card__year" {...textRegion(path, "year")}>{device.year}</span>
 					{/if}
 				</div>
-				<span class="device-card__brand">{device.brand}</span>
+				<span class="device-card__brand" {...textRegion(path, "brand")}>{device.brand}</span>
 			</div>
 
 			<span
@@ -101,11 +106,13 @@ const showImage = $derived(Boolean(device.image) && !coverFailed);
 		{#if device.specs}
 			<div class="device-card__specs">
 				<Icon icon="material-symbols:code-rounded" aria-hidden="true" />
-				<span>{device.specs}</span>
+				<span {...textRegion(path, "specs")}>{device.specs}</span>
 			</div>
 		{/if}
 
-		<p class="device-card__description">{device.description}</p>
+		<p class="device-card__description" {...textRegion(path, "description")}>
+			{device.description}
+		</p>
 
 		<div class="device-card__footer">
 			{#if device.link}

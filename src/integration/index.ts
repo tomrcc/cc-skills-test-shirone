@@ -560,6 +560,7 @@ async function createBundledIntegrations(
 		{ default: mdx },
 		{ pluginCollapsibleSections },
 		{ pluginLineNumbers },
+		{ default: editableRegions },
 	] = await Promise.all([
 		import("@swup/astro"),
 		import("astro-expressive-code"),
@@ -568,6 +569,7 @@ async function createBundledIntegrations(
 		import("@astrojs/mdx"),
 		import("@expressive-code/plugin-collapsible-sections"),
 		import("@expressive-code/plugin-line-numbers"),
+		import("@cloudcannon/editable-regions/astro-integration"),
 	]);
 	const oddmiscIntegration = options.umamiEnabled
 		? (await import("oddmisc/astro")).oddmisc({
@@ -652,6 +654,9 @@ async function createBundledIntegrations(
 			filter: (page: string) => sitemapFilter(page),
 		}),
 		mdx(mdxOptions),
+		// Lets `src/cloudcannon/registerComponents.ts` re-render components in
+		// the browser; pages import it only inside CloudCannon's Visual Editor.
+		editableRegions(),
 	];
 }
 

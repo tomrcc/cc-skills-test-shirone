@@ -1,0 +1,14 @@
+lastUpdated:
+  enable: true
+  minimumAgeDays: 90
+discovery:
+  enable: true
+  related:
+    enable: true
+    count: 3
+  random:
+    enable: true
+    count: 2
+share:
+  enable: true
+  includeCover: true

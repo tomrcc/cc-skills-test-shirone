@@ -23,6 +23,8 @@ export async function initFancyboxRuntime(
 	root: ParentNode = document,
 ): Promise<void> {
 	if (typeof document === "undefined" || !hasFancyboxTarget(root)) return;
+	// The lightbox would take the clicks CloudCannon's Visual Editor needs.
+	if (window.inEditorMode) return;
 
 	try {
 		const runtime = await import("./fancybox-handler");

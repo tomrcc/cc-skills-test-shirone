@@ -1,0 +1,13 @@
+{
+	"schemaVersion": 1,
+	"source": {
+		"type": "path",
+		"path": "site-settings"
+	},
+	"mounts": {
+		"content": false,
+		"data": false,
+		"assets": false,
+		"public": false
+	}
+}

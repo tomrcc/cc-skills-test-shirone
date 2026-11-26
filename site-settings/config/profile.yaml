@@ -1,0 +1,13 @@
+avatar: /src/assets/images/demo-avatar.webp
+name: Shirone
+bio: The rain remembers what the sky forgot to say.
+links:
+  - name: X
+    icon: fa7-brands:x-twitter
+    url: https://x.com
+  - name: Steam
+    icon: fa7-brands:steam
+    url: https://store.steampowered.com
+  - name: GitHub
+    icon: fa7-brands:github
+    url: https://github.com/LyraVoid/Shirone

@@ -10,13 +10,24 @@ let {
 	subtitle = "",
 	icon = "",
 	class: className = "",
+	titleProp,
+	subtitleProp,
 }: {
 	title: string;
 	subtitle?: string;
 	/** 标题左侧装饰图标（Iconify 名） */
 	icon?: string;
 	class?: string;
+	/** Data paths of `title` and `subtitle`, for text regions in CloudCannon's Visual Editor. */
+	titleProp?: string;
+	subtitleProp?: string;
 } = $props();
+const titleRegion = $derived(
+	titleProp ? { "data-editable": "text", "data-prop": titleProp } : {},
+);
+const subtitleRegion = $derived(
+	subtitleProp ? { "data-editable": "text", "data-prop": subtitleProp } : {},
+);
 </script>
 
 <div class="section-title {className}">
@@ -26,10 +37,10 @@ let {
 				<Icon {icon} />
 			</span>
 		{/if}
-		<h2 class="section-title__title">{title}</h2>
+		<h2 class="section-title__title" {...titleRegion}>{title}</h2>
 	</div>
 	{#if subtitle}
-		<p class="section-title__subtitle">{subtitle}</p>
+		<p class="section-title__subtitle" {...subtitleRegion}>{subtitle}</p>
 	{/if}
 </div>
 

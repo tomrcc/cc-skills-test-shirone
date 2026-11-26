@@ -1,10 +1,17 @@
 ---
 interface Props {
 	class: string;
+	/** Makes the slot the page's markdown body region in CloudCannon's Visual Editor. */
+	editableBody?: boolean;
 }
-const className = Astro.props.class;
+const { class: className, editableBody = false } = Astro.props;
+// Deferred: CloudCannon's rich text view can't reproduce the site's markdown
+// plugins, so the rendered body stays until an editor clicks into it.
+const bodyRegion = editableBody
+	? { "data-editable": "text", "data-prop": "@content", "data-defer-mount": "" }
+	: {};
 ---
-<div data-pagefind-body class={`prose dark:prose-invert prose-base !max-w-none custom-md markdown-content ${className}`}>
+<div data-pagefind-body class={`prose dark:prose-invert prose-base !max-w-none custom-md markdown-content ${className}`} {...bodyRegion}>
 	<slot />
 </div>
 

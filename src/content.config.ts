@@ -2,13 +2,17 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
+/** CloudCannon writes `null` or `""` for a cleared input; treat both as absent. */
+const absentWhenEmpty = (value: unknown): unknown =>
+	value === null || value === "" ? undefined : value;
+
 const postsCollection = defineCollection({
 	loader: glob({ base: "./src/content/posts", pattern: "**/*.{md,mdx}" }),
 	schema: z.object({
 		title: z.string(),
 		published: z.date(),
 		publishedAt: z.date().optional(),
-		updated: z.date().optional(),
+		updated: z.preprocess(absentWhenEmpty, z.date().optional()),
 		updatedAt: z.date().optional(),
 		pinned: z.boolean().optional().default(false),
 		draft: z.boolean().optional().default(false),
@@ -24,7 +28,7 @@ const postsCollection = defineCollection({
 			.default("")
 			.transform((value) => value.trim()),
 		/** 系列内顺序；缺省回退为按发布日期排 */
-		seriesOrder: z.number().int().optional(),
+		seriesOrder: z.preprocess(absentWhenEmpty, z.number().int().optional()),
 		lang: z.string().optional().default(""),
 
 		/* 单篇版权覆写（省略字段回退到全站 licenseConfig；字符串简写许可证名称） */
@@ -53,10 +57,13 @@ const postsCollection = defineCollection({
 
 		/* Post Encryption */
 		encrypted: z.boolean().optional().default(false),
-		password: z
-			.union([z.string(), z.number()])
-			.transform((v) => String(v))
-			.optional(),
+		password: z.preprocess(
+			absentWhenEmpty,
+			z
+				.union([z.string(), z.number()])
+				.transform((v) => String(v))
+				.optional(),
+		),
 		passwordHint: z.string().optional().default(""),
 		hideHomeContent: z.boolean().optional().default(true),
 
@@ -112,10 +119,13 @@ const momentsCollection = defineCollection({
 			.default([]),
 		/* Moment encryption */
 		encrypted: z.boolean().optional().default(false),
-		password: z
-			.union([z.string(), z.number()])
-			.transform((value) => String(value))
-			.optional(),
+		password: z.preprocess(
+			absentWhenEmpty,
+			z
+				.union([z.string(), z.number()])
+				.transform((value) => String(value))
+				.optional(),
+		),
 		passwordHint: z.string().optional().default(""),
 		draft: z.boolean().optional().default(false),
 	}),

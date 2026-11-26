@@ -17,6 +17,8 @@ declare global {
 
 	interface Window {
 		swup?: Swup;
+		/** Set by CloudCannon inside its Visual Editor, before any page script runs. */
+		inEditorMode?: boolean;
 		oddmisc?: OddmiscBrowserClient;
 		__shironeUmamiStatsPromises?: Record<string, Promise<OddmiscStatsResult>>;
 		__shironeNavigationBound?: boolean;

@@ -190,6 +190,11 @@ const defaultSchemeStyle = createDefaultSchemeStyle();
 			if (localStorage.getItem('mc-motion') === 'reduced') {
 				document.documentElement.classList.add('motion-reduced');
 			}
+			// CloudCannon's Visual Editor: no motion, and no Swup visits.
+			if (window.inEditorMode) {
+				document.documentElement.classList.add('motion-reduced');
+				document.documentElement.setAttribute('data-no-swup', '');
+			}
 			const storedWallpaperMode = localStorage.getItem('wallpaper-mode');
 			const wallpaperMode = storedWallpaperMode === 'banner' || storedWallpaperMode === 'none'
 				? storedWallpaperMode
@@ -385,6 +390,13 @@ scrollFunction();
 <script>
 import { bindFancyboxRuntime } from "../utils/fancybox-runtime";
 import { applyStoredLayoutMode } from "../utils/layout-mode";
+
+// Shares this script so it adds no request outside CloudCannon's Visual Editor.
+if (window.inEditorMode) {
+	import("@/cloudcannon/registerComponents").catch((error) => {
+		console.warn("Failed to load CloudCannon component registration:", error);
+	});
+}
 
 bindFancyboxRuntime();
 

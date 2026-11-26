@@ -1,0 +1,4 @@
+enable: true
+title: $t:friends
+description: $t:friendsBanner
+pageSize: 12

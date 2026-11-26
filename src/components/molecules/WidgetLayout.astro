@@ -9,6 +9,8 @@ import Icon from "@iconify/svelte";
 interface Props {
 	id: string;
 	name?: string;
+	/** Visual Editor data path for `name`; adds a text region when set */
+	nameProp?: string;
 	isCollapsed?: boolean;
 	collapsedHeight?: string;
 	class?: string;
@@ -21,6 +23,7 @@ interface Props {
 const {
 	id,
 	name,
+	nameProp,
 	isCollapsed,
 	collapsedHeight,
 	style,
@@ -33,7 +36,7 @@ const className = Astro.props.class;
     <Card color="var(--card-bg)" radius="l" class="pb-4">
     <div class="widget-layout__header">
         <AccentBar size="small" />
-        <span>{name}</span>
+        <span data-editable={nameProp ? "text" : undefined} data-prop={nameProp}>{name}</span>
     </div>
     <div id={id} class:list={["collapse-wrapper px-4 overflow-hidden", {"collapsed": isCollapsed, "widget-layout__scroll-content": scrollContent, "widget-layout__flex-scroll": flexScroll}]}>
         <slot></slot>

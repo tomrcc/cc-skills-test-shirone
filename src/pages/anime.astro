@@ -7,7 +7,8 @@ import AnimeSection from "@components/organisms/AnimeSection.svelte";
 import I18nKey from "@i18n/i18nKey";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { resolveI18nText } from "@utils/i18n-utils";
-import { animeConfig } from "@/config/animeConfig";
+import { animeConfig, resolveAnimeOptions } from "@/config/animeConfig";
+import { animeSectionProps } from "@/utils/feature-sections";
 import { getAnimeList } from "../utils/anime-data";
 
 if (!animeConfig.enable) {
@@ -20,15 +21,32 @@ const pageDescription = resolveI18nText(
 	I18nKey.animeBanner,
 );
 
-const animes = await getAnimeList();
+// Only the local list has a data file for CloudCannon to edit; provider snapshots don't.
+const fromDataFile = resolveAnimeOptions(animeConfig).source.kind === "local";
+const sectionProps = animeSectionProps(
+	animeConfig,
+	await getAnimeList(),
+	fromDataFile,
+);
 ---
 
 <MainGridLayout title={pageTitle} description={pageDescription} page="anime">
-	<AnimeSection
-		animes={animes}
-		title={pageTitle}
-		subtitle={pageDescription}
-		pageSize={animeConfig.pageSize}
-		client:visible
-	/>
+	{fromDataFile ? (
+		<editable-component
+			data-component="anime-section"
+			data-prop-items="@data[anime]"
+			data-prop-settings="@data[anime_settings]"
+		>
+			<AnimeSection {...sectionProps} client:visible />
+		</editable-component>
+	) : (
+		<AnimeSection {...sectionProps} client:visible />
+	)}
+	<script>
+		if (window.inEditorMode) {
+			import("@/cloudcannon/register/anime").catch((error) => {
+				console.warn("Failed to load CloudCannon component registration:", error);
+			});
+		}
+	</script>
 </MainGridLayout>

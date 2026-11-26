@@ -16,10 +16,20 @@
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
+import {
+	arrayItemRegion,
+	arrayRegion,
+	type EditablePath,
+	imageRegion,
+	textRegion,
+	valueRegion,
+} from "@utils/editable-regions";
 import { reveal } from "@utils/motion";
 import type { GameItem, GameStatus } from "@/types/gamesConfig";
 
-let { game, delay = 0 }: { game: GameItem; delay?: number } = $props();
+let { game, delay = 0 }: { game: GameItem & EditablePath; delay?: number } =
+	$props();
+const path = $derived(game.editablePath);
 
 let coverFailed = $state(false);
 
@@ -58,9 +68,7 @@ const statusMeta: Record<
 const meta = $derived(statusMeta[game.status]);
 const showCover = $derived(Boolean(game.cover) && !coverFailed);
 const ratingLabel = $derived(
-	game.rating === undefined
-		? ""
-		: `${i18n(I18nKey.gamesRating)} ${game.rating.toFixed(1)}`,
+	!game.rating ? "" : `${i18n(I18nKey.gamesRating)} ${game.rating.toFixed(1)}`,
 );
 </script>
 
@@ -79,10 +87,11 @@ const ratingLabel = $derived(
 				loading="lazy"
 				decoding="async"
 				onerror={() => (coverFailed = true)}
+				{...imageRegion(path, "cover")}
 			/>
 		{:else}
 			<span class="game-card__banner-icon" aria-hidden="true">
-				<Icon icon={game.icon ?? "material-symbols:sports-esports-outline-rounded"} />
+				<Icon icon={game.icon || "material-symbols:sports-esports-outline-rounded"} />
 			</span>
 		{/if}
 
@@ -101,20 +110,22 @@ const ratingLabel = $derived(
 		</span>
 
 		<div class="game-card__caption">
-			<h2 class="game-card__title">{game.name}</h2>
-			<span class="game-card__developer">{game.developer}</span>
+			<h2 class="game-card__title" {...textRegion(path, "name")}>{game.name}</h2>
+			<span class="game-card__developer" {...textRegion(path, "developer")}>
+				{game.developer}
+			</span>
 		</div>
 	</div>
 
 	<div class="game-card__body">
 		<div class="game-card__meta">
-			{#if game.rating !== undefined}
+			{#if game.rating}
 				<span class="game-card__rating" aria-label={ratingLabel}>
 					<Icon icon="material-symbols:star-rounded" aria-hidden="true" />
 					{game.rating.toFixed(1)}
 				</span>
 			{/if}
-			{#if game.hours !== undefined}
+			{#if game.hours}
 				<span class="game-card__hours">
 					<Icon icon="material-symbols:timer-outline-rounded" aria-hidden="true" />
 					{game.hours}
@@ -128,19 +139,23 @@ const ratingLabel = $derived(
 				</span>
 			{/if}
 			{#if game.year}
-				<span class="game-card__year">{game.year}</span>
+				<span class="game-card__year" {...textRegion(path, "year")}>{game.year}</span>
 			{/if}
 		</div>
 
 		{#if game.tags && game.tags.length > 0}
-			<div class="game-card__tags">
+			<div class="game-card__tags" {...arrayRegion(path, "tags")}>
 				{#each game.tags as tag}
-					<span class="game-card__tag">{tag}</span>
+					<span class="game-card__tag" {...arrayItemRegion(path)}>
+						<span {...valueRegion(path)}>{tag}</span>
+					</span>
 				{/each}
 			</div>
 		{/if}
 
-		<p class="game-card__description">{game.description}</p>
+		<p class="game-card__description" {...textRegion(path, "description")}>
+			{game.description}
+		</p>
 
 		<div class="game-card__footer">
 			{#if game.link}

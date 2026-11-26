@@ -72,10 +72,11 @@ const subtitle = `${statusLabel} · ${ordered.length} ${i18n(I18nKey.postsCount)
 			icon="material-symbols:auto-stories-rounded"
 			title={series.data.title}
 			subtitle={subtitle}
+			titleProp="title"
 		/>
 		{series.body && (
 			<section class="series-detail__overview">
-				<Markdown class="series-detail__overview-markdown">
+				<Markdown class="series-detail__overview-markdown" editableBody>
 					<Content />
 				</Markdown>
 			</section>

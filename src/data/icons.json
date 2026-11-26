@@ -1,0 +1,226 @@
+[
+	{
+		"name": "Android",
+		"id": "material-symbols:android-rounded"
+	},
+	{
+		"name": "Apps",
+		"id": "material-symbols:apps-rounded"
+	},
+	{
+		"name": "Astro (logo)",
+		"id": "simple-icons:astro"
+	},
+	{
+		"name": "Auto Stories Outline",
+		"id": "material-symbols:auto-stories-outline-rounded"
+	},
+	{
+		"name": "Build Outline",
+		"id": "material-symbols:build-outline-rounded"
+	},
+	{
+		"name": "C (logo)",
+		"id": "simple-icons:c"
+	},
+	{
+		"name": "C++ (logo)",
+		"id": "simple-icons:cplusplus"
+	},
+	{
+		"name": "Code",
+		"id": "material-symbols:code-rounded"
+	},
+	{
+		"name": "Code Blocks Outline",
+		"id": "material-symbols:code-blocks-outline-rounded"
+	},
+	{
+		"name": "Construction",
+		"id": "material-symbols:construction-rounded"
+	},
+	{
+		"name": "Deployed Code Outline",
+		"id": "material-symbols:deployed-code-outline-rounded"
+	},
+	{
+		"name": "Desktop Windows Outline",
+		"id": "material-symbols:desktop-windows-outline-rounded"
+	},
+	{
+		"name": "Dns",
+		"id": "material-symbols:dns-rounded"
+	},
+	{
+		"name": "Edit Note",
+		"id": "material-symbols:edit-note-rounded"
+	},
+	{
+		"name": "Explore Outline",
+		"id": "material-symbols:explore-outline-rounded"
+	},
+	{
+		"name": "Extension Outline",
+		"id": "material-symbols:extension-outline-rounded"
+	},
+	{
+		"name": "Favorite",
+		"id": "material-symbols:favorite-rounded"
+	},
+	{
+		"name": "Flag",
+		"id": "material-symbols:flag-rounded"
+	},
+	{
+		"name": "GitHub (brand)",
+		"id": "fa7-brands:github"
+	},
+	{
+		"name": "Go (logo)",
+		"id": "simple-icons:go"
+	},
+	{
+		"name": "Headphones",
+		"id": "material-symbols:headphones-rounded"
+	},
+	{
+		"name": "JavaScript (logo)",
+		"id": "simple-icons:javascript"
+	},
+	{
+		"name": "Keyboard Outline",
+		"id": "material-symbols:keyboard-outline-rounded"
+	},
+	{
+		"name": "Kotlin (logo)",
+		"id": "simple-icons:kotlin"
+	},
+	{
+		"name": "Laptop Mac",
+		"id": "material-symbols:laptop-mac-rounded"
+	},
+	{
+		"name": "Menu Book",
+		"id": "material-symbols:menu-book-rounded"
+	},
+	{
+		"name": "Node.js (logo)",
+		"id": "simple-icons:nodedotjs"
+	},
+	{
+		"name": "OpenJDK (logo)",
+		"id": "simple-icons:openjdk"
+	},
+	{
+		"name": "Palette Outline",
+		"id": "material-symbols:palette-outline-rounded"
+	},
+	{
+		"name": "Phone Iphone",
+		"id": "material-symbols:phone-iphone"
+	},
+	{
+		"name": "PHP (logo)",
+		"id": "simple-icons:php"
+	},
+	{
+		"name": "Playwright (logo)",
+		"id": "simple-icons:playwright"
+	},
+	{
+		"name": "PostgreSQL (logo)",
+		"id": "simple-icons:postgresql"
+	},
+	{
+		"name": "Python (logo)",
+		"id": "simple-icons:python"
+	},
+	{
+		"name": "React (logo)",
+		"id": "simple-icons:react"
+	},
+	{
+		"name": "Rocket Launch",
+		"id": "material-symbols:rocket-launch-rounded"
+	},
+	{
+		"name": "Ruby (logo)",
+		"id": "simple-icons:ruby"
+	},
+	{
+		"name": "Rust (logo)",
+		"id": "simple-icons:rust"
+	},
+	{
+		"name": "Sass (logo)",
+		"id": "simple-icons:sass"
+	},
+	{
+		"name": "School",
+		"id": "material-symbols:school-rounded"
+	},
+	{
+		"name": "Sentiment Excited Outline",
+		"id": "material-symbols:sentiment-excited-outline-rounded"
+	},
+	{
+		"name": "Shield Outline",
+		"id": "material-symbols:shield-outline-rounded"
+	},
+	{
+		"name": "Star",
+		"id": "material-symbols:star-rounded"
+	},
+	{
+		"name": "Steam (brand)",
+		"id": "fa7-brands:steam"
+	},
+	{
+		"name": "Svelte (logo)",
+		"id": "simple-icons:svelte"
+	},
+	{
+		"name": "Swift (logo)",
+		"id": "simple-icons:swift"
+	},
+	{
+		"name": "Swords Outline",
+		"id": "material-symbols:swords-outline-rounded"
+	},
+	{
+		"name": "Tablet Mac",
+		"id": "material-symbols:tablet-mac-rounded"
+	},
+	{
+		"name": "Tailwind CSS (logo)",
+		"id": "simple-icons:tailwindcss"
+	},
+	{
+		"name": "Terminal",
+		"id": "material-symbols:terminal-rounded"
+	},
+	{
+		"name": "TypeScript (logo)",
+		"id": "simple-icons:typescript"
+	},
+	{
+		"name": "Vue.js (logo)",
+		"id": "simple-icons:vuedotjs"
+	},
+	{
+		"name": "Web",
+		"id": "material-symbols:web-rounded"
+	},
+	{
+		"name": "Widgets",
+		"id": "material-symbols:widgets-rounded"
+	},
+	{
+		"name": "Work",
+		"id": "material-symbols:work-rounded"
+	},
+	{
+		"name": "X (Twitter) (brand)",
+		"id": "fa7-brands:x-twitter"
+	}
+]

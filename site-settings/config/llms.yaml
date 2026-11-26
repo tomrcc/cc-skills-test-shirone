@@ -1,0 +1,19 @@
+enable: true
+generateFull: true
+siteSummary: ""
+descriptionMaxLength: 200
+excludeTags:
+  - secret
+  - private
+excludeCategories: []
+corePages:
+  - title: Home
+    url: /
+    description: Main blog entrance and latest post stream.
+  - title: About
+    url: /about/
+    description: Author profile, technical stack, and background.
+  - title: Archive
+    url: /archive/
+    description: Chronological index of all published writings.
+customSections: []

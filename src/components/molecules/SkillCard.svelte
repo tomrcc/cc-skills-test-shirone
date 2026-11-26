@@ -4,10 +4,13 @@
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
+import { type EditablePath, textRegion } from "@utils/editable-regions";
 import { reveal } from "@utils/motion";
 import type { SkillItem, SkillLevel } from "@/types/skillsConfig";
 
-let { skill, delay = 0 }: { skill: SkillItem; delay?: number } = $props();
+let { skill, delay = 0 }: { skill: SkillItem & EditablePath; delay?: number } =
+	$props();
+const path = $derived(skill.editablePath);
 
 const levelMeta: Record<SkillLevel, { value: number; key: I18nKey }> = {
 	beginner: { value: 1, key: I18nKey.skillLevelBeginner },
@@ -31,13 +34,15 @@ const fallback = $derived((skill.name.charAt(0) || "?").toUpperCase());
 			{/if}
 		</span>
 		<div class="skill-card__identity">
-			<h2>{skill.name}</h2>
+			<h2 {...textRegion(path, "name")}>{skill.name}</h2>
 			<span class="skill-card__level">{levelLabel}</span>
 		</div>
 	</div>
 
 	{#if skill.description}
-		<p class="skill-card__description">{skill.description}</p>
+		<p class="skill-card__description" {...textRegion(path, "description")}>
+			{skill.description}
+		</p>
 	{/if}
 
 	<div

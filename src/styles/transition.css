@@ -27,6 +27,12 @@ html.is-animating .transition-swup-fade {
     animation: 300ms fade-in-up;
     animation-fill-mode: forwards;
 }
+/* CloudCannon's Visual Editor shows each element in its final state, including
+   markup it re-renders after an edit. */
+.cms-editor-active .onload-animation {
+    opacity: 1;
+    animation: none;
+}
 #navbar {
     animation-delay: 0ms
 }

@@ -27,13 +27,18 @@ const closeDuration = Number(config.closeDuration ?? 86400);
 {contentText && (
 	<WidgetLayout
 		name={config.title || i18n(I18nKey.announcement)}
+		nameProp={config.title ? "@data[announcement_settings].title" : undefined}
 		id="announcement"
 		class={className}
 		style={style}
 	>
 		<div class="announcement-wrapper flex flex-col" data-close-duration={String(closeDuration)}>
 			<!-- 公告栏内容 -->
-			<div class="announcement-content">
+			<div
+				class="announcement-content"
+				data-editable={config.content ? "text" : undefined}
+				data-prop={config.content ? "@data[announcement_settings].content" : undefined}
+			>
 				{contentText}
 			</div>
 
@@ -48,7 +53,7 @@ const closeDuration = Number(config.closeDuration ?? 86400);
 								rel={isExternal ? "noopener noreferrer" : undefined}
 								class="announcement-btn m3-state-layer"
 							>
-								<span>{link.text}</span>
+								<span data-editable="text" data-prop="@data[announcement_settings].link.text">{link.text}</span>
 								{isExternal && (
 									<Icon icon="material-symbols:arrow-outward-rounded"
 										class="announcement-btn__icon"
@@ -152,6 +157,8 @@ const closeDuration = Number(config.closeDuration ?? 86400);
 	}
 
 	function closeAnnouncement() {
+		// Closing would hide the widget from the Visual Editor for a day.
+		if (window.inEditorMode) return;
 		const widgetLayouts = document.querySelectorAll<HTMLElement>(
 			'widget-layout[data-id="announcement"]',
 		);

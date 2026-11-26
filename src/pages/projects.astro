@@ -5,7 +5,7 @@ import I18nKey from "@i18n/i18nKey";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { resolveI18nText } from "@utils/i18n-utils";
 import { projectsConfig } from "@/config/projectsConfig";
-import { resolveProjectsData } from "@/utils/feature-data";
+import { projectsSectionProps } from "@/utils/feature-sections";
 
 if (!projectsConfig.enable) {
 	return Astro.redirect("/404/");
@@ -17,7 +17,7 @@ const pageDescription = resolveI18nText(
 	I18nKey.projectsBanner,
 );
 
-const items = resolveProjectsData(projectsConfig);
+const sectionProps = projectsSectionProps(projectsConfig);
 ---
 
 <MainGridLayout
@@ -25,11 +25,18 @@ const items = resolveProjectsData(projectsConfig);
 	description={pageDescription}
 	page="projects"
 >
-	<ProjectSection
-		categories={projectsConfig.categories}
-		items={items}
-		title={pageTitle}
-		subtitle={pageDescription}
-		client:visible
-	/>
+	<editable-component
+		data-component="projects-section"
+		data-prop-items="@data[projects]"
+		data-prop-settings="@data[projects_settings]"
+	>
+		<ProjectSection {...sectionProps} client:visible />
+	</editable-component>
+	<script>
+		if (window.inEditorMode) {
+			import("@/cloudcannon/register/projects").catch((error) => {
+				console.warn("Failed to load CloudCannon component registration:", error);
+			});
+		}
+	</script>
 </MainGridLayout>

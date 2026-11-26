@@ -25,7 +25,7 @@ import {
 } from "./collections.ts";
 
 /** Only these can change the collection; everything else is ignored. */
-const SOURCE_EXTENSIONS = /\.(astro|md|mdx|svelte|ts|tsx)$/;
+const SOURCE_EXTENSIONS = /\.(astro|json|md|mdx|svelte|ts|tsx|ya?ml)$/;
 
 /** Coalesce the burst of events one save produces. */
 const DEBOUNCE_MS = 150;
