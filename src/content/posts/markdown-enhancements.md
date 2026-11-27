@@ -1,24 +1,30 @@
 ---
+_schema: default
 title: Shirone Markdown Enhancements
-published: 2026-08-19
+published: 2026-08-19T00:00:00Z
 updated:
-pinned: true
-description: Explore Shirone's custom Markdown extensions, expressive components, and authoring syntax.
-image: ""
-tags: [Demo, Markdown, Extensions, Theme, Shirone]
+description: Explore Shirone's custom Markdown extensions, expressive
+  components, and authoring syntax.
+image: ''
+tags:
+  - Demo
+  - Markdown
+  - Extensions
+  - Theme
+  - Shirone
+category: Guides
 series: markdown-syntax-guide
 seriesOrder: 3
-category: Guides
 lang: en
+pinned: true
 draft: false
 comment: true
 encrypted: false
-password: ""
-passwordHint: ""
+password: ''
+passwordHint: ''
 hideHomeContent: true
 ---
-
-Shirone provides a collection of theme-exclusive Markdown extensions and custom syntax containers. Built on top of our native unified AST processing pipeline, all extensions render into accessible, semantic HTML during site build time with **zero client JavaScript hydration overhead** and **100% M3E design token alignment**.
+Shirone provides a collection of theme-exclusive Markdown extensions and custom syntax containers. Built on top of our native unified AST processing pipeline, all extensions render into accessible, semantic HTML during site build time with **zero client JavaScript hydration overhead** and **100% M3E design token alignment**. Tom.
 
 ## File Trees
 
@@ -28,7 +34,7 @@ File Trees turn multi-level project structures, source hierarchies, and terminal
 
 Use the `:::file-tree` block directive when writing the file hierarchy directly as a Markdown nested list.
 
-```markdown
+~~~markdown
 :::file-tree{title="Shirone source tree"}
 - src
   - components/
@@ -50,7 +56,7 @@ Use the `:::file-tree` block directive when writing the file hierarchy directly 
   - favicon.svg
 - package.json
 :::
-```
+~~~
 
 :::file-tree{title="Shirone source tree"}
 - src
@@ -76,10 +82,10 @@ Use the `:::file-tree` block directive when writing the file hierarchy directly 
 
 #### Authoring Rules & Markers
 
-- **Diff States**: Prefix an item with `++` (green background & badge) or `--` (red background & strikethrough) to highlight changes.
-- **Comments**: Any text following a `#` is rendered as a muted, right-aligned inline comment.
-- **Emphasis**: Wrap names in `**bold**` to give key files prominent visual weight.
-- **Collapsible Folders**: Directories inferred from nested list items start expanded by default. Add a trailing slash (e.g. `components/`) to create a collapsed directory that readers can expand on click or via keyboard navigation.
+* **Diff States**: Prefix an item with `++` (green background & badge) or `--` (red background & strikethrough) to highlight changes.
+* **Comments**: Any text following a `#` is rendered as a muted, right-aligned inline comment.
+* **Emphasis**: Wrap names in `**bold**` to give key files prominent visual weight.
+* **Collapsible Folders**: Directories inferred from nested list items start expanded by default. Add a trailing slash (e.g. `components/`) to create a collapsed directory that readers can expand on click or via keyboard navigation.
 
 ---
 
@@ -107,8 +113,8 @@ dist
 
 #### Configuration Options
 
-- `title="string"`: Sets a custom header title and accessible label for the tree.
-- `icon="colored" | "simple"`: Choose between multi-color extension icons (`colored`, default) or minimal monochrome icons (`simple`).
+* `title="string"`: Sets a custom header title and accessible label for the tree.
+* `icon="colored" | "simple"`: Choose between multi-color extension icons (`colored`, default) or minimal monochrome icons (`simple`).
 
 ---
 
@@ -172,11 +178,11 @@ Combine multiple fenced code blocks within a `:::code-tree` block directive. Eac
 
 #### Configuration & Markers
 
-- `title="string"`: Sets the header title and accessible label for the code tree.
-- `height="string"`: Sets the height for the desktop view (default `420px`, e.g. `380px`, `26rem`).
-- `entry="filepath"`: Specifies which file is active upon first load.
-- `icon="colored" | "simple"`: Switch between colorful or minimal monochrome file icons.
-- `:active`: Place `:active` on any fenced code block to designate it as the default active tab.
+* `title="string"`: Sets the header title and accessible label for the code tree.
+* `height="string"`: Sets the height for the desktop view (default `420px`, e.g. `380px`, `26rem`).
+* `entry="filepath"`: Specifies which file is active upon first load.
+* `icon="colored" | "simple"`: Switch between colorful or minimal monochrome file icons.
+* `:active`: Place `:active` on any fenced code block to designate it as the default active tab.
 
 ---
 
@@ -184,9 +190,8 @@ Combine multiple fenced code blocks within a `:::code-tree` block directive. Eac
 
 Point directly to any local directory path in the workspace to automatically scan and generate an interactive code tree at build time without manually copying file contents.
 
-```markdown
+~~~markdown
 @[code-tree title="Anime Utilities" entry="status.ts"](/src/utils/anime)
-```
+~~~
 
 @[code-tree title="Site Configuration" entry="siteConfig.ts"](/src/config)
-
