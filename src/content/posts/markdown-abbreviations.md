@@ -39,7 +39,9 @@ SSR makes an HTML response available before client code runs.
 ```
 
 *[SSR]: Server-Side Rendering
+
 *[LCP]: Largest Contentful Paint
+
 *[CLS]: Cumulative Layout Shift
 
 ## Authoring boundaries

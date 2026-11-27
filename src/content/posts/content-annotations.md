@@ -54,7 +54,9 @@ Definitions may contain paragraphs, emphasis, links, lists, and inline code [+ri
 Reuse a label [+review] to present a short sequence of related notes behind one marker.
 
 [+review]: Start with the decision that changes the reader's next action.
+
 [+review]: Keep implementation evidence separate from background context.
+
 [+review]: Remove details that belong in the main article instead of the annotation.
 
 Undefined references such as `[+missing]` remain ordinary text, so an unfinished definition never creates an empty control.

@@ -15,6 +15,7 @@ markdown:
     # demo posts' nested ``` examples inside their outer fence.
     code_block_fences: "~~~"
     escape_snippets_in_code_blocks: true
+    treat_indentation_as_code: true
 
 _editables:
   content:
@@ -824,11 +825,6 @@ collections_config:
 file_config:
   - glob:
       - src/content/posts/mdx-showcase.mdx
-      - src/content/posts/markdown-fields.md
-      - src/content/posts/option-groups.md
-      - src/content/posts/content-annotations.md
-      - src/content/posts/markdown-enhancements.md
-      - src/content/posts/image-grid-demo/index.md
     _enabled_editors:
       - data
 
@@ -3641,6 +3637,7 @@ _snippets:
             - editor_key: preload
               type: string
               optional: true
+              remove_empty: true
           format:
             root_boundary:
               start: "{"
@@ -3703,6 +3700,7 @@ _snippets:
             - editor_key: preload
               type: string
               optional: true
+              remove_empty: true
           format:
             root_boundary:
               start: "{"
@@ -3767,6 +3765,7 @@ _snippets:
             - editor_key: preload
               type: string
               optional: true
+              remove_empty: true
           format:
             root_boundary:
               start: "{"
@@ -3826,6 +3825,7 @@ _snippets:
             - editor_key: preload
               type: string
               optional: true
+              remove_empty: true
           format:
             root_boundary:
               start: "{"
@@ -3890,12 +3890,15 @@ _snippets:
             - editor_key: columns
               type: string
               optional: true
+              remove_empty: true
             - editor_key: aspect
               type: string
               optional: true
+              remove_empty: true
             - editor_key: fit
               type: string
               optional: true
+              remove_empty: true
           format:
             root_boundary:
               start: "{"
@@ -3951,6 +3954,14 @@ _snippets:
         comment: Images only, each in its own paragraph.
         options:
           image: true
+    alternate_formats:
+      - snippet: ":::grid\n[[images]]\n:::"
+        params:
+          images:
+            parser: content
+            options:
+              editor_key: images
+              trim_text: true
   file_tree:
     snippet: ":::file-tree[[attributes]]\n[[tree]]\n:::"
     preview:
@@ -3969,9 +3980,11 @@ _snippets:
             - editor_key: title
               type: string
               optional: true
+              remove_empty: true
             - editor_key: icon
               type: string
               optional: true
+              remove_empty: true
           format:
             root_boundary:
               start: "{"
@@ -4030,15 +4043,19 @@ _snippets:
             - editor_key: title
               type: string
               optional: true
+              remove_empty: true
             - editor_key: height
               type: string
               optional: true
+              remove_empty: true
             - editor_key: entry
               type: string
               optional: true
+              remove_empty: true
             - editor_key: icon
               type: string
               optional: true
+              remove_empty: true
           format:
             root_boundary:
               start: "{"
@@ -4084,6 +4101,149 @@ _snippets:
         type: code
         label: Files
         comment: One code block per file, each with title="path/to/file".
+        options:
+          syntax: markdown
+  code_block_meta:
+    snippet: "```[[lang]] [[meta]]\n[[code]]\n```"
+    # Only fences whose info string has options after the language.
+    strict_whitespace: true
+    params:
+      lang:
+        parser: content
+        options:
+          editor_key: lang
+          raw: true
+          forbidden_tokens:
+            - " "
+            - "\n"
+            - "`"
+      meta:
+        parser: content
+        options:
+          editor_key: meta
+          raw: true
+          forbidden_tokens:
+            - "\n"
+            - "`"
+      code:
+        parser: content
+        options:
+          editor_key: code
+          raw: true
+    preview:
+      text:
+        - key: meta
+        - Code block
+      subtext:
+        - key: lang
+      icon: code
+    picker_preview:
+      text: Code block with options
+      icon: code
+    _inputs:
+      lang:
+        type: text
+        label: Language
+      meta:
+        type: text
+        label: Options
+        comment: Expressive Code options, such as title="app.js" {2-3}.
+      code:
+        type: code
+        label: Code
+  option_group:
+    snippet: "::: tabs[[sync]]\n[[body]]\n:::"
+    params:
+      sync:
+        parser: optional
+        options:
+          snippet: "#[[sync_id]]"
+          remove_empty: true
+      sync_id:
+        parser: content
+        options:
+          editor_key: sync_id
+          raw: true
+          forbidden_tokens:
+            - " "
+            - "\n"
+      body:
+        parser: content
+        options:
+          editor_key: body
+          raw: true
+    preview:
+      text: Option group
+      subtext:
+        - key: sync_id
+      icon: tab
+    picker_preview:
+      text: Option group (tabs)
+      icon: tab
+    _inputs:
+      sync_id:
+        type: text
+        label: Sync id
+        comment: Groups with the same id switch together.
+      body:
+        type: code
+        label: Options
+        comment: Start each option with @tab Title, then a blank line and its content.
+        options:
+          syntax: markdown
+  field_group:
+    snippet: ":::: field-group\n[[body]]\n::::"
+    preview:
+      text: Field group
+      icon: list_alt
+    picker_preview:
+      text: Field group
+      icon: list_alt
+    params:
+      body:
+        parser: content
+        options:
+          editor_key: body
+          raw: true
+    _inputs:
+      body:
+        type: code
+        label: Fields
+        comment: "One ::: field block per option."
+        options:
+          syntax: markdown
+  field:
+    snippet: "::: field [[name]]\n[[body]]\n:::"
+    preview:
+      text:
+        - key: name
+        - Field
+      icon: label
+    picker_preview:
+      text: Field
+      icon: label
+    params:
+      name:
+        parser: content
+        options:
+          editor_key: name
+          raw: true
+          trim_text: true
+          forbidden_tokens:
+            - "\n"
+      body:
+        parser: content
+        options:
+          editor_key: body
+          raw: true
+    _inputs:
+      name:
+        type: text
+        label: Field name
+      body:
+        type: code
+        label: Tags and description
+        comment: "@type, @default and status tags, then a blank line and the description."
         options:
           syntax: markdown
   collapse:
@@ -4335,6 +4495,7 @@ _snippets:
         options:
           editor_key: expansion
           raw: true
+          trim_text: true
           forbidden_tokens:
             - "\n"
     _inputs:
@@ -4345,6 +4506,187 @@ _snippets:
       expansion:
         type: text
         label: Full meaning
+  marker:
+    snippet: "==[[text]]==[[variant_block]]"
+    inline: true
+    view: inline
+    preview:
+      text:
+        - key: text
+        - Marker
+      icon: format_ink_highlighter
+    picker_preview:
+      text: Highlight
+      icon: format_ink_highlighter
+    params:
+      text:
+        parser: content
+        options:
+          editor_key: text
+          raw: true
+          forbidden_tokens:
+            - "=="
+            - "\n"
+      variant_block:
+        parser: optional
+        options:
+          snippet: "{.[[variant]]}"
+          remove_empty: true
+      variant:
+        parser: content
+        options:
+          editor_key: variant
+          raw: true
+          forbidden_tokens:
+            - "}"
+            - "\n"
+    _inputs:
+      text:
+        type: text
+        label: Text
+      variant:
+        type: select
+        label: Colour
+        options:
+          allow_empty: true
+          values:
+            - primary
+            - secondary
+            - tertiary
+            - error
+            - tip
+  annotation:
+    snippet: "[+[[label]]]:\n[[body]]"
+    strict_whitespace: true
+    preview:
+      text:
+        - key: label
+        - Annotation
+      icon: sticky_note_2
+    picker_preview:
+      text: Annotation text
+      icon: sticky_note_2
+    params:
+      label:
+        parser: content
+        options:
+          editor_key: label
+          raw: true
+          forbidden_tokens:
+            - "]"
+            - " "
+            - "\n"
+      body:
+        parser: content
+        options:
+          editor_key: body
+          raw: true
+          indented_by: "  "
+    _inputs:
+      label:
+        type: text
+        label: Annotation name
+      body:
+        type: code
+        label: Text
+        comment: Markdown, indented by two spaces on each line.
+        options:
+          syntax: markdown
+  annotation_line:
+    snippet: "[+[[label]]]: [[body]]"
+    strict_whitespace: true
+    preview:
+      text:
+        - key: label
+        - Annotation
+      subtext:
+        - key: body
+      icon: sticky_note_2
+    picker_preview:
+      text: Annotation text (one line)
+      icon: sticky_note_2
+    params:
+      label:
+        parser: content
+        options:
+          editor_key: label
+          raw: true
+          forbidden_tokens:
+            - "]"
+            - " "
+            - "\n"
+      body:
+        parser: content
+        options:
+          editor_key: body
+          raw: true
+          forbidden_tokens:
+            - "\n"
+    _inputs:
+      label:
+        type: text
+        label: Annotation name
+      body:
+        type: text
+        label: Text
+  annotation_reference:
+    snippet: "[+[[label]]]"
+    inline: true
+    view: inline
+    preview:
+      text:
+        - key: label
+        - Annotation
+      icon: sticky_note_2
+    picker_preview:
+      text: Annotation marker
+      icon: sticky_note_2
+    params:
+      label:
+        parser: content
+        options:
+          editor_key: label
+          raw: true
+          forbidden_tokens:
+            - "]"
+            - " "
+            - "\n"
+    _inputs:
+      label:
+        type: text
+        label: Annotation name
+  aligned_table:
+    snippet: "|[[header]]\n| :[[rows]]"
+    preview:
+      text: Table with aligned columns
+      icon: table
+    picker_preview:
+      text: Table with aligned columns
+      icon: table
+    params:
+      header:
+        parser: content
+        options:
+          editor_key: header
+          raw: true
+          forbidden_tokens:
+            - "\n"
+      rows:
+        parser: content
+        options:
+          editor_key: rows
+          raw: true
+          forbidden_tokens:
+            - "\n\n"
+    _inputs:
+      header:
+        type: text
+        label: Header row
+      rows:
+        type: code
+        label: Alignment and body rows
+        options:
+          syntax: markdown
   footnote_reference:
     snippet: "[^[[id]]]"
     inline: true

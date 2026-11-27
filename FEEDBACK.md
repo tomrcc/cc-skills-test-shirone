@@ -94,3 +94,19 @@ Orchestrator checks:
     - Nothing on clicking into an `@content` region writing the file with no change typed.
     - Nothing on snippet parsers being unable to express a fixed set.
     - The handoff's one-word edits should run in `cloudcannon dev` during the migration, before hosting.
+- Tom rejected the `_enabled_editors: [data]` "fix". Turning off body editing to protect content gives up the point of the migration. The orchestrator relayed it as a fix without questioning it. Sent back: bodies stay editable, and unsupported syntax must survive a save through snippets or equivalent content forms, proven with real editor saves.
+  - Skill finding: the skills let an agent reach for "disable editing" when a save damages content. Phase 2 set the precedent with `option-groups.md`. The skills should say to preserve the syntax with snippets or content changes, and to stop and report if that's impossible.
+- Fix round 4 (bodies stay editable):
+  - 19 of 21 posts are now body-editable and come back unchanged from a real local editor save (keystroke plus Backspace). The only accepted body changes are `~~~` fences and `*` bullets. All `_enabled_editors: [data]` entries are gone except `mdx-showcase.mdx`'s.
+  - New snippets: `code_block_meta` (fences with options, `strict_whitespace: true`), `option_group`, `field_group`, `field`, `marker`, `annotation`, `annotation_line`, `annotation_reference` (block before inline), and `aligned_table`. The grid gets `alternate_formats`, optional models get `remove_empty: true`, and `markdown.options.treat_indentation_as_code: true` is set.
+  - Content was pre-normalised to the form a save writes, only where the page renders the same: `\.` in numbered headings, blank lines between one-line definitions, and the reflowed bodies of `markdown.md` and `markdown-extended.md`. Built pages match the pre-change build (whitespace ignored). Feeds change slightly, and RSS shows one heading's `<code>` as literal text.
+  - Not fixed: `encrypted-demo.md` (a save turns a loose list with hard breaks into a tight one), `mdx-showcase.mdx` (not attempted: imports, exports and JSX), and Biome.
+  - What led the agent to `[data]`: `migrate-to-cloudcannon/audit.md` offers "Keep the files out of the rich text editor with `_enabled_editors: [data]`" as one of three equal options, and Phase 2 had set the precedent.
+  - Skill gaps:
+    - Nothing says clicking into a body rewrites it.
+    - Nothing on fence options being dropped.
+    - Nothing on `treat_indentation_as_code` or `spaced_lists`.
+    - Nothing on snippet-model `remove_empty` or `allowed_values`.
+    - Nothing on `strict_whitespace`.
+    - Nothing on snippet order between block and inline matches.
+  - Recommended skill changes: drop `[data]` as an option in `audit.md`, and add a migration step that saves every post locally in `cloudcannon dev` and diffs the body.

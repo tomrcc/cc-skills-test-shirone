@@ -24,7 +24,7 @@ Shirone provides a collection of theme-exclusive Markdown extensions and custom 
 
 File Trees turn multi-level project structures, source hierarchies, and terminal directory outputs into compact, interactive tree views with automatic extension icons, diff highlighting, and collapsible branches.
 
-### 1. Nested List Syntax (`:::file-tree`)
+### 1\. Nested List Syntax (`:::file-tree`)
 
 Use the `:::file-tree` block directive when writing the file hierarchy directly as a Markdown nested list.
 
@@ -83,7 +83,7 @@ Use the `:::file-tree` block directive when writing the file hierarchy directly 
 
 ---
 
-### 2. Terminal Output Syntax (```` ```file-tree ````)
+### 2\. Terminal Output Syntax (<code>```file-tree</code>)
 
 When you already have directory tree text generated from command-line tools like `tree`, paste it directly into a `file-tree` fenced code block. Both Unicode branch characters (`├──`, `└──`, `│`) and ASCII branches are automatically parsed.
 
@@ -116,7 +116,7 @@ dist
 
 Interactive Code Trees pair a multi-level file hierarchy navigation pane on the left with instant code panel switching on the right. They provide an IDE-like reading experience for multi-file examples, modules, or whole directory walk-throughs.
 
-### 1. Container Syntax (`:::code-tree`)
+### 1\. Container Syntax (`:::code-tree`)
 
 Combine multiple fenced code blocks within a `:::code-tree` block directive. Each code block specifies its path via `title="path/to/file"`.
 
@@ -180,7 +180,7 @@ Combine multiple fenced code blocks within a `:::code-tree` block directive. Eac
 
 ---
 
-### 2. Local Directory Auto-Import (`@[code-tree]`)
+### 2\. Local Directory Auto-Import (`@[code-tree]`)
 
 Point directly to any local directory path in the workspace to automatically scan and generate an interactive code tree at build time without manually copying file contents.
 

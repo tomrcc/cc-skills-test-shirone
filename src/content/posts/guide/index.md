@@ -28,7 +28,7 @@ Shirone renders content server-side first (SSR-first). When navigating within th
 
 ---
 
-## 1. Creating a New Post
+## 1\. Creating a New Post
 
 You can quickly scaffold a new post with standard frontmatter using the built-in CLI command:
 
@@ -44,7 +44,7 @@ The newly created file will be placed in `src/content/posts/`.
 
 ---
 
-## 2. Frontmatter Specification
+## 2\. Frontmatter Specification
 
 Every Markdown (`.md`) or MDX (`.mdx`) post starts with a YAML frontmatter block defining its metadata.
 
@@ -87,7 +87,7 @@ comment: true
 
 ---
 
-## 3. Post Encryption
+## 3\. Post Encryption
 
 Shirone provides client-side post encryption. This is a static password gate, not server-side access control: the encrypted payload and asset URLs remain publicly downloadable, so do not use it for genuinely confidential files or regulated secrets. For private journals or restricted articles, specify a password in frontmatter:
 
@@ -109,7 +109,7 @@ hideHomeContent: true
 
 ---
 
-## 4. Organizing Post Files
+## 4\. Organizing Post Files
 
 Shirone supports both folder-based co-location and single-file layouts:
 
@@ -135,11 +135,11 @@ src/content/posts/
 
 ---
 
-## 5. Rich Markdown & MDX Extensions
+## 5\. Rich Markdown & MDX Extensions
 
 Shirone includes modern Markdown extensions out of the box:
 
-### 5.1 Admonitions
+### 5\.1 Admonitions
 
 Use container directives for notes, tips, warnings, and alerts:
 
@@ -153,7 +153,7 @@ Use warning containers to signal potential pitfalls or breaking changes.
 :::
 ```
 
-### 5.2 GitHub Repository Cards
+### 5\.2 GitHub Repository Cards
 
 Embed live, beautifully styled GitHub repository cards using the directive syntax:
 
@@ -163,7 +163,7 @@ Embed live, beautifully styled GitHub repository cards using the directive synta
 
 ::github{repo="LyraVoid/Shirone"}
 
-### 5.3 Expressive Code Blocks
+### 5\.3 Expressive Code Blocks
 
 Enhanced code blocks feature syntax highlighting, file name badges, line numbers, and selective line highlighting:
 
@@ -175,7 +175,7 @@ const theme = themeFromSourceColor(argbFromHex("#f472b6"));
 console.log("Primary color token:", theme.schemes.light.primary);
 ```
 
-### 5.4 Mathematical Typesetting (KaTeX)
+### 5\.4 Mathematical Typesetting (KaTeX)
 
 Render elegant LaTeX mathematical notation directly in Markdown:
 
@@ -186,7 +186,7 @@ $$
 \int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}
 $$
 
-### 5.5 Mermaid Diagrams
+### 5\.5 Mermaid Diagrams
 
 Create flowcharts, sequence diagrams, and architecture maps using plain text:
 
@@ -205,7 +205,7 @@ sequenceDiagram
     Page-->>Visitor: New Page Rendered
 ```
 
-### 5.6 Image Galleries & Fancybox Lightbox
+### 5\.6 Image Galleries & Fancybox Lightbox
 
 Images automatically integrate with Fancybox for lossless zoom, pan gestures, and full-screen preview:
 
@@ -215,7 +215,7 @@ Images automatically integrate with Fancybox for lossless zoom, pan gestures, an
 
 ---
 
-## 6. Next Steps & Customization
+## 6\. Next Steps & Customization
 
 - **Site Configuration**: Learn about global settings in `src/config/siteConfig.ts` and [`src/config/README.md`](https://github.com/LyraVoid/Shirone/blob/main/src/config/README.md).
 - **Design Tokens**: Explore tokens and color palettes in `DESIGN.md` and `docs/m3e-standard.md`.
