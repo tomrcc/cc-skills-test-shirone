@@ -581,6 +581,8 @@ collections_config:
 
   albums:
     path: public/images/albums
+    # Hosted CloudCannon filters the info.json files out as developer files otherwise.
+    include_developer_files: true
     name: Albums
     singular_name: Album
     icon: photo_library
