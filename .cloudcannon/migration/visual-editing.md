@@ -339,3 +339,8 @@ Checked on the build, against the page source:
 ### Pages to check for hydration warnings (dev mode, console open)
 
 Every page carries the changed shell. Check `/`, `/posts/guide/` and `/about/`. Each profile link's `Tooltip` island now sits inside a `span.flex` wrapper. No island's props changed, and the other changes are attributes on server-rendered markup.
+
+## Snippet menu layer
+
+CloudCannon appends the snippet card menu (Edit, Remove) to `<body>` as `#cms-controls-wrapper` at z-index 11. `#main-layout` is `position: absolute; z-index: 30`, so the menu opened underneath the page and the card handle looked dead. The editor-only `registerComponents.ts` adds `html body > #cms-controls-wrapper { z-index: 40; }`: above the page, below the z-50 top app bar. A minimal site with no Shirone CSS or JS shows the menu with CloudCannon's defaults.
+

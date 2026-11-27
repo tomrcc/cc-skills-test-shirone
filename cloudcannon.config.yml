@@ -823,11 +823,6 @@ collections_config:
       - data
 
 file_config:
-  - glob:
-      - src/content/posts/mdx-showcase.mdx
-    _enabled_editors:
-      - data
-
   - glob: site-settings/config/site.yaml
     _inputs:
       $:
@@ -4008,7 +4003,9 @@ _snippets:
       icon:
         type: select
         label: Icons
+        comment: Coloured file-type icons, or simple monochrome ones.
         options:
+          allow_create: false
           allow_empty: true
           value_key: id
           preview:
@@ -4086,7 +4083,9 @@ _snippets:
       icon:
         type: select
         label: Icons
+        comment: Coloured file-type icons, or simple monochrome ones.
         options:
+          allow_create: false
           allow_empty: true
           value_key: id
           preview:
@@ -4246,6 +4245,123 @@ _snippets:
         comment: "@type, @default and status tags, then a blank line and the description."
         options:
           syntax: markdown
+  mdx_imports:
+    # The `from "@` keeps import lines inside code examples out.
+    snippet: "import [[first]] from \"@[[imports]]"
+    strict_whitespace: true
+    preview:
+      text: MDX imports
+      icon: input
+    picker_preview:
+      text: MDX imports
+      icon: input
+    params:
+      first:
+        parser: content
+        options:
+          editor_key: first
+          raw: true
+          forbidden_tokens:
+            - " "
+            - "\n"
+      imports:
+        parser: content
+        options:
+          editor_key: imports
+          raw: true
+          forbidden_tokens:
+            - "\n\n"
+    _inputs:
+      first:
+        type: text
+        label: First import name
+      imports:
+        type: code
+        label: Imports
+        comment: The rest of the import block from the first path, up to the next blank line.
+        options:
+          syntax: javascript
+  mdx_export:
+    snippet: "export const [[declaration]]"
+    strict_whitespace: true
+    preview:
+      text: MDX data
+      icon: data_object
+    picker_preview:
+      text: MDX data (export const)
+      icon: data_object
+    params:
+      declaration:
+        parser: content
+        options:
+          editor_key: declaration
+          raw: true
+          forbidden_tokens:
+            - "\n\n"
+    _inputs:
+      declaration:
+        type: code
+        label: Declaration
+        comment: The name, then = and the value, up to the next blank line.
+        options:
+          syntax: javascript
+  mdx_expression:
+    snippet: "{authorInfo.[[field]]}"
+    inline: true
+    view: inline
+    preview:
+      text:
+        - key: field
+      icon: data_object
+    picker_preview:
+      text: authorInfo value
+      icon: data_object
+    params:
+      field:
+        parser: content
+        options:
+          editor_key: field
+          raw: true
+          forbidden_tokens:
+            - "}"
+            - "\n"
+    _inputs:
+      field:
+        type: text
+        label: authorInfo field
+  html_block:
+    snippet: "<div [[attributes]]>\n[[body]]\n</div>"
+    strict_whitespace: true
+    preview:
+      text: HTML and component block
+      icon: code_blocks
+    picker_preview:
+      text: HTML and component block
+      icon: code_blocks
+    params:
+      attributes:
+        parser: content
+        options:
+          editor_key: attributes
+          raw: true
+          forbidden_tokens:
+            - ">"
+            - "\n"
+      body:
+        parser: content
+        options:
+          editor_key: body
+          raw: true
+    _inputs:
+      attributes:
+        type: text
+        label: Wrapper attributes
+      body:
+        type: code
+        label: Content
+        comment: HTML, Svelte components and JSX, indented inside the wrapper.
+        options:
+          syntax: html
   collapse:
     snippet: "::: collapse[[flags]]\n[[panels]]\n:::"
     preview:

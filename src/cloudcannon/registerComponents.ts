@@ -13,3 +13,11 @@ for (const img of document.querySelectorAll<HTMLImageElement>(
 	img.removeAttribute("srcset");
 	img.removeAttribute("sizes");
 }
+
+// CloudCannon appends its snippet menu to <body> at z-index 11, under the
+// z-30 `#main-layout`; z-40 keeps it above the page and below the z-50 navbar.
+// The extra selector parts outrank CloudCannon's own `#cms-controls-wrapper` rule.
+const controlsLayer = document.createElement("style");
+controlsLayer.textContent =
+	"html body > #cms-controls-wrapper { z-index: 40; }";
+document.head.append(controlsLayer);

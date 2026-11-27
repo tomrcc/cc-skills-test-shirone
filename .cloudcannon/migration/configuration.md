@@ -102,11 +102,12 @@ What CloudCannon itself writes to the YAML (key order kept, comments dropped) is
    - `marker`: `==text==` with an optional `{.variant}`.
    - `annotation`, `annotation_line` and `annotation_reference`: `[+label]` notes. The block snippet comes before the inline one.
    - `aligned_table`: tables whose delimiter row starts with `:`.
+   - `mdx_imports`, `mdx_export`, `mdx_expression` and `html_block`: `mdx-showcase.mdx`'s import block, each `export const`, its `{authorInfo.…}` values and its top-level `<div>` blocks of HTML and Svelte components, all raw. `html_block` uses `strict_whitespace`, so only a `</div>` at the start of a line closes it.
    - The grid gets an `alternate_formats` entry for attribute-less `:::grid`. Every optional `key_values` model has `remove_empty: true`, so a save doesn't add `fit=""` or `icon=""`.
    - `abbreviation` trims its expansion.
    - `treat_indentation_as_code: true` keeps indented code blocks as code.
    
-   Content uses the forms a save writes wherever the page renders the same: `\.` in numbered headings, `<code>` for the inline code that contains a fence, blank lines between one-line abbreviation and annotation definitions, and the reflowed bodies of `markdown.md` and `markdown-extended.md`. Only `mdx-showcase.mdx` stays on `_enabled_editors: [data]` (14 Svelte atoms, `export const` data and JSX maps; audit open question 9).
+   Content uses the forms a save writes wherever the page renders the same: `\.` in numbered headings, `<code>` for the inline code that contains a fence, blank lines between one-line abbreviation and annotation definitions, and the reflowed bodies of `markdown.md` and `markdown-extended.md`. `encrypted-demo.md` uses a tight list, the form a save writes. No post is limited to the Data Editor.
 9. **`markdown.options.code_block_fences: "~~~"`**, with the demo posts' outer four-backtick fences written as `~~~` (`steps.md`, `markdown-enhancements.md`, `collapse-panels.md`, `option-groups.md`, `image-grid-demo/index.md`). A save writes every fence in the body with this marker at three characters. With `` ``` `` the outer fence of a block that shows a ``` example comes out the same length as the inner one, and the example leaks into the post. With `~~~` the inner ``` lines stay code. The site renders `~~~` and ``` fences identically, so every saved file's fences turn to `~~~` with no change to the page. `excerptFromMarkdown` strips both fence styles.
 
 ### Other decisions

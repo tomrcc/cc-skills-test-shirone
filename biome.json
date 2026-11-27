@@ -49,6 +49,10 @@
 	},
 	"overrides": [
 		{
+			"includes": ["**/src/data/*.json"],
+			"formatter": { "enabled": false }
+		},
+		{
 			"includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],
 			"linter": {
 				"rules": {

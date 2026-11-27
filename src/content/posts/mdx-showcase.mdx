@@ -64,7 +64,7 @@ export const segmentedOptions = [
 **MDX (Markdown + JSX)** bridges the gap between static writing and application interfaces. In Shirone, authors can seamlessly mix dynamic logic, reactive Svelte 5 components, and Material 3 design tokens directly within post content.
 :::
 
-## 1. Markdown vs MDX Capability Matrix
+## 1\. Markdown vs MDX Capability Matrix
 
 | Feature | Standard Markdown (`.md`) | Shirone MDX (`.mdx`) | Execution Mode |
 | :--- | :--- | :--- | :--- |
@@ -79,7 +79,7 @@ export const segmentedOptions = [
 
 ---
 
-## 2. Dynamic Expressions and Data Mapping
+## 2\. Dynamic Expressions and Data Mapping
 
 MDX allows declaring scoped constants using `export const` at the top of the file, which can be evaluated inline or mapped across templates:
 
@@ -106,11 +106,11 @@ Arrays and collections can be rendered dynamically into grid layouts:
 
 ---
 
-## 3. M3E Display and Layout Primitives (SSR-Only)
+## 3\. M3E Display and Layout Primitives (SSR-Only)
 
 In accordance with Shirone's component architecture (`docs/atomic-structure.md`), stateless display components output clean, accessible semantic HTML with no client-side runtime payload.
 
-### 3.1 Card Containers (`Card.svelte`)
+### 3\.1 Card Containers (`Card.svelte`)
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
   <Card variant="filled" class="!p-5">
@@ -129,7 +129,7 @@ In accordance with Shirone's component architecture (`docs/atomic-structure.md`)
   </Card>
 </div>
 
-### 3.2 Accent Bars and Badges (`AccentBar` & `Badge`)
+### 3\.2 Accent Bars and Badges (`AccentBar` & `Badge`)
 
 <div class="flex items-center gap-4 my-4 p-4 rounded-lg bg-[var(--surface-container-high)]">
   <AccentBar size="large" />
@@ -140,7 +140,7 @@ In accordance with Shirone's component architecture (`docs/atomic-structure.md`)
   <Badge>M3E v0.192</Badge>
 </div>
 
-### 3.3 Skeleton Placeholders (`Skeleton.svelte`)
+### 3\.3 Skeleton Placeholders (`Skeleton.svelte`)
 
 For previewing layout skeletons or prototyping async states:
 
@@ -157,11 +157,11 @@ For previewing layout skeletons or prototyping async states:
 
 ---
 
-## 4. Feedback and Loading Indicators
+## 4\. Feedback and Loading Indicators
 
 Shirone features full-fidelity Material 3 Expressive motion and feedback atoms:
 
-### 4.1 Morphing Loading Indicator (`LoadingIndicator.svelte`)
+### 4\.1 Morphing Loading Indicator (`LoadingIndicator.svelte`)
 
 Implemented with `androidx.graphics.shapes` polygon morphing, providing smooth spring-interpolated 7-shape animations:
 
@@ -188,7 +188,7 @@ Implemented with `androidx.graphics.shapes` polygon morphing, providing smooth s
   </div>
 </div>
 
-### 4.2 Linear and Indeterminate Progress (`ProgressIndicator.svelte`)
+### 4\.2 Linear and Indeterminate Progress (`ProgressIndicator.svelte`)
 
 <div class="flex flex-col gap-4 my-6 p-6 rounded-2xl bg-[var(--surface-container)] border border-[var(--outline-variant)]">
   <div class="flex flex-col gap-2">
@@ -207,11 +207,11 @@ Implemented with `androidx.graphics.shapes` polygon morphing, providing smooth s
 
 ---
 
-## 5. Interactive Svelte 5 Islands
+## 5\. Interactive Svelte 5 Islands
 
 Components declared with `client:visible` are lazy-hydrated via `IntersectionObserver` when entering the viewport:
 
-### 5.1 Button Matrix (`Button.svelte`)
+### 5\.1 Button Matrix (`Button.svelte`)
 
 <div class="flex flex-wrap items-center gap-3 my-6 p-4 rounded-xl border border-[var(--outline-variant)]">
   <Button client:visible variant="filled">Filled Button</Button>
@@ -221,7 +221,7 @@ Components declared with `client:visible` are lazy-hydrated via `IntersectionObs
   <Button client:visible variant="text">Text Button</Button>
 </div>
 
-### 5.2 Filter Chips and Segmented Buttons (`Chips` & `SegmentedButton`)
+### 5\.2 Filter Chips and Segmented Buttons (`Chips` & `SegmentedButton`)
 
 <div class="flex flex-col gap-4 my-6 p-6 rounded-2xl bg-[var(--surface-container)] border border-[var(--outline-variant)]">
   <div>
@@ -237,7 +237,7 @@ Components declared with `client:visible` are lazy-hydrated via `IntersectionObs
   </div>
 </div>
 
-### 5.3 Switches, Checkboxes, and Sliders (`Switch`, `Checkbox`, `Slider`)
+### 5\.3 Switches, Checkboxes, and Sliders (`Switch`, `Checkbox`, `Slider`)
 
 <div class="flex flex-col gap-4 my-6 p-6 rounded-2xl bg-[var(--surface-container)] border border-[var(--outline-variant)]">
   <div class="flex items-center justify-between">
@@ -264,7 +264,7 @@ Components declared with `client:visible` are lazy-hydrated via `IntersectionObs
   </div>
 </div>
 
-### 5.4 Input Controls (`TextField.svelte`)
+### 5\.4 Input Controls (`TextField.svelte`)
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
   <TextField client:visible variant="filled" label="Filled Text Field" placeholder="Enter text..." />
@@ -273,15 +273,15 @@ Components declared with `client:visible` are lazy-hydrated via `IntersectionObs
 
 ---
 
-## 6. Markdown Extension Compatibility
+## 6\. Markdown Extension Compatibility
 
 Shirone's SSOT unified plugin pipeline preserves full compatibility with all Markdown extensions:
 
-### 6.1 GitHub Repository Cards
+### 6\.1 GitHub Repository Cards
 
 ::github{repo="saicaca/fuwari"}
 
-### 6.2 Mermaid Architecture Diagrams
+### 6\.2 Mermaid Architecture Diagrams
 
 ```mermaid
 flowchart TD
@@ -292,7 +292,7 @@ flowchart TD
     Swup --> Screen["M3E Expressive Article View"]
 ```
 
-### 6.3 Mathematical Expressions (LaTeX / KaTeX)
+### 6\.3 Mathematical Expressions (LaTeX / KaTeX)
 
 Inline equation: Mass-energy equivalence $E = mc^2$ and Gaussian integral $\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}$.
 
@@ -304,6 +304,6 @@ $$
 
 ---
 
-## 7. Summary
+## 7\. Summary
 
 The native integration of MDX empowers technical writers to build rich, interactive documentation while preserving Shirone's ultra-fast static performance. All components adhere to the Material 3 Expressive token design system, ensuring consistency, accessibility, and visual harmony.

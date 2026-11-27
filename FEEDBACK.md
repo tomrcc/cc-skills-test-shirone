@@ -110,3 +110,17 @@ Orchestrator checks:
     - Nothing on `strict_whitespace`.
     - Nothing on snippet order between block and inline matches.
   - Recommended skill changes: drop `[data]` as an option in `audit.md`, and add a migration step that saves every post locally in `cloudcannon dev` and diffs the body.
+- Hosted save of "Markdown Enhancements" after fix round 4 (commit `6994ea1`): the body kept every fence option and file-tree block. The only body changes are the intended " Tom.", `~~~` fences, `*` bullets and the final newline. The front matter was restyled. The build passes and the page renders the file trees and the edit.
+- Tom's calls: make `mdx-showcase.mdx` body-editable, make `encrypted-demo.md`'s loose list tight in the source, and exclude `src/data/*.json` from Biome formatting.
+- Hosted editor, every snippet in a post body (seen on "Markdown Enhancements", e.g. "Shirone source tree"): clicking the six-dot handle on a snippet card does nothing. The only way into a snippet's edit modal is double-clicking the card. Sent to the migration agent.
+- Fix round 5:
+  - Snippet handle: CloudCannon's snippet menu opens appended to `<body>` (`#cms-controls-wrapper`, z-index 11), underneath shirone's `#main-layout` (`position: absolute; z-index: 30`). A minimal site without shirone's CSS opens it normally. Fix: editor-only `html body > #cms-controls-wrapper { z-index: 40; }` in `registerComponents.ts`. The file-tree and code-tree "Icons" selects had inherited the root `_inputs.icon` comment and allowed typed values; they now have their own comment and `allow_create: false`.
+  - `mdx-showcase.mdx` is body-editable: snippets `mdx_imports` (anchored on `from "@`, because a broader match swallowed a Python `import` in `markdown.md`), `mdx_export`, `mdx_expression` and `html_block` (`strict_whitespace`). No post is Data Editor only any more.
+  - `encrypted-demo.md` is in the editor's form (tight list, `<br />`). The page loses one `<p>` and three empty paragraphs, as intended.
+  - Biome: formatting is off for `**/src/data/*.json`, linting still on. `biome ci ./src` passes.
+  - Checked with a real local editor save on all 21 posts (0 body changes apart from fence and bullet style), and the build, `astro check` and `cloudcannon validate` all pass.
+  - Skill gaps:
+    - Nothing says CloudCannon's snippet menu is attached to `<body>` and can be hidden by a z-indexed layout. The load-time checklist could include opening a snippet's menu.
+    - Root `_inputs` merge into a snippet's input of the same name.
+    - Snippets anchored on common words match inside code examples.
+    - There's no documented way to isolate editor behaviour with a minimal site.
